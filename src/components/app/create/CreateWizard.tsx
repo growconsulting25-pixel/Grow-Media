@@ -195,7 +195,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                 onClick={() => goTo(i)}
                 aria-label={t.steps[s]}
                 aria-current={i === step ? "step" : undefined}
-                className={cn("block h-1.5 w-full rounded-full transition-colors duration-500", i <= step ? "bg-brand-500 text-on-brand" : "bg-white/10 hover:bg-white/20")}
+                className={cn("block h-1.5 w-full rounded-full transition-colors duration-500", i <= step ? "bg-brand-600 text-on-brand" : "bg-white/10 hover:bg-white/20")}
               />
             </li>
           ))}

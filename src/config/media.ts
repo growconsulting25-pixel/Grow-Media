@@ -1,41 +1,57 @@
 /**
- * Visual assets. Property photography is placeholder imagery (Unsplash) and is
- * meant to be replaced with the company's own listings. Every image renders on
- * top of a tonal fallback so a missing file never breaks a layout.
+ * Visual assets: free Pexels photography (pexels.com/license), chosen to feel
+ * like everyday listings — family homes, townhouses, bright simple interiors —
+ * plus real estate agents with clients. Replace with the company's own
+ * listings any time. Every image renders on a tonal fallback so a missing file
+ * never breaks a layout.
  */
-const unsplash = (id: string) => `https://images.unsplash.com/${id}`;
+const pexels = (id: number) => `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg`;
+
+export type ImageAlt =
+  | "exterior" | "frontYard" | "twoStory" | "townhouse" | "street" | "facade"
+  | "kitchen" | "living" | "bedroom" | "dining" | "interior"
+  | "agentWoman" | "agentMan" | "agentPhone" | "keys" | "handshake" | "showing";
 
 export interface PropertyImage {
   src: string;
   /** Localized alt text key in `dict.media.alt`. */
-  alt: "exterior" | "pool" | "kitchen" | "living" | "bedroom" | "dining" | "facade" | "interior" | "agentWoman" | "agentMan" | "agentPhone" | "keys" | "handshake";
+  alt: ImageAlt;
   /** Tonal fallback (shown while loading / on error). */
   tone: string;
+  /** CSS object-position, for portraits whose subject isn't centered. */
+  focus?: string;
 }
 
 export const propertyImages = {
-  exterior: { src: unsplash("photo-1600596542815-ffad4c1539a9"), alt: "exterior", tone: "#2a2f3a" },
-  pool: { src: unsplash("photo-1613490493576-7fde63acd811"), alt: "pool", tone: "#23303b" },
-  kitchen: { src: unsplash("photo-1600566753190-17f0baa2a6c3"), alt: "kitchen", tone: "#3a3530" },
-  living: { src: unsplash("photo-1600210492486-724fe5c67fb0"), alt: "living", tone: "#34302c" },
-  bedroom: { src: unsplash("photo-1616594039964-ae9021a400a0"), alt: "bedroom", tone: "#2f2c2b" },
-  dining: { src: unsplash("photo-1600607687939-ce8a6c25118c"), alt: "dining", tone: "#322f2d" },
-  facade: { src: unsplash("photo-1600585154340-be6161a56a0c"), alt: "facade", tone: "#27303a" },
-  interior: { src: unsplash("photo-1600573472550-8090b5e0745e"), alt: "interior", tone: "#33302e" },
-  // People — real estate professionals and clients
-  agentWoman: { src: unsplash("photo-1573496359142-b8d87734a5a2"), alt: "agentWoman", tone: "#2b3440" },
-  agentMan: { src: unsplash("photo-1560250097-0b93528c311a"), alt: "agentMan", tone: "#2a2f38" },
-  agentPhone: { src: unsplash("photo-1556157382-97eda2d62296"), alt: "agentPhone", tone: "#2e3238" },
-  keys: { src: unsplash("photo-1560518883-ce09059eeffa"), alt: "keys", tone: "#2f2d2a" },
-  handshake: { src: unsplash("photo-1521791136064-7986c2920216"), alt: "handshake", tone: "#2c3036" },
+  // Homes — affordable, family-scale properties
+  exterior: { src: pexels(8031873), alt: "exterior", tone: "#2c3540" },
+  frontYard: { src: pexels(8894802), alt: "frontYard", tone: "#2d3a33" },
+  twoStory: { src: pexels(4030036), alt: "twoStory", tone: "#2c3540" },
+  townhouse: { src: pexels(12008034), alt: "townhouse", tone: "#34302c" },
+  street: { src: pexels(8504300), alt: "street", tone: "#2c3540" },
+  facade: { src: pexels(5353883), alt: "facade", tone: "#2c3540" },
+  // Interiors — bright, simple, lived-in
+  kitchen: { src: pexels(7168013), alt: "kitchen", tone: "#3a3833" },
+  living: { src: pexels(4468806), alt: "living", tone: "#3a3530" },
+  bedroom: { src: pexels(4792349), alt: "bedroom", tone: "#3a3530" },
+  dining: { src: pexels(4713242), alt: "dining", tone: "#3a3833" },
+  interior: { src: pexels(5825398), alt: "interior", tone: "#3a3530" },
+  // People — real estate professionals and their clients
+  agentWoman: { src: pexels(8293766), alt: "agentWoman", tone: "#2b3440", focus: "center 25%" },
+  agentMan: { src: pexels(8815878), alt: "agentMan", tone: "#2a2f38", focus: "center 20%" },
+  agentPhone: { src: pexels(12432832), alt: "agentPhone", tone: "#2e3238", focus: "center 30%" },
+  keys: { src: pexels(8815915), alt: "keys", tone: "#2f2d2a", focus: "center 35%" },
+  handshake: { src: pexels(7641899), alt: "handshake", tone: "#2c3036" },
+  showing: { src: pexels(7937330), alt: "showing", tone: "#2c3036" },
 } satisfies Record<string, PropertyImage>;
 
 export type PropertyImageKey = keyof typeof propertyImages;
 
-/** Builds a responsive Unsplash URL. Non-Unsplash sources are returned as-is. */
-export function imageUrl(src: string, width: number, quality = 70) {
-  if (!src.includes("images.unsplash.com")) return src;
-  return `${src}?auto=format&fit=crop&w=${width}&q=${quality}`;
+/** Builds a responsive image URL (Pexels and Unsplash CDNs resize on the fly). */
+export function imageUrl(src: string, width: number, quality = 82) {
+  if (src.includes("images.pexels.com")) return `${src}?auto=compress&cs=tinysrgb&w=${width}`;
+  if (src.includes("images.unsplash.com")) return `${src}?auto=format&fit=crop&w=${width}&q=${quality}`;
+  return src;
 }
 
 /**

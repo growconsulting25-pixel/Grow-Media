@@ -24,7 +24,7 @@ export function Photo({ name, width = 800, sizes, priority, className, imgClassN
   const { dict } = useI18n();
   const image = propertyImages[name];
   const [failed, setFailed] = useState(false);
-  const widths = [Math.round(width / 2), width, width * 2];
+  const widths = [Math.round(width / 2), width, Math.round(width * 1.5), width * 2];
 
   return (
     <div
@@ -43,6 +43,7 @@ export function Photo({ name, width = 800, sizes, priority, className, imgClassN
           decoding="async"
           onError={() => setFailed(true)}
           className={cn("absolute inset-0 size-full object-cover", imgClassName)}
+          style={"focus" in image && image.focus ? { objectPosition: image.focus } : undefined}
         />
       )}
     </div>

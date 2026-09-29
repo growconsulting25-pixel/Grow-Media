@@ -16,7 +16,7 @@ export function Logo({ href, className }: { href: string; className?: string }) 
   return (
     <Link href={href} className={cn("group inline-flex shrink-0 items-center gap-2 whitespace-nowrap", className)} aria-label={siteConfig.name}>
       <GrowMark className="size-6 transition-transform duration-300 group-hover:-translate-y-0.5" />
-      <span className="text-[1.1rem] leading-none font-semibold tracking-tight">
+      <span className="text-[1.1rem] leading-none font-semibold tracking-tight text-white">
         Grow <span className="font-medium text-brand-500">Media</span>
       </span>
     </Link>

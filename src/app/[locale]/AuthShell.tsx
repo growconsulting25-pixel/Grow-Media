@@ -21,7 +21,7 @@ export function AuthShell({ locale, dict, children }: { locale: Locale; dict: Di
         </main>
       </div>
       <div className="relative hidden overflow-hidden lg:block">
-        <Photo name="handshake" width={1200} sizes="50vw" priority className="absolute inset-0" imgClassName="animate-kenburns" />
+        <Photo name="keys" width={1200} sizes="50vw" priority className="absolute inset-0" imgClassName="animate-kenburns" />
         <div className="absolute inset-0 bg-ink-900/55" />
         <Sparkles density={6} />
         <p className="display absolute right-12 bottom-14 left-12 text-4xl text-white">{dict.footer.tagline}</p>

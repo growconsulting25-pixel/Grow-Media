@@ -81,7 +81,7 @@ export function ContentEngine() {
           className={cn(
             "absolute top-1/2 hidden h-px w-10 transition-opacity lg:block",
             side === "left" ? "left-full" : "right-full",
-            selected ? "bg-brand-500 text-on-brand" : "bg-white/10",
+            selected ? "bg-brand-600 text-on-brand" : "bg-white/10",
           )}
         />
       </button>
@@ -148,7 +148,7 @@ function Stage({ id }: { id: FormatId }) {
     case "story":
       return phone(["kitchen", "dining", "living"], null, { badge: f.overlay, caption: reel.handle, cta: reel.cta });
     case "shortAd":
-      return phone(["pool", "facade"], null, { badge: f.overlay, price: reel.price, cta: reel.cta });
+      return phone(["townhouse", "frontYard"], null, { badge: f.overlay, price: reel.price, cta: reel.cta });
     case "ugc":
       return phone(
         ["agentWoman", "living", "kitchen"],
@@ -209,7 +209,7 @@ function Stage({ id }: { id: FormatId }) {
     case "teaser":
       return (
         <div className="relative aspect-square w-[88%] max-w-[22rem] overflow-hidden rounded-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_40px_80px_-30px_rgba(0,0,0,0.9)]">
-          <Photo name="pool" width={480} sizes="352px" decorative className="size-full" imgClassName="scale-110 blur-[3px] animate-kenburns" />
+          <Photo name="twoStory" width={480} sizes="352px" decorative className="size-full" imgClassName="animate-kenburns" />
           <div className="absolute inset-0 grid place-items-center bg-black/35 text-center">
             <div>
               <p className="text-[0.7rem] font-medium tracking-[0.3em] text-white/80 uppercase">{reel.handle}</p>

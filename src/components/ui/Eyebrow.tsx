@@ -12,9 +12,9 @@ export function Eyebrow({ children, tone = "dark", className }: { children: Reac
         className,
       )}
     >
-      <span aria-hidden className="h-px w-3 bg-brand-500 text-on-brand" />
+      <span aria-hidden className="h-px w-3 bg-brand-600 text-on-brand" />
       {children}
-      <span aria-hidden className="h-px w-3 bg-brand-500 text-on-brand" />
+      <span aria-hidden className="h-px w-3 bg-brand-600 text-on-brand" />
     </span>
   );
 }

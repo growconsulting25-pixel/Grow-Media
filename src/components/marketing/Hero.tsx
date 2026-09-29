@@ -14,15 +14,15 @@ export function Hero({ dict }: { dict: Dictionary }) {
     <section aria-labelledby="hero-title" className="relative isolate overflow-hidden border-b border-white/[0.06] pt-28 pb-16 sm:pt-36 sm:pb-20">
       {/* Banner: a real listing at dusk behind a solid navy veil, plus a faint grid */}
       <div aria-hidden className="absolute inset-0 -z-10">
-        <Photo name="exterior" width={1600} sizes="100vw" priority decorative className="absolute inset-0" />
-        <div className="absolute inset-0 bg-ink-900/85" />
+        <Photo name="street" width={1600} sizes="100vw" priority decorative className="absolute inset-0" />
+        <div className="absolute inset-0 bg-ink-900/80" />
         <div className="grid-lines absolute inset-0 opacity-50" />
         <Sparkles density={6} />
       </div>
 
       <Container className="flex flex-col items-center text-center">
         <p className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] py-1.5 pr-3.5 pl-1.5 text-[0.8rem] text-fg-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]">
-          <span className="rounded-full bg-brand-500 px-2 py-0.5 text-[0.7rem] font-semibold text-on-brand">{dict.common.new}</span>
+          <span className="rounded-full bg-brand-600 px-2 py-0.5 text-[0.7rem] font-semibold text-on-brand">{dict.common.new}</span>
           {t.offerPill}
         </p>
 

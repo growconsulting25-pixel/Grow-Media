@@ -88,7 +88,7 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
             const mine = !m.is_staff;
             return (
               <li key={m.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
-                <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm", mine ? "rounded-br-sm bg-brand-500 text-on-brand" : "rounded-bl-sm bg-white/[0.06] text-fg")}>
+                <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm", mine ? "rounded-br-sm bg-brand-600 text-on-brand" : "rounded-bl-sm bg-white/[0.06] text-fg")}>
                   <p className={cn("mb-0.5 text-[0.7rem]", mine ? "text-on-brand/70" : "text-brand-300")}>{mine ? t.you : t.team} · {fmt.format(new Date(m.created_at))}</p>
                   <p className="whitespace-pre-line">{m.body}</p>
                   {m.attachment_path && (

@@ -12,11 +12,11 @@ import { ReelScreen } from "./ReelScreen";
 const inputs: { name: PropertyImageKey; className: string; rotate: number; delay: number }[] = [
   { name: "exterior", className: "left-[2%] top-[6%] w-[46%]", rotate: -5, delay: 0 },
   { name: "kitchen", className: "left-[44%] top-[0%] w-[42%]", rotate: 4, delay: 0.8 },
-  { name: "living", className: "left-[8%] top-[48%] w-[42%]", rotate: 3, delay: 1.6 },
+  { name: "townhouse", className: "left-[8%] top-[48%] w-[42%]", rotate: 3, delay: 1.6 },
   { name: "agentWoman", className: "left-[48%] top-[44%] w-[40%]", rotate: -3, delay: 2.4 },
 ];
 
-const reelShots: PropertyImageKey[] = ["exterior", "kitchen", "living", "pool", "bedroom"];
+const reelShots: PropertyImageKey[] = ["exterior", "kitchen", "living", "bedroom", "frontYard"];
 
 /**
  * Photos → production → phone. The whole product story in one composition.
@@ -81,7 +81,7 @@ export function HeroVisual() {
             </div>
             <p className="text-[0.7rem] font-medium tracking-wide text-brand-300 uppercase">{v.processing}</p>
             <div className="h-1 w-20 overflow-hidden rounded-full bg-white/[0.07]">
-              <div className="h-full w-full origin-left animate-progress rounded-full bg-brand-500 text-on-brand" />
+              <div className="h-full w-full origin-left animate-progress rounded-full bg-brand-600 text-on-brand" />
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export function HeroVisual() {
         <div className="relative flex justify-center md:justify-start">
           {/* mobile-only mini photo strip behind the phone */}
           <div aria-hidden className="absolute inset-x-0 top-[18%] flex justify-between px-0 md:hidden">
-            {(["kitchen", "pool"] as const).map((n, i) => (
+            {(["kitchen", "frontYard"] as const).map((n, i) => (
               <div key={n} className="w-[34%] rounded-lg bg-white/[0.06] p-0.5 opacity-70" style={{ transform: `rotate(${i ? 6 : -6}deg)` }}>
                 <Photo name={n} width={240} sizes="34vw" decorative className="aspect-[4/3] rounded-md" />
               </div>

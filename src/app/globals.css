@@ -32,7 +32,7 @@
   --color-navy-700: #0f2d48;
   --color-navy-800: #0b2239;
   /* Text/icons placed on a solid brand fill */
-  --color-on-brand: #041320;
+  --color-on-brand: #ffffff;
 
   /* Light sections — cool paper greys */
   --color-paper: #f4f6f8;
@@ -61,7 +61,7 @@
   }
   @keyframes kenburns {
     from { transform: scale(1.02) translate3d(0, 0, 0); }
-    to { transform: scale(1.14) translate3d(-2%, -2%, 0); }
+    to { transform: scale(1.07) translate3d(-1%, -1%, 0); }
   }
   @keyframes shimmer {
     from { background-position: -200% 0; }
@@ -136,15 +136,17 @@
     text-wrap: balance;
   }
 
-  /* Primary pill button — solid Grow cyan with dark text for contrast */
+  /* Primary pill button — solid Grow blue with white text (the deeper
+     brand-600 keeps white text legible; #00ABFF stays the accent color). */
   .btn-primary {
-    background: var(--color-brand-500);
+    background: var(--color-brand-600);
+    font-weight: 600;
     color: var(--color-on-brand);
     box-shadow: 0 8px 24px -12px rgba(0, 171, 255, 0.55);
     transition: transform 0.25s var(--ease-out-expo), background-color 0.2s ease, box-shadow 0.25s ease;
   }
   .btn-primary:hover {
-    background: var(--color-brand-400);
+    background: var(--color-brand-700);
     box-shadow: 0 10px 30px -12px rgba(0, 171, 255, 0.7);
   }
   .btn-primary:active { transform: translateY(1px) scale(0.99); }
