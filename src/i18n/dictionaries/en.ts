@@ -114,7 +114,7 @@ const en = {
   },
 
   trust: {
-    label: "Built for agents at Quebec and Canada's leading brokerages — and ready for the platforms your buyers use",
+    label: "Agents from these brokerages already work with Grow",
   },
   examples: {
     eyebrow: "Examples",

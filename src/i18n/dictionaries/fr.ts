@@ -110,7 +110,7 @@ const fr: Dictionary = {
   },
 
   trust: {
-    label: "Conçu pour les courtiers des grandes bannières du Québec et du Canada — et prêt pour les plateformes de vos acheteurs",
+    label: "Des courtiers de ces bannières travaillent déjà avec Grow",
   },
   examples: {
     eyebrow: "Exemples",
