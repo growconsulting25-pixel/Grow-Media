@@ -22,6 +22,8 @@ export default async function CreatePage({ params, searchParams }: PageProps<"/[
     if (d && d.project.status === "draft") detail = d;
   }
 
+  const { data: plan } = await session.supabase.from("subscriptions").select("id").eq("status", "active").limit(1);
+
   return (
     <CreateWizard
       key={detail?.project.id ?? "new"}
@@ -30,6 +32,7 @@ export default async function CreatePage({ params, searchParams }: PageProps<"/[
       initialStep={one(sp.step) ?? (detail ? "upload" : undefined)}
       initialType={one(sp.type)}
       billingEnabled={isStripeConfigured()}
+      hasSavedCard={Boolean(plan?.length)}
       initialNotes={one(sp.idea)}
       initialIdeaId={/^[0-9a-f-]{36}$/i.test(one(sp.ideaId) ?? "") ? one(sp.ideaId) : undefined}
     />

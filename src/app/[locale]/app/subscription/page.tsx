@@ -108,19 +108,39 @@ export default async function SubscriptionPage({ params, searchParams }: PagePro
       <section aria-labelledby="addons-title">
         <h2 id="addons-title" className="mb-4 text-lg font-semibold tracking-tight">{t.addOns}</h2>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {addOns.map((a) => (
-            <li key={a.id} className="surface flex items-center justify-between gap-4 rounded-2xl px-5 py-4">
-              <span className="flex items-center gap-3 text-sm font-medium">
-                <Icon name={a.id === "walkthrough" ? "cube" : "megaphone"} className="size-4 text-brand-300" />
-                {dict.pricing.addOns[a.id].name}
-              </span>
-              {a.price !== null ? (
-                <span className="font-semibold">{interpolate(dict.pricing.addOns[a.id].price, { price: formatPrice(a.price, locale) })}</span>
-              ) : (
-                <a href={mail(dict.pricing.addOns[a.id].name)} className="text-sm text-brand-300 hover:underline">{dict.pricing.addOns[a.id].price}</a>
-              )}
-            </li>
-          ))}
+          {addOns.map((a) => {
+            const name = dict.pricing.addOns[a.id].name;
+            const inner = (
+              <>
+                <span className="flex min-w-0 items-center gap-3">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-brand-500/12 text-brand-300">
+                    <Icon name={a.id === "walkthrough" ? "cube" : "megaphone"} className="size-4" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-medium">{name}</span>
+                    {a.price !== null && billing && <span className="mt-0.5 block text-xs text-fg-subtle">{t.addOnHint}</span>}
+                  </span>
+                </span>
+                <span className="flex shrink-0 items-center gap-3">
+                  {a.price !== null && <span className="font-semibold">{interpolate(dict.pricing.addOns[a.id].price, { price: formatPrice(a.price, locale) })}</span>}
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-600 px-3 py-1.5 text-xs font-semibold text-on-brand transition-colors group-hover:bg-brand-700">
+                    {a.price !== null ? t.order : dict.pricing.addOns[a.id].price}
+                    <Icon name="arrowRight" className="size-3.5" />
+                  </span>
+                </span>
+              </>
+            );
+            const cls = "surface group flex items-center justify-between gap-4 rounded-2xl px-5 py-4 transition-colors hover:bg-white/[0.05]";
+            return (
+              <li key={a.id}>
+                {a.id === "walkthrough" && billing ? (
+                  <Link href={`${href("appCreate", locale)}?type=walkthrough`} className={cls}>{inner}</Link>
+                ) : (
+                  <a href={mail(name)} className={cls}>{inner}</a>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </section>
     </div>

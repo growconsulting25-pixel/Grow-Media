@@ -113,8 +113,8 @@ export async function signedPreviewUrls(supabase: SupabaseClient, paths: string[
   return Object.fromEntries((data ?? []).filter((d) => d.signedUrl).map((d) => [d.path, d.signedUrl])) as Record<string, string>;
 }
 
-export async function getQuote(supabase: SupabaseClient): Promise<Quote> {
-  const { data, error } = await supabase.rpc("get_submission_quote");
+export async function getQuote(supabase: SupabaseClient, projectId?: string): Promise<Quote> {
+  const { data, error } = await supabase.rpc("get_submission_quote", projectId ? { p_project_id: projectId } : {});
   if (error) throw error;
   return data as Quote;
 }

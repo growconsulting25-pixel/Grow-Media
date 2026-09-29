@@ -45,7 +45,7 @@ export async function syncSubscription(db: SupabaseClient, sub: Stripe.Subscript
   if (error) throw error;
 }
 
-/** Records the order and, for a single video, submits the paid project. */
+/** Records the order and, for a paid project (video and/or add-on), submits it. */
 export async function handleCheckoutCompleted(db: SupabaseClient, stripe: Stripe | null, session: Stripe.Checkout.Session) {
   if (session.payment_status !== "paid" && session.payment_status !== "no_payment_required") return "unpaid";
   const meta = session.metadata ?? {};
@@ -73,12 +73,17 @@ export async function handleCheckoutCompleted(db: SupabaseClient, stripe: Stripe
   if (!inserted?.length) return "duplicate";
 
   if (meta.kind === "single" && meta.project_id) {
-    const { error: pErr } = await db
-      .from("projects")
-      .update({ status: "submitted", submitted_at: new Date().toISOString(), is_free: false, price_cents: session.amount_total ?? 0 })
-      .eq("id", meta.project_id)
-      .eq("user_id", userId)
-      .eq("status", "draft");
+    // The database re-prices the draft (video + add-on) and submits it. The
+    // pre-discount subtotal is compared, so promotion codes stay valid.
+    const { error: pErr } = await db.rpc("finalize_paid_submission", {
+      p_project_id: meta.project_id,
+      p_user_id: userId,
+      p_paid_cents: session.amount_subtotal ?? session.amount_total ?? 0,
+    });
+    if (pErr?.message?.includes("underpaid")) {
+      console.error(`checkout ${session.id}: paid less than the project now costs; needs staff review`);
+      return "needs_review";
+    }
     if (pErr) throw pErr;
     return "project_submitted";
   }

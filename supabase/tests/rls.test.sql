@@ -114,4 +114,39 @@ end $$;
 select pg_temp.assert((select status = 'revision_requested' from public.projects where id = 'aaaaaaaa-0000-0000-0000-000000000001'), 'revision requested');
 reset role;
 
+-- Add-on: a 3D walkthrough costs the add-on even when the plan covers the video
+select pg_temp.act_as(:'alice');
+insert into public.projects (id, user_id, address, type) values ('aaaaaaaa-0000-0000-0000-000000000003', :'alice', '5 Rue des Érables', 'walkthrough');
+insert into public.project_files (project_id, user_id, storage_path, file_name, mime_type, size_bytes)
+  values ('aaaaaaaa-0000-0000-0000-000000000003', :'alice', :'alice' || '/aaaaaaaa-0000-0000-0000-000000000003/c.jpg', 'c.jpg', 'image/jpeg', 1000);
+select pg_temp.assert((select q->>'mode' = 'subscription' and (q->>'addon_cents')::int = 9900 and (q->>'due_cents')::int = 9900
+  from public.get_submission_quote('aaaaaaaa-0000-0000-0000-000000000003') q), 'walkthrough quote: plan covers video, add-on due');
+do $$ begin
+  perform public.submit_project('aaaaaaaa-0000-0000-0000-000000000003');
+  raise exception 'unpaid add-on was submitted';
+exception when raise_exception then
+  if sqlerrm <> 'payment_required' then raise; end if;
+  raise notice 'ok - unpaid add-on blocks submission';
+end $$;
+update public.projects set addon_paid = true where id = 'aaaaaaaa-0000-0000-0000-000000000003';
+select pg_temp.assert((select not addon_paid from public.projects where id = 'aaaaaaaa-0000-0000-0000-000000000003'), 'client cannot mark add-on paid');
+do $$ begin
+  perform public.finalize_paid_submission('aaaaaaaa-0000-0000-0000-000000000003', auth.uid(), 9900);
+  raise exception 'client called finalize';
+exception when insufficient_privilege then raise notice 'ok - clients cannot finalize payments'; end $$;
+reset role;
+do $$ begin
+  perform public.finalize_paid_submission('aaaaaaaa-0000-0000-0000-000000000003', (select user_id from public.projects where id = 'aaaaaaaa-0000-0000-0000-000000000003'), 5000);
+  raise exception 'underpayment accepted';
+exception when raise_exception then
+  if sqlerrm <> 'underpaid' then raise; end if;
+  raise notice 'ok - underpayment rejected';
+end $$;
+select pg_temp.assert((select status = 'submitted' and addon_paid and price_cents = 0 and not is_free
+  from public.finalize_paid_submission('aaaaaaaa-0000-0000-0000-000000000003', :'alice', 9900)), 'paid add-on submitted, video from plan');
+select pg_temp.assert((select status = 'submitted' from public.finalize_paid_submission('aaaaaaaa-0000-0000-0000-000000000003', :'alice', 9900)), 'finalize is idempotent');
+select pg_temp.act_as(:'alice');
+select pg_temp.assert((select (q->>'used')::int = 2 from public.get_submission_quote() q), 'walkthrough video counts toward the plan');
+reset role;
+
 \echo ALL RLS TESTS PASSED

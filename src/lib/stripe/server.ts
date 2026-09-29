@@ -32,6 +32,13 @@ export function planLineItem(planId: PlanId, name: string): Stripe.Checkout.Sess
   };
 }
 
+/** Line item for an add-on, priced from config/pricing.ts (the database holds the same price). */
+export function addOnLineItem(id: "walkthrough", name: string): Stripe.Checkout.SessionCreateParams.LineItem {
+  const envPrice = process.env[`STRIPE_PRICE_${id.toUpperCase()}`];
+  if (envPrice) return { price: envPrice, quantity: 1 };
+  return { quantity: 1, price_data: { currency: currency.toLowerCase(), unit_amount: walkthroughAddOnCents(), product_data: { name: `Grow Media — ${name}` } } };
+}
+
 export function walkthroughAddOnCents() {
   return cents(addOns.find((a) => a.id === "walkthrough")?.price ?? 0);
 }
