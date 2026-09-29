@@ -149,6 +149,7 @@ Homepage CTA → 3-step modal (details → password → photos) → account crea
 
 - **Plans:** the Subscription page opens Stripe Checkout for Agent and Pro. "Manage billing" opens the Stripe customer portal to change plan, update the card, get invoices or cancel.
 - **Single videos:** when a client has no free credit and no plan allowance left, the wizard's last step becomes "Pay 49,95 $ and submit". The Stripe webhook submits the project once the payment is confirmed.
+- **Add-ons (3D walkthrough, +99 $):** a walkthrough project costs its video (free credit, plan allowance or single price) plus the add-on. Subscribers pay in one click with the card on their plan (a one-off Stripe invoice, no redirect). Everyone else goes through Checkout. The database (`quote_for`, `finalize_paid_submission`) prices and submits the project; clients can never mark an add-on paid.
 - **Server-side truth:** prices come from `src/config/pricing.ts` (or optional `STRIPE_PRICE_*` IDs). Subscription status and paid submissions are written only by the signature-verified webhook (`/api/stripe/webhook`), which is idempotent on the checkout session and subscription IDs.
 - **Setup:**
   1. Stripe → Developers → API keys: add `STRIPE_SECRET_KEY` to Netlify.

@@ -57,10 +57,20 @@ export interface StatusEvent {
   created_at: string;
 }
 
-export type Quote =
-  | { mode: "free"; price_cents: 0; free_credits: number }
-  | { mode: "subscription"; price_cents: 0; plan_id: string; used: number; included: number }
-  | { mode: "payment_required"; price_cents: number; plan_id: string };
+/** Add-on part of a quote: `due_cents` is what is still owed (video + unpaid add-on). */
+interface QuoteTotals {
+  addon_id: "walkthrough" | null;
+  addon_cents: number;
+  addon_paid: boolean;
+  due_cents: number;
+}
+
+export type Quote = QuoteTotals &
+  (
+    | { mode: "free"; price_cents: 0; free_credits: number }
+    | { mode: "subscription"; price_cents: 0; plan_id: string; used: number; included: number }
+    | { mode: "payment_required"; price_cents: number; plan_id: string }
+  );
 
 /** The client-facing progress steps (a subset of statuses). */
 export const timelineSteps = ["submitted", "in_production", "review", "ready"] as const;

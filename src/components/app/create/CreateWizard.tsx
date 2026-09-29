@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { addOns } from "@/config/pricing";
 import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/I18nProvider";
 import { interpolate } from "@/i18n/interpolate";
@@ -26,6 +27,8 @@ import { BillingButton } from "../billing/BillingButton";
 const STEPS = ["type", "details", "upload", "style", "branding", "notes", "review"] as const;
 type StepId = (typeof STEPS)[number];
 
+const walkthroughPrice = addOns.find((a) => a.id === "walkthrough")?.price ?? null;
+
 const typeIcons: Record<ProjectType, IconName> = {
   listing_video: "play",
   walkthrough: "cube",
@@ -42,9 +45,11 @@ interface Props {
   initialIdeaId?: string;
   /** Stripe is configured: paid videos go through checkout instead of email. */
   billingEnabled?: boolean;
+  /** The client has an active plan with a card on file (one-click payments). */
+  hasSavedCard?: boolean;
 }
 
-export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes, initialIdeaId, billingEnabled = false }: Props) {
+export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes, initialIdeaId, billingEnabled = false, hasSavedCard = false }: Props) {
   const { dict, locale } = useI18n();
   const t = dict.app.create;
   const router = useRouter();
@@ -78,8 +83,8 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
 
   useEffect(() => {
     if (current !== "review" || !supabase) return;
-    getQuote(supabase).then(setQuote).catch(() => setQuote(null));
-  }, [current, supabase]);
+    getQuote(supabase, project?.id).then(setQuote).catch(() => setQuote(null));
+  }, [current, supabase, project?.id]);
 
   const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) => {
     setForm((f) => ({ ...f, [key]: value }));
@@ -229,6 +234,11 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     <span>
                       <span className="block font-medium">{dict.app.types[type].label}</span>
                       <span className="mt-1 block text-sm text-fg-muted">{dict.app.types[type].description}</span>
+                      {type === "walkthrough" && walkthroughPrice !== null && (
+                        <span className="mt-2 inline-block rounded-full bg-brand-500/12 px-2 py-0.5 text-xs font-medium text-brand-300">
+                          {interpolate(dict.pricing.addOns.walkthrough.price, { price: formatPrice(walkthroughPrice, locale) })}
+                        </span>
+                      )}
                     </span>
                   </button>
                 );
@@ -351,15 +361,15 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
             {t.back}
           </Button>
         )}
-        {current === "review" && quote?.mode === "payment_required" && billingEnabled && project ? (
+        {current === "review" && quote && quote.due_cents > 0 && billingEnabled && project ? (
           <div className="ml-auto text-right">
             <BillingButton action={{ kind: "single", projectId: project.id }}>
-              {interpolate(dict.app.billing.payAndSubmit, { price: formatPrice(quote.price_cents / 100, locale) })}
+              {interpolate(dict.app.billing.payAndSubmit, { price: formatPrice(quote.due_cents / 100, locale) })}
             </BillingButton>
-            <p className="mt-1.5 text-xs text-fg-subtle">{dict.app.billing.secure}</p>
+            <p className="mt-1.5 text-xs text-fg-subtle">{hasSavedCard ? dict.app.billing.savedCard : dict.app.billing.secure}</p>
           </div>
         ) : current === "review" ? (
-          <Button size="lg" arrow className="ml-auto" onClick={onSubmit} disabled={busy || uploading || quote?.mode === "payment_required"}>
+          <Button size="lg" arrow className="ml-auto" onClick={onSubmit} disabled={busy || uploading || (quote?.due_cents ?? 0) > 0}>
             {busy ? t.submitting : t.submit}
           </Button>
         ) : (
@@ -407,15 +417,27 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit, billingEnabled }:
             </div>
           ))}
         </dl>
+        {q && q.addon_cents > 0 && (
+          <dl className="space-y-2 border-t border-white/[0.06] px-5 py-4 text-sm">
+            <div className="flex justify-between gap-4">
+              <dt className="text-fg-muted">{t.video}</dt>
+              <dd className="tabular-nums">{q.mode === "payment_required" ? formatPrice(q.price_cents / 100, locale) : q.mode === "free" ? t.firstVideoFree : interpolate(t.includedInPlan, { used: q.used, included: q.included })}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt className="text-fg-muted">{dict.pricing.addOns.walkthrough.name}</dt>
+              <dd className="tabular-nums">{q.addon_paid ? t.addonPaid : formatPrice(q.addon_cents / 100, locale)}</dd>
+            </div>
+          </dl>
+        )}
         <div className="flex items-center justify-between gap-4 border-t border-white/[0.06] bg-white/[0.02] px-5 py-4">
           <div>
-            <p className="text-sm font-medium">{t.total}</p>
-            {q?.mode === "free" && <p className="mt-0.5 flex items-center gap-1 text-xs text-success"><Icon name="check" className="size-3.5" /> {t.firstVideoFree}</p>}
-            {q?.mode === "subscription" && <p className="mt-0.5 text-xs text-fg-muted">{interpolate(t.includedInPlan, { used: q.used, included: q.included })}</p>}
+            <p className="text-sm font-medium">{q && q.due_cents > 0 ? t.dueNow : t.total}</p>
+            {q?.mode === "free" && !q.addon_cents && <p className="mt-0.5 flex items-center gap-1 text-xs text-success"><Icon name="check" className="size-3.5" /> {t.firstVideoFree}</p>}
+            {q?.mode === "subscription" && !q.addon_cents && <p className="mt-0.5 text-xs text-fg-muted">{interpolate(t.includedInPlan, { used: q.used, included: q.included })}</p>}
           </div>
-          <p className="text-2xl font-semibold tracking-tight tabular-nums">{q ? formatPrice(q.price_cents / 100, locale) : "…"}</p>
+          <p className="text-2xl font-semibold tracking-tight tabular-nums">{q ? formatPrice(q.due_cents / 100, locale) : "…"}</p>
         </div>
-        {q?.mode === "payment_required" && !billingEnabled && (
+        {q && q.due_cents > 0 && !billingEnabled && (
           <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-fg-muted">
             {t.paymentRequired} <a className="text-brand-300 underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
           </p>

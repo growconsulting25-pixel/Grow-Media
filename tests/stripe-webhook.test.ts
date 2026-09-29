@@ -10,8 +10,12 @@ import { handleStripeEvent } from "../src/lib/stripe/webhook";
 
 type Call = { table: string; op: string; payload?: unknown; opts?: unknown; filters: [string, unknown][] };
 
-function fakeDb(opts: { duplicateOrder?: boolean; profileByCustomer?: string } = {}) {
+function fakeDb(opts: { duplicateOrder?: boolean; profileByCustomer?: string; rpcError?: string } = {}) {
   const calls: Call[] = [];
+  const rpc = async (fn: string, args: unknown) => {
+    calls.push({ table: `rpc:${fn}`, op: "rpc", payload: args, filters: [] });
+    return { data: null, error: opts.rpcError ? { message: opts.rpcError } : null };
+  };
   const from = (table: string) => {
     const call: Call = { table, op: "", filters: [] };
     calls.push(call);
@@ -28,7 +32,7 @@ function fakeDb(opts: { duplicateOrder?: boolean; profileByCustomer?: string } =
     };
     return chain;
   };
-  return { db: { from } as never, calls };
+  return { db: { from, rpc } as never, calls };
 }
 
 const stripe = new Stripe("sk_test_offline");
@@ -44,22 +48,26 @@ async function run() {
   console.log("ok - signatures: valid accepted, wrong secret and tampered payload rejected");
 
   // 2. Single video paid → order recorded + draft project submitted (only that user's draft)
-  const single = { id: "cs_1", object: "checkout.session", mode: "payment", payment_status: "paid", amount_total: 4995, currency: "cad", payment_intent: "pi_1",
+  const single = { id: "cs_1", object: "checkout.session", mode: "payment", payment_status: "paid", amount_total: 4995, amount_subtotal: 4995, currency: "cad", payment_intent: "pi_1",
     metadata: { kind: "single", user_id: "user_1", project_id: "proj_1" } } as unknown as Stripe.Checkout.Session;
   let f = fakeDb();
   assert.equal(await handleStripeEvent(f.db, null, { type: "checkout.session.completed", data: { object: single } } as Stripe.Event), "project_submitted");
   const order = f.calls.find((c) => c.table === "orders")!;
   assert.deepEqual((order.opts as { onConflict: string }).onConflict, "stripe_checkout_session_id");
   assert.equal((order.payload as { amount_cents: number }).amount_cents, 4995);
-  const proj = f.calls.find((c) => c.table === "projects")!;
-  assert.equal((proj.payload as { status: string }).status, "submitted");
-  assert.deepEqual(proj.filters, [["id", "proj_1"], ["user_id", "user_1"], ["status", "draft"]]);
-  console.log("ok - single video: order recorded, only the owner's draft is submitted at 49.95");
+  const fin = f.calls.find((c) => c.table === "rpc:finalize_paid_submission")!;
+  assert.deepEqual(fin.payload, { p_project_id: "proj_1", p_user_id: "user_1", p_paid_cents: 4995 });
+  console.log("ok - paid project: order recorded, the owner's draft is finalized by the database at 49.95");
+
+  // 2b. Paid less than the draft now costs → recorded for staff, no retry loop
+  f = fakeDb({ rpcError: "underpaid" });
+  assert.equal(await handleStripeEvent(f.db, null, { type: "checkout.session.completed", data: { object: single } } as Stripe.Event), "needs_review");
+  console.log("ok - underpaid project is flagged, not retried");
 
   // 3. Retried webhook → no second submission
   f = fakeDb({ duplicateOrder: true });
   assert.equal(await handleStripeEvent(f.db, null, { type: "checkout.session.completed", data: { object: single } } as Stripe.Event), "duplicate");
-  assert.ok(!f.calls.some((c) => c.table === "projects"));
+  assert.ok(!f.calls.some((c) => c.table.startsWith("rpc:")));
   console.log("ok - retried webhook is idempotent");
 
   // 4. Unpaid session → nothing written
