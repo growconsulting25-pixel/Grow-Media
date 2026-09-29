@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Button, buttonClasses } from "@/components/ui/Button";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { Photo } from "@/components/ui/Photo";
+import { projectTypeImages } from "@/config/media";
 import { addOns } from "@/config/pricing";
 import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -224,14 +226,18 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     aria-checked={active}
                     onClick={() => set("type", type)}
                     className={cn(
-                      "flex items-start gap-4 rounded-2xl p-5 text-left transition-all",
+                      "group flex flex-col overflow-hidden rounded-2xl text-left transition-all",
                       active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(0,171,255,0.6)]" : "surface hover:bg-white/[0.05]",
                     )}
                   >
-                    <span className={cn("grid size-10 shrink-0 place-items-center rounded-xl", active ? "btn-primary" : "bg-white/[0.05] text-fg-muted")}>
-                      <Icon name={typeIcons[type]} className="size-5" />
+                    <span className="relative block aspect-[16/9] w-full overflow-hidden">
+                      <Photo name={projectTypeImages[type]} width={560} ratio={16 / 9} sizes="(min-width: 640px) 360px, 92vw" decorative className="size-full" imgClassName="transition-transform duration-700 group-hover:scale-105" />
+                      <span aria-hidden className="absolute inset-0 bg-ink-950/25" />
+                      <span className={cn("absolute top-3 left-3 grid size-10 place-items-center rounded-xl", active ? "btn-primary" : "bg-ink-950/70 text-fg backdrop-blur")}>
+                        <Icon name={typeIcons[type]} className="size-5" />
+                      </span>
                     </span>
-                    <span>
+                    <span className="block p-5">
                       <span className="block font-medium">{dict.app.types[type].label}</span>
                       <span className="mt-1 block text-sm text-fg-muted">{dict.app.types[type].description}</span>
                       {type === "walkthrough" && walkthroughPrice !== null && (

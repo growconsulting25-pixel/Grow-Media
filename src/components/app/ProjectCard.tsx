@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
+import { Photo } from "@/components/ui/Photo";
 import { ProgressIndicator } from "@/components/ui/ProgressIndicator";
+import { projectTypeImages } from "@/config/media";
 import { localeTags, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { interpolate } from "@/i18n/interpolate";
@@ -25,9 +27,7 @@ export function ProjectCard({ project, dict, locale, cover, fileCount }: { proje
           // eslint-disable-next-line @next/next/no-img-element -- short-lived signed URL
           <img src={cover} alt="" loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
         ) : (
-          <span className="absolute inset-0 grid place-items-center text-fg-subtle">
-            <Icon name="image" className="size-6" />
-          </span>
+          <Photo name={projectTypeImages[project.type]} width={480} ratio={16 / 9} sizes="(min-width: 1024px) 320px, 92vw" decorative className="absolute inset-0" imgClassName="opacity-70 transition-transform duration-700 group-hover:scale-[1.03]" />
         )}
         <span className="absolute top-3 left-3">
           <ProjectStatusBadge status={project.status} dict={dict} />

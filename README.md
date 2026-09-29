@@ -142,6 +142,9 @@ Homepage CTA → 3-step modal (details → password → photos) → account crea
   - a queue by status (New, In production, Review, Revisions, Ready, Completed);
   - a project page with source-file downloads, status changes, final-video upload (to the client's private `deliverables` folder, with caption and hashtags), revision handling and the message thread as staff.
 - **Emails** go through [Resend](https://resend.com). Database triggers create notifications, and `/api/email/dispatch` emails them to clients in their language. It runs every 5 minutes (`netlify/functions/dispatch-emails.mts`) and immediately after staff actions. New projects also alert `ADMIN_NOTIFY_EMAIL`.
+- **Team alerts** (to `ADMIN_NOTIFY_EMAIL`): new sign-up, project submitted, client message, revision requested, new subscriber, cancellation and every payment. Database triggers queue them in `staff_alerts`, so no code path can forget one.
+- **Client emails:** project received, in production, video ready, new message from the team, revision complete.
+- **Team:** `/fr/admin/team` adds admins, each with their own email. A new admin is emailed a link to choose their password. Removing an admin makes them a regular client again.
 - **Required Netlify env vars:** `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_NOTIFY_EMAIL`, `CRON_SECRET` (see `.env.example`).
 - **Supabase auth emails** (confirmation, password reset) go through Resend too. Configure this in Supabase → Authentication → Emails → SMTP settings: host `smtp.resend.com`, port `465`, user `resend`, password = Resend API key.
 

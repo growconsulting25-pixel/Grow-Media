@@ -98,6 +98,14 @@ export const propertyImages = {
 
 export type PropertyImageKey = keyof typeof propertyImages;
 
+/** Illustrates each video type (type picker, and project cards before a video exists). */
+export const projectTypeImages = {
+  listing_video: "exterior",
+  walkthrough: "living",
+  ugc: "ugcCreator",
+  video_ad: "adsCreator",
+} as const satisfies Record<string, PropertyImageKey>;
+
 /**
  * Builds a responsive image URL (Pexels and Unsplash CDNs resize on the fly).
  * With `ratio` (width / height) the CDN crops to that shape, so tall frames —

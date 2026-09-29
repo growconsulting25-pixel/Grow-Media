@@ -22,7 +22,11 @@ export default async function AdminLayout({ children, params }: LayoutProps<"/[l
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-4 px-4 sm:px-8">
           <Logo href={`/${locale}/admin`} />
           <span className="rounded-full bg-brand-600 px-2.5 py-0.5 text-xs font-semibold text-on-brand">{dict.app.admin.title}</span>
-          <div className="ml-auto flex items-center gap-4">
+          <nav className="ml-auto flex items-center gap-4 text-sm">
+            <Link href={`/${locale}/admin`} className="text-fg-muted hover:text-fg">{dict.app.admin.queue}</Link>
+            <Link href={`/${locale}/admin/team`} className="text-fg-muted hover:text-fg">{dict.app.admin.team.nav}</Link>
+          </nav>
+          <div className="flex items-center gap-4">
             <LanguageSwitcher />
             <Link href={href("app", locale)} className="text-sm text-fg-muted hover:text-fg">{dict.app.nav.dashboard}</Link>
           </div>

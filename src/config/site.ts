@@ -2,7 +2,7 @@
 export const siteConfig = {
   name: "Grow Media",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000").replace(/\/$/, ""),
-  contactEmail: "hello@growconsulting.ca",
+  contactEmail: "media@growconsulting.ca",
   /** Nominal delivery window in hours, used in copy and UI. */
   deliveryHours: 24,
   social: [
