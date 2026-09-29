@@ -45,7 +45,7 @@ export function BrandMarquee({ dict }: { dict: Dictionary }) {
             >
               {b.logo ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={b.logo} alt={b.name} loading="lazy" className="h-7 w-auto max-w-40 object-contain brightness-0 invert sm:h-8" />
+                <img src={b.logo} alt={b.name} loading="lazy" className="h-8 w-auto max-w-44 object-contain brightness-0 invert sm:h-10" />
               ) : (
                 <span className="text-xl font-semibold tracking-tight sm:text-2xl">{b.name}</span>
               )}
