@@ -401,6 +401,8 @@ const fr: Dictionary = {
     eyebrow: "FAQ",
     headline: [{ text: "Vos questions, ", accent: "nos réponses." }],
     stillQuestions: "Une autre question?",
+    showMore: "Voir {count} autres questions",
+    showLess: "Voir moins de questions",
     contact: "Écrivez-nous",
     items: [
       {
@@ -576,6 +578,12 @@ const fr: Dictionary = {
 
   media: {
     alt: {
+      winter: "Maison familiale par une journée d'hiver enneigée",
+      forSale: "Maison avec une pancarte « À vendre » sur le terrain",
+      bathroom: "Salle de bain lumineuse et simple",
+      entrance: "Entrée et corridor d'une maison",
+      couple: "Couple devant sa nouvelle maison",
+      creator: "Courtière immobilière souriant à la caméra",
       exterior: "Façade d'une maison familiale",
       frontYard: "Maison avec cour avant par une journée ensoleillée",
       twoStory: "Maison de banlieue à deux étages",

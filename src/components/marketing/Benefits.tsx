@@ -72,7 +72,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
 
           <Tile k="brand" icon="palette" dict={dict} delay={60}>
             <div className="mt-auto flex items-center gap-2 pt-5" aria-hidden>
-              <Photo name="agentMan" width={96} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" />
+              <Photo name="agentPhone" width={96} ratio={1} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" />
               {["#0b1622", "#00abff", "#dce4ec"].map((c) => (
                 <span key={c} className="size-7 rounded-full ring-2 ring-white" style={{ background: c }} />
               ))}
@@ -129,10 +129,10 @@ function Tile({ k, icon, dict, className, children, delay, horizontal }: { k: Ke
 
 function MoreContentVisual({ labels }: { labels: string[] }) {
   const tiles: { name: PropertyImageKey; cls: string }[] = [
-    { name: "exterior", cls: "aspect-[9/16] w-[26%]" },
-    { name: "kitchen", cls: "aspect-[9/16] w-[26%] translate-y-4" },
-    { name: "living", cls: "aspect-[4/5] w-[28%]" },
-    { name: "frontYard", cls: "aspect-square w-[24%] translate-y-6" },
+    { name: "detached", cls: "aspect-[9/16] w-[26%]" },
+    { name: "cozyBedroom", cls: "aspect-[9/16] w-[26%] translate-y-4" },
+    { name: "bathroom", cls: "aspect-[4/5] w-[28%]" },
+    { name: "lawnSign", cls: "aspect-square w-[24%] translate-y-6" },
   ];
   return (
     <div className="relative mt-auto pt-8">
@@ -151,7 +151,7 @@ function MoreContentVisual({ labels }: { labels: string[] }) {
 }
 
 function ScaleVisual({ label }: { label: string }) {
-  const names: PropertyImageKey[] = ["exterior", "townhouse", "frontYard", "twoStory", "facade", "street"];
+  const names: PropertyImageKey[] = ["suburb", "rowHouses", "sidingHouse", "bungalow", "colorfulStreet", "snowyYard"];
   return (
     <div className="flex min-w-0 flex-1 items-center gap-3">
       <div className="no-scrollbar flex min-w-0 flex-1 gap-2 overflow-hidden">

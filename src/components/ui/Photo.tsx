@@ -10,6 +10,8 @@ interface Props {
   /** Rendered width hint in CSS px, used to build the srcset. */
   width?: number;
   sizes?: string;
+  /** Box shape (width / height). Crops at the CDN so the image stays sharp. */
+  ratio?: number;
   priority?: boolean;
   className?: string;
   imgClassName?: string;
@@ -20,7 +22,7 @@ interface Props {
  * Property photo with responsive srcset and a tonal fallback, so layouts hold
  * even when an image is slow or unavailable.
  */
-export function Photo({ name, width = 800, sizes, priority, className, imgClassName, decorative }: Props) {
+export function Photo({ name, width = 800, sizes, ratio, priority, className, imgClassName, decorative }: Props) {
   const { dict } = useI18n();
   const image = propertyImages[name];
   const [failed, setFailed] = useState(false);
@@ -34,8 +36,8 @@ export function Photo({ name, width = 800, sizes, priority, className, imgClassN
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element -- remote CDN handles resizing via srcset
         <img
-          src={imageUrl(image.src, width)}
-          srcSet={widths.map((w) => `${imageUrl(image.src, w)} ${w}w`).join(", ")}
+          src={imageUrl(image.src, width, ratio)}
+          srcSet={widths.map((w) => `${imageUrl(image.src, w, ratio)} ${w}w`).join(", ")}
           sizes={sizes ?? `${width}px`}
           alt={decorative ? "" : dict.media.alt[image.alt]}
           loading={priority ? "eager" : "lazy"}

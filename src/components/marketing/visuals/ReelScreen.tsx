@@ -66,6 +66,7 @@ export function ReelScreen({ images, content, interval = 3200, minimal, classNam
           <Photo
             name={name}
             width={480}
+            ratio={9 / 19.5}
             sizes={sizes}
             priority={priority && i === 0}
             decorative
@@ -118,7 +119,7 @@ export function ReelScreen({ images, content, interval = 3200, minimal, classNam
         )}
         {(content.agent || content.audio) && (
           <div className="mt-2.5 flex items-center gap-2 border-t border-white/15 pt-2">
-            <Photo name={content.agentPhoto ?? "agentWoman"} width={80} sizes="24px" decorative className="size-6 shrink-0 rounded-full ring-1 ring-white/60" />
+            <Photo name={content.agentPhoto ?? "agentMan"} width={80} ratio={1} sizes="24px" decorative className="size-6 shrink-0 rounded-full ring-1 ring-white/60" />
             <div className="min-w-0 text-[0.58rem] leading-tight">
               {content.agent && <p className="truncate font-medium">{content.agent}</p>}
               {content.audio && (
