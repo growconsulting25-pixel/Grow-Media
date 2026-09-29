@@ -65,7 +65,7 @@ export function Transformation() {
                     audio: dict.hero.visual.reel.audio,
                   }}
                 />
-                <span className="absolute top-3 right-3 z-10 rounded-full bg-brand-500 px-2.5 py-1 text-[0.7rem] font-semibold text-on-brand">{t.after}</span>
+                <span className="absolute top-3 right-3 z-10 rounded-full bg-brand-600 px-2.5 py-1 text-[0.7rem] font-semibold text-on-brand">{t.after}</span>
               </div>
 
               {/* BEFORE (clipped) */}
@@ -130,7 +130,7 @@ export function Transformation() {
                         on ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.45)]" : "bg-white/[0.03] text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]",
                       )}
                     >
-                      <span className={cn("grid size-5 place-items-center rounded-full transition-colors duration-500", on ? "bg-brand-500 text-on-brand" : "bg-white/[0.06]")}>
+                      <span className={cn("grid size-5 place-items-center rounded-full transition-colors duration-500", on ? "bg-brand-600 text-on-brand" : "bg-white/[0.06]")}>
                         <Icon name="check" className="size-3" />
                       </span>
                       {item}

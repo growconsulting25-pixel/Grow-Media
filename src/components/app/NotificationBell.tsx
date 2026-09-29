@@ -92,7 +92,7 @@ export function NotificationBell({ initialUnread }: { initialUnread: number }) {
         className="relative grid size-9 place-items-center rounded-full bg-white/[0.05] text-fg-muted transition-colors hover:text-fg"
       >
         <Icon name="bell" className="size-4" />
-        {unread > 0 && <span className="absolute -top-0.5 -right-0.5 grid min-w-4 place-items-center rounded-full bg-brand-500 px-1 text-[0.6rem] font-semibold text-on-brand">{unread > 9 ? "9+" : unread}</span>}
+        {unread > 0 && <span className="absolute -top-0.5 -right-0.5 grid min-w-4 place-items-center rounded-full bg-brand-600 px-1 text-[0.6rem] font-semibold text-on-brand">{unread > 9 ? "9+" : unread}</span>}
       </button>
       {open && (
         <div className="surface-raised absolute top-11 right-0 z-50 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl lg:right-auto lg:left-0">

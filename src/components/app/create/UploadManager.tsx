@@ -224,7 +224,7 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
                       <span className="sr-only">{interpolate(t.uploadingProgress, { name: p.file.name })}</span>
                       <span className="font-mono text-xs tabular-nums">{Math.round(p.progress * 100)}%</span>
                       <span className="h-1 w-3/4 overflow-hidden rounded-full bg-white/15">
-                        <span className="block h-full rounded-full bg-brand-500 transition-[width] text-on-brand" style={{ width: `${p.progress * 100}%` }} />
+                        <span className="block h-full rounded-full bg-brand-600 transition-[width] text-on-brand" style={{ width: `${p.progress * 100}%` }} />
                       </span>
                     </>
                   )}

@@ -139,7 +139,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
 
       <ol className="mt-5 grid grid-cols-3 gap-1.5" aria-hidden>
         {[0, 1, 2].map((i) => (
-          <li key={i} className={cn("h-1 rounded-full transition-colors duration-500", i <= step ? "bg-brand-500 text-on-brand" : "bg-white/10")} />
+          <li key={i} className={cn("h-1 rounded-full transition-colors duration-500", i <= step ? "bg-brand-600 text-on-brand" : "bg-white/10")} />
         ))}
       </ol>
 

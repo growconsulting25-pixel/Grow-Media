@@ -63,10 +63,10 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
             return (
               <li key={step} className="flex items-center gap-3 sm:flex-col sm:items-start" aria-current={active ? "step" : undefined}>
                 <div className="flex w-full items-center gap-2">
-                  <span className={cn("grid size-7 shrink-0 place-items-center rounded-full text-xs", done ? "bg-brand-500 text-on-brand" : active ? "bg-brand-500/20 text-brand-300 ring-2 ring-brand-400/60" : "bg-white/[0.06] text-fg-subtle")}>
+                  <span className={cn("grid size-7 shrink-0 place-items-center rounded-full text-xs", done ? "bg-brand-600 text-on-brand" : active ? "bg-brand-500/20 text-brand-300 ring-2 ring-brand-400/60" : "bg-white/[0.06] text-fg-subtle")}>
                     {done ? <Icon name="check" className="size-3.5" /> : i + 1}
                   </span>
-                  {i < timelineSteps.length - 1 && <span className={cn("hidden h-px flex-1 sm:block", i < current ? "bg-brand-500 text-on-brand" : "bg-white/10")} />}
+                  {i < timelineSteps.length - 1 && <span className={cn("hidden h-px flex-1 sm:block", i < current ? "bg-brand-600 text-on-brand" : "bg-white/10")} />}
                 </div>
                 <div>
                   <p className={cn("text-sm font-medium", !done && !active && "text-fg-subtle")}>

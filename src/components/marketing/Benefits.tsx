@@ -32,7 +32,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
               {i.fast.timeline.map((step, idx) => (
                 <div key={step} className="flex flex-1 items-center gap-2">
                   <div className="flex-1">
-                    <div className={cn("h-1.5 rounded-full", idx < 2 ? "bg-brand-500 text-on-brand" : "bg-paper-3")} />
+                    <div className={cn("h-1.5 rounded-full", idx < 2 ? "bg-brand-600 text-on-brand" : "bg-paper-3")} />
                     <p className="mt-2 flex items-center gap-1 text-xs text-muted-on-paper">
                       {idx === 2 && <Icon name="check" className="size-3 text-emerald-600" />}
                       {step}
@@ -55,7 +55,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
           <Tile k="cost" icon="coins" dict={dict} delay={180}>
             <div className="mt-auto flex items-end gap-2 pt-5" aria-hidden>
               <div className="h-16 w-7 rounded-md bg-paper-3" />
-              <div className="h-5 w-7 rounded-md bg-brand-500 text-on-brand" />
+              <div className="h-5 w-7 rounded-md bg-brand-600 text-on-brand" />
             </div>
           </Tile>
 
@@ -64,7 +64,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
               {i.consistent.days.map((d, idx) => (
                 <div key={idx} className="text-center">
                   <p className="text-[0.68rem] text-muted-on-paper">{d}</p>
-                  <div className={cn("mt-1.5 aspect-[3/4] rounded-md", [0, 2, 4, 5].includes(idx) ? "bg-brand-500 text-on-brand" : "bg-paper-3")} />
+                  <div className={cn("mt-1.5 aspect-[3/4] rounded-md", [0, 2, 4, 5].includes(idx) ? "bg-brand-600 text-on-brand" : "bg-paper-3")} />
                 </div>
               ))}
             </div>
@@ -72,7 +72,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
 
           <Tile k="brand" icon="palette" dict={dict} delay={60}>
             <div className="mt-auto flex items-center gap-2 pt-5" aria-hidden>
-              <Photo name="agentMan" width={96} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" imgClassName="object-[center_20%]" />
+              <Photo name="agentMan" width={96} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" />
               {["#0b1622", "#00abff", "#dce4ec"].map((c) => (
                 <span key={c} className="size-7 rounded-full ring-2 ring-white" style={{ background: c }} />
               ))}
@@ -132,7 +132,7 @@ function MoreContentVisual({ labels }: { labels: string[] }) {
     { name: "exterior", cls: "aspect-[9/16] w-[26%]" },
     { name: "kitchen", cls: "aspect-[9/16] w-[26%] translate-y-4" },
     { name: "living", cls: "aspect-[4/5] w-[28%]" },
-    { name: "pool", cls: "aspect-square w-[24%] translate-y-6" },
+    { name: "frontYard", cls: "aspect-square w-[24%] translate-y-6" },
   ];
   return (
     <div className="relative mt-auto pt-8">
@@ -151,14 +151,14 @@ function MoreContentVisual({ labels }: { labels: string[] }) {
 }
 
 function ScaleVisual({ label }: { label: string }) {
-  const names: PropertyImageKey[] = ["exterior", "facade", "pool", "interior", "kitchen", "living"];
+  const names: PropertyImageKey[] = ["exterior", "townhouse", "frontYard", "twoStory", "facade", "street"];
   return (
     <div className="flex min-w-0 flex-1 items-center gap-3">
       <div className="no-scrollbar flex min-w-0 flex-1 gap-2 overflow-hidden">
         {names.map((n, i) => (
           <div key={n} className="relative w-28 shrink-0 overflow-hidden rounded-xl bg-paper-2 p-1 lg:flex-1">
             <Photo name={n} width={220} sizes="160px" decorative className="aspect-[4/3] rounded-lg" />
-            <span className={cn("absolute top-2 right-2 size-2 rounded-full ring-2 ring-white", i < 4 ? "bg-emerald-500" : "bg-brand-500 text-on-brand")} />
+            <span className={cn("absolute top-2 right-2 size-2 rounded-full ring-2 ring-white", i < 4 ? "bg-emerald-500" : "bg-brand-600 text-on-brand")} />
           </div>
         ))}
       </div>
