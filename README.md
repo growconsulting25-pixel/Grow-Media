@@ -1,2 +1,87 @@
-# Grow-Media
-Media and production 
+# Grow Media
+
+A bilingual (FR/EN) marketing site and future client platform for professional real-estate listing videos, made without a video shoot.
+
+**Stack:** Next.js 16 (App Router, Turbopack) · React 19 · TypeScript · Tailwind CSS v4 · Geist. There are no runtime dependencies beyond these.
+
+```bash
+npm install
+npm run dev        # http://localhost:3000 → redirects to /fr or /en
+npm run build && npm start
+npm run lint
+```
+
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` for canonical, hreflang and OpenGraph URLs.
+
+## Status
+
+| Phase | Scope | Status |
+| --- | --- | --- |
+| 1 | Foundation, design system, i18n, navigation, homepage, responsive marketing site | ✅ Done |
+| 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | Next |
+| 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | — |
+| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | — |
+| 5 | UX polish, mobile QA, accessibility, conversion optimization | — |
+
+## Architecture
+
+```
+src/
+  app/[locale]/            Routes. The root layout lives here so <html lang> is correct.
+    page.tsx               Homepage (section order = the storytelling sequence)
+    login/ signup/         Auth pages (UI ready; backend arrives in Phase 2)
+    legal/[slug]/          Privacy / Terms / Cookies (localized slugs)
+    opengraph-image.tsx    Per-locale OG image
+  app/sitemap.ts, robots.ts
+  proxy.ts                 Locale detection (cookie → Accept-Language → fr) and localized-URL rewrites
+  i18n/
+    config.ts              Locales, default locale, BCP-47 tags
+    dictionaries/en.ts     Source of truth for every UI string (defines the type)
+    dictionaries/fr.ts     French: typed against en, so a missing key fails the build
+    routing.ts             Localized route map (/fr/connexion ↔ /en/login), href(), switchLocalePath()
+    I18nProvider.tsx       useI18n() for client components
+  config/
+    site.ts                Brand name, contact, social links, feature flags
+    pricing.ts             Plans, add-ons, launch offer (the only place prices live)
+    services.ts            Service catalogue
+    media.ts               Property imagery + example YouTube videos
+    navigation.ts          Section anchor ids
+  data/testimonials.ts     Real customer stories only (empty until real ones exist)
+  lib/                     analytics (typed events), format (Intl currency), seo, cn
+  components/
+    ui/                    Button, Headline, SectionHeading, Eyebrow, Photo, PhoneMockup,
+                           VideoPlayer, Modal, Accordion, StatusBadge, ProgressIndicator, …
+    layout/                Navbar, Footer, Logo, LanguageSwitcher
+    onboarding/            SignupProvider (one modal for every CTA), SignupFlow, FreeVideoButton,
+                           auth-adapter (the Phase 2 swap point)
+    marketing/             One component per homepage section, plus visuals/
+```
+
+### Adding a language
+Add the code to `i18n/config.ts`, create `dictionaries/<code>.ts` typed as `Dictionary`, register it in `dictionaries/index.ts`, and add its slugs to `i18n/routing.ts`.
+
+### Changing prices
+Edit `config/pricing.ts`. Cards, the comparison block, the FAQ answer and JSON-LD all read from it.
+
+### Example videos
+Set the three YouTube IDs in `config/media.ts`. Set `aspect: "9:16"` for vertical Shorts. They appear in:
+- the hero "Watch an Example" modal
+- the Examples gallery
+- the "Cinematic Video" tab of the content-engine section
+
+They use a lightweight facade: YouTube loads only when someone presses play, through `youtube-nocookie.com`.
+
+### Property photos
+Placeholder Unsplash photos are listed in `config/media.ts`. Replace them with your own listings. Each image renders over a tonal fallback, so a slow or missing image never breaks the layout.
+
+### Social proof policy
+`data/testimonials.ts` starts empty, so the Results section shows an honest "be one of our first featured agents" invitation. Setting `NEXT_PUBLIC_SHOW_DEMO_SOCIAL_PROOF=true` renders layout-only demo cards, each with a visible "Demo content" badge; use this only in development. Metrics (views, likes, …) render only when a real value is present.
+
+### Analytics
+`lib/analytics.ts` exposes `track(event)` for the funnel events:
+`hero_free_video_click`, `example_video_play`, `pricing_view`, `plan_selected`, `signup_started`, `signup_completed`, `project_started`, `photos_uploaded`, `project_submitted`, `free_video_completed`, `subscription_started`.
+
+Events go to `window.dataLayer` (GTM-ready) and are re-emitted as a `gm:analytics` DOM event.
+
+### Signup today
+The CTA modal runs the full 3-step flow (details → password → photos) with validation. The auth adapter deliberately returns `not_configured`, and the user sees an honest "accounts open soon, email us your photos" message. Nothing is faked or stored. Phase 2 replaces `components/onboarding/auth-adapter.ts` with Supabase.

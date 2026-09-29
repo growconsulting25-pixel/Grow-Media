@@ -1,0 +1,257 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Dark surfaces — near-black with a navy undertone */
+  --color-ink-950: #06060b;
+  --color-ink-900: #0a0a12;
+  --color-ink-850: #0e0e18;
+  --color-ink-800: #13131e;
+  --color-ink-700: #1b1b28;
+  --color-ink-600: #262635;
+
+  /* Foreground on dark */
+  --color-fg: #f4f3f8;
+  --color-fg-muted: #a3a1b3;
+  --color-fg-subtle: #6d6b80;
+
+  /* Accent — electric violet, used sparingly */
+  --color-violet-300: #d4c2ff;
+  --color-violet-400: #b692ff;
+  --color-violet-500: #8f5cf7;
+  --color-violet-600: #7336ec;
+  --color-violet-700: #5b22c9;
+  --color-orchid-400: #d17df2;
+  --color-lavender: #e7defd;
+
+  /* Light sections — warm paper and lavender-gray */
+  --color-paper: #f5f3ef;
+  --color-paper-2: #ecebf1;
+  --color-paper-3: #e2e0ea;
+  --color-ink-on-paper: #121119;
+  --color-muted-on-paper: #5b5968;
+
+  --color-success: #4ade80;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-kenburns: kenburns 14s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-drift: drift 9s ease-in-out infinite;
+  --animate-progress: progress 3.2s var(--ease-out-expo) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--float-rotate, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--float-rotate, 0deg)); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.02) translate3d(0, 0, 0); }
+    to { transform: scale(1.14) translate3d(-2%, -2%, 0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--drift-rotate, 0deg)); }
+    50% { transform: translate3d(var(--drift-x, 6px), -8px, 0) rotate(var(--drift-rotate, 0deg)); }
+  }
+  @keyframes progress {
+    0% { transform: scaleX(0.08); }
+    70%, 100% { transform: scaleX(1); }
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-ink-900);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-violet-500) 45%, transparent);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-violet-400);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  button:not(:disabled),
+  [role="button"],
+  [role="tab"] {
+    cursor: pointer;
+  }
+}
+
+/* ==========================================================================
+   Components (kept small — most styling lives in Tailwind classes)
+   ========================================================================== */
+@layer components {
+  /* Headline gradient — light lavender to violet, as in the accent words */
+  .text-gradient {
+    background: linear-gradient(100deg, #f4f0ff 0%, var(--color-violet-300) 28%, var(--color-violet-400) 55%, var(--color-orchid-400) 78%, var(--color-violet-500) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .on-paper .text-gradient {
+    background: linear-gradient(100deg, var(--color-violet-700) 0%, var(--color-violet-600) 45%, #a44bd8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .display {
+    font-weight: 600;
+    letter-spacing: -0.038em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  /* Primary pill button */
+  .btn-primary {
+    background:
+      radial-gradient(120% 140% at 85% 0%, rgba(232, 150, 255, 0.55) 0%, transparent 55%),
+      linear-gradient(180deg, #8a4cf5 0%, #6a2ee0 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.28),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+      0 10px 30px -10px rgba(128, 64, 240, 0.8);
+    color: white;
+    transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.32),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
+      0 14px 40px -10px rgba(150, 80, 255, 0.95);
+  }
+  .btn-primary:active { transform: translateY(1px) scale(0.99); }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: inset 0 0 0 1px rgba(160, 120, 255, 0.45);
+    color: var(--color-fg);
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(143, 92, 247, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(182, 146, 255, 0.75);
+  }
+  .on-paper .btn-secondary {
+    color: var(--color-ink-on-paper);
+    box-shadow: inset 0 0 0 1px rgba(91, 34, 201, 0.35);
+  }
+
+  /* Surfaces */
+  .surface {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+  .surface-raised {
+    background: linear-gradient(180deg, #1a1a27 0%, #12121c 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+  }
+  .glass {
+    background: rgba(12, 12, 20, 0.62);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  /* Violet hairline on the top edge of a card, as in the reference UI */
+  .edge-glow {
+    position: relative;
+  }
+  .edge-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0 18% auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(190, 140, 255, 0.85), transparent);
+    pointer-events: none;
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.35s ease, transform 0.35s var(--ease-out-expo);
+  }
+  .hover-glow:hover {
+    box-shadow: inset 0 0 0 1px rgba(170, 125, 255, 0.4), 0 20px 50px -25px rgba(130, 70, 240, 0.55);
+  }
+
+  /* Faint architectural grid used behind some sections */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+  }
+
+  .shimmer-bar {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(190, 150, 255, 0.35) 50%, rgba(255, 255, 255, 0.04) 100%);
+    background-size: 200% 100%;
+    animation: var(--animate-shimmer);
+  }
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Scroll reveal (progressively enhanced — content is visible without JS) */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — keep layout, drop movement
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
