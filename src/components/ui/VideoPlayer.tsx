@@ -49,7 +49,7 @@ export function VideoPlayer({ video, title, autoplay, className, location = "inl
           aria-label={interpolate(dict.examples.playLabel, { title })}
           className="group absolute inset-0 size-full"
         >
-          <span aria-hidden className="absolute inset-0 bg-[radial-gradient(80%_80%_at_50%_40%,#23203a,#0b0b12)]" />
+          <span aria-hidden className="absolute inset-0 bg-ink-800" />
           {/* eslint-disable-next-line @next/next/no-img-element -- remote poster, facade pattern */}
           {poster && <img
             src={poster}

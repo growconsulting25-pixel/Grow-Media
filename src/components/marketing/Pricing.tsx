@@ -41,19 +41,18 @@ export function Pricing() {
 
   return (
     <section ref={ref} id={sectionIds.pricing} aria-labelledby="pricing-title" className="relative overflow-hidden py-24 sm:py-32">
-      <div aria-hidden className="absolute top-40 left-1/2 h-[30rem] w-[60rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(115,54,236,0.22),transparent)]" />
       <Container className="relative">
         <SectionHeading eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="pricing-title" />
 
         {launchOffer.active && (
-          <Reveal className="relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-[1.5rem] bg-[linear-gradient(110deg,rgba(115,54,236,0.28),rgba(209,125,242,0.14)_60%,rgba(255,255,255,0.03))] p-px">
-            <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-[calc(1.5rem-1px)] bg-ink-850/90 px-6 py-6 text-center sm:flex-row sm:text-left">
+          <Reveal className="relative mx-auto mt-12 max-w-3xl overflow-hidden rounded-[1.5rem] bg-brand-500/40 p-px">
+            <div className="relative flex flex-col items-center gap-4 overflow-hidden rounded-[calc(1.5rem-1px)] bg-navy-800 px-6 py-6 text-center sm:flex-row sm:text-left">
               <Sparkles density={6} />
               <span className="relative grid size-12 shrink-0 place-items-center rounded-2xl btn-primary">
                 <Icon name="sparkle" className="size-5" fill="currentColor" />
               </span>
               <div className="relative flex-1">
-                <p className="text-xs font-semibold tracking-wide text-violet-300 uppercase">{t.offer.badge}</p>
+                <p className="text-xs font-semibold tracking-wide text-brand-300 uppercase">{t.offer.badge}</p>
                 <p className="mt-1 text-xl font-semibold tracking-tight">{t.offer.title}</p>
                 <p className="mt-0.5 text-sm text-fg-muted">{t.offer.note}</p>
               </div>
@@ -76,7 +75,7 @@ export function Pricing() {
             {addOns.map((a) => (
               <li key={a.id} className="surface flex items-center justify-between gap-4 rounded-2xl px-5 py-4">
                 <span className="flex items-center gap-3 text-sm font-medium">
-                  <span className="grid size-8 place-items-center rounded-lg bg-violet-500/12 text-violet-300">
+                  <span className="grid size-8 place-items-center rounded-lg bg-brand-500/12 text-brand-300">
                     <Icon name={a.id === "walkthrough" ? "cube" : "megaphone"} className="size-4" />
                   </span>
                   {t.addOns[a.id].name}
@@ -84,7 +83,7 @@ export function Pricing() {
                 {a.price !== null ? (
                   <span className="font-semibold">{interpolate(t.addOns[a.id].price, { price: formatPrice(a.price, locale) })}</span>
                 ) : (
-                  <a href={`mailto:${siteConfig.contactEmail}`} className="text-sm font-medium text-violet-300 underline-offset-4 hover:underline">
+                  <a href={`mailto:${siteConfig.contactEmail}`} className="text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
                     {t.addOns[a.id].price}
                   </a>
                 )}
@@ -110,13 +109,13 @@ function PricingCard({ plan, delay }: { plan: Plan; delay: number }) {
       className={cn(
         "relative flex flex-col rounded-[var(--radius-panel)] p-7 sm:p-8",
         featured
-          ? "edge-glow bg-[linear-gradient(180deg,rgba(115,54,236,0.2),rgba(20,18,32,0.9)_45%)] shadow-[inset_0_0_0_1px_rgba(170,125,255,0.45),0_40px_80px_-40px_rgba(115,54,236,0.7)] lg:-my-3 lg:py-11"
+          ? "edge-glow bg-navy-800 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5),0_30px_60px_-30px_rgba(0,0,0,0.8)] lg:-my-3 lg:py-11"
           : "surface",
       )}
     >
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-lg font-semibold tracking-tight">{copy.name}</h3>
-        {featured && <span className="rounded-full bg-violet-600 px-2.5 py-1 text-[0.7rem] font-semibold">{t.mostPopular}</span>}
+        {featured && <span className="rounded-full bg-brand-600 px-2.5 py-1 text-[0.7rem] font-semibold text-on-brand">{t.mostPopular}</span>}
       </div>
       <p className="mt-1.5 text-sm text-fg-muted">{copy.tagline}</p>
 
@@ -124,7 +123,7 @@ function PricingCard({ plan, delay }: { plan: Plan; delay: number }) {
         <span className="text-[2.75rem] leading-none font-semibold tracking-tight">{formatPrice(plan.price, locale)}</span>
         <span className="text-sm text-fg-muted">{plan.interval === "month" ? dict.common.perMonth : dict.common.perVideo}</span>
       </p>
-      <p className="mt-2 text-sm font-medium text-violet-300">
+      <p className="mt-2 text-sm font-medium text-brand-300">
         {plan.interval === "month" ? interpolate(t.videosPerMonth, { count: plan.videosIncluded }) : t.oneVideo}
       </p>
 
@@ -143,7 +142,7 @@ function PricingCard({ plan, delay }: { plan: Plan; delay: number }) {
       <ul className="mt-7 space-y-3 border-t border-white/[0.07] pt-6">
         {copy.features.map((f) => (
           <li key={f} className="flex items-start gap-2.5 text-sm text-fg-muted">
-            <Icon name="check" className={cn("mt-0.5 size-4 shrink-0", featured ? "text-violet-300" : "text-fg-subtle")} />
+            <Icon name="check" className={cn("mt-0.5 size-4 shrink-0", featured ? "text-brand-300" : "text-fg-subtle")} />
             {f}
           </li>
         ))}

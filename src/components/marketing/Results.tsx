@@ -1,6 +1,7 @@
 import { FreeVideoButton } from "@/components/onboarding/FreeVideoButton";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
+import { Photo } from "@/components/ui/Photo";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { siteConfig } from "@/config/site";
@@ -21,7 +22,7 @@ export function Results({ dict, locale }: { dict: Dictionary; locale: Locale }) 
   const showDemo = !hasReal && siteConfig.showDemoSocialProof;
 
   return (
-    <LightSection labelledBy="results-title" tone="lavender">
+    <LightSection labelledBy="results-title" tone="cool">
       <Container>
         <SectionHeading tone="light" eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="results-title" />
 
@@ -52,17 +53,20 @@ export function Results({ dict, locale }: { dict: Dictionary; locale: Locale }) 
           )}
 
           {!hasReal && !showDemo && (
-            <Reveal className="mx-auto flex max-w-3xl flex-col items-center rounded-[1.75rem] bg-white px-6 py-12 text-center shadow-[0_0_0_1px_rgba(18,17,25,0.06),0_24px_48px_-32px_rgba(40,20,90,0.3)] sm:px-12">
+            <Reveal className="mx-auto grid max-w-5xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_0_0_1px_rgba(11,22,34,0.06),0_24px_48px_-32px_rgba(11,34,57,0.3)] md:grid-cols-[0.9fr_1.1fr]">
+              <Photo name="agentWoman" width={640} sizes="(min-width: 768px) 40vw, 92vw" className="aspect-[4/3] md:aspect-auto md:min-h-full" imgClassName="object-[center_25%]" />
+              <div className="flex flex-col items-center px-6 py-12 text-center sm:px-10">
               <ol className="flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-muted-on-paper" aria-label={dict.how.eyebrow}>
                 <li className="inline-flex items-center gap-1.5 rounded-full bg-paper-2 px-3 py-1.5"><Icon name="image" className="size-4" /> {dict.how.steps.upload.label}</li>
                 <li aria-hidden><Icon name="arrowRight" className="size-4" /></li>
                 <li className="inline-flex items-center gap-1.5 rounded-full bg-paper-2 px-3 py-1.5"><Icon name="sparkle" className="size-4" /> {dict.how.steps.customize.label}</li>
                 <li aria-hidden><Icon name="arrowRight" className="size-4" /></li>
-                <li className="inline-flex items-center gap-1.5 rounded-full bg-violet-600/10 px-3 py-1.5 text-violet-700"><Icon name="check" className="size-4" /> {dict.how.steps.receive.label}</li>
+                <li className="inline-flex items-center gap-1.5 rounded-full bg-brand-600/10 px-3 py-1.5 text-brand-700"><Icon name="check" className="size-4" /> {dict.how.steps.receive.label}</li>
               </ol>
               <h3 className="mt-8 text-2xl font-semibold tracking-tight sm:text-3xl">{t.empty.title}</h3>
               <p className="mt-3 max-w-xl leading-relaxed text-muted-on-paper">{t.empty.description}</p>
               <FreeVideoButton source="results" className="mt-8" />
+              </div>
             </Reveal>
           )}
         </div>

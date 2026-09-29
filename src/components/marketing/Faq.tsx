@@ -24,7 +24,7 @@ export function Faq({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           <SectionHeading align="left" eyebrow={t.eyebrow} lines={t.headline} titleId="faq-title" />
           <Reveal delay={100} className="mt-8">
             <p className="text-sm text-fg-muted">{t.stillQuestions}</p>
-            <a href={`mailto:${siteConfig.contactEmail}`} className="mt-1 inline-flex text-sm font-medium text-violet-300 underline-offset-4 hover:underline">
+            <a href={`mailto:${siteConfig.contactEmail}`} className="mt-1 inline-flex text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
               {t.contact} → {siteConfig.contactEmail}
             </a>
           </Reveal>

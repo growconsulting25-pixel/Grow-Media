@@ -65,7 +65,7 @@ export function Transformation() {
                     audio: dict.hero.visual.reel.audio,
                   }}
                 />
-                <span className="absolute top-3 right-3 z-10 rounded-full bg-violet-600/90 px-2.5 py-1 text-[0.7rem] font-semibold">{t.after}</span>
+                <span className="absolute top-3 right-3 z-10 rounded-full bg-brand-500 px-2.5 py-1 text-[0.7rem] font-semibold text-on-brand">{t.after}</span>
               </div>
 
               {/* BEFORE (clipped) */}
@@ -86,7 +86,7 @@ export function Transformation() {
               </div>
 
               {/* Divider handle */}
-              <div aria-hidden className="pointer-events-none absolute inset-y-0 z-20 w-px bg-white/90 shadow-[0_0_20px_rgba(190,140,255,0.9)]" style={{ left: `${value}%` }}>
+              <div aria-hidden className="pointer-events-none absolute inset-y-0 z-20 w-px bg-white/90 shadow-[0_0_20px_rgba(0,171,255,0.9)]" style={{ left: `${value}%` }}>
                 <span className="absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-ink-900 shadow-lg">
                   <svg viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M7.5 5.5 3 10l4.5 4.5M12.5 5.5 17 10l-4.5 4.5" /></svg>
                 </span>
@@ -127,10 +127,10 @@ export function Transformation() {
                       key={item}
                       className={cn(
                         "flex items-center gap-2 rounded-xl px-3.5 py-3 text-sm transition-all duration-500",
-                        on ? "bg-violet-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(170,125,255,0.45)]" : "bg-white/[0.03] text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]",
+                        on ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.45)]" : "bg-white/[0.03] text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]",
                       )}
                     >
-                      <span className={cn("grid size-5 place-items-center rounded-full transition-colors duration-500", on ? "bg-violet-500 text-white" : "bg-white/[0.06]")}>
+                      <span className={cn("grid size-5 place-items-center rounded-full transition-colors duration-500", on ? "bg-brand-500 text-on-brand" : "bg-white/[0.06]")}>
                         <Icon name="check" className="size-3" />
                       </span>
                       {item}
@@ -148,11 +148,11 @@ export function Transformation() {
                   <p className="mt-2 text-2xl font-semibold tracking-tight text-fg-muted line-through decoration-white/25 decoration-1">{t.compare.traditionalValue}<sup className="ml-0.5 text-xs">*</sup></p>
                   <p className="mt-2 text-xs leading-relaxed text-fg-subtle">{t.compare.traditionalNote}</p>
                 </div>
-                <div className="edge-glow rounded-2xl bg-violet-500/[0.08] p-4 shadow-[inset_0_0_0_1px_rgba(170,125,255,0.35)]">
-                  <p className="text-xs text-violet-300">{interpolate(t.compare.oursLabel, { brand: siteConfig.name })}</p>
+                <div className="edge-glow rounded-2xl bg-brand-500/[0.08] p-4 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.35)]">
+                  <p className="text-xs text-brand-300">{interpolate(t.compare.oursLabel, { brand: siteConfig.name })}</p>
                   <p className="mt-2 text-2xl font-semibold tracking-tight">{interpolate(t.compare.oursValue, { price: formatPrice(startingPrice, locale) })}</p>
                   <p className="mt-2 flex items-center gap-1.5 text-xs leading-relaxed text-fg-muted">
-                    <Icon name="clock" className="size-3.5 shrink-0 text-violet-300" /> {t.compare.oursNote}
+                    <Icon name="clock" className="size-3.5 shrink-0 text-brand-300" /> {t.compare.oursNote}
                   </p>
                 </div>
               </div>

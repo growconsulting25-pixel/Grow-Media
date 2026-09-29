@@ -11,17 +11,17 @@ import { formatPrice } from "@/lib/format";
 export function Upsell({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const t = dict.app.upsell;
   return (
-    <section aria-labelledby="upsell-title" className="edge-glow relative overflow-hidden rounded-[var(--radius-panel)] bg-[linear-gradient(135deg,rgba(115,54,236,0.22),rgba(20,18,32,0.9)_55%)] p-6 shadow-[inset_0_0_0_1px_rgba(170,125,255,0.35)] sm:p-8">
+    <section aria-labelledby="upsell-title" className="edge-glow relative overflow-hidden rounded-[var(--radius-panel)] bg-navy-800 p-6 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.35)] sm:p-8">
       <h2 id="upsell-title" className="display text-2xl sm:text-3xl">{t.title}</h2>
       <p className="mt-1 text-fg-muted">{t.subtitle}</p>
       <ul className="mt-6 grid gap-3 sm:grid-cols-3">
         {plans.map((p) => (
-          <li key={p.id} className={cn("rounded-2xl p-4", p.highlighted ? "bg-violet-500/15 shadow-[inset_0_0_0_1px_rgba(170,125,255,0.5)]" : "bg-white/[0.04]")}>
+          <li key={p.id} className={cn("rounded-2xl p-4", p.highlighted ? "bg-brand-500/15 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5)]" : "bg-white/[0.04]")}>
             <p className="text-sm text-fg-muted">{t[p.id]}</p>
             <p className="mt-1 text-2xl font-semibold tracking-tight">
               {formatPrice(p.price, locale)} <span className="text-sm font-normal text-fg-muted">{p.interval === "month" ? t.perMonth : t.perVideo}</span>
             </p>
-            {p.interval === "month" && <p className="mt-1 text-xs text-violet-300">{interpolate(t.videos, { count: p.videosIncluded })}</p>}
+            {p.interval === "month" && <p className="mt-1 text-xs text-brand-300">{interpolate(t.videos, { count: p.videosIncluded })}</p>}
           </li>
         ))}
       </ul>

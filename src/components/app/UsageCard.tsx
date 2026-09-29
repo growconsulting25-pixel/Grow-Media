@@ -24,7 +24,7 @@ export function UsageCard({ summary, dict, locale }: { summary: AccountSummary; 
             {summary.free_credits > 0 ? interpolate(t.freeLeft, { count: summary.free_credits }) : interpolate(t.payAsYouGo, { price: formatPrice(single.price, locale) })}
           </p>
         </div>
-        <Link href={href("appSubscription", locale)} className="text-sm text-violet-300 hover:underline">{t.manage} →</Link>
+        <Link href={href("appSubscription", locale)} className="text-sm text-brand-300 hover:underline">{t.manage} →</Link>
       </div>
     );
   }
@@ -37,13 +37,13 @@ export function UsageCard({ summary, dict, locale }: { summary: AccountSummary; 
     <div className="surface rounded-[var(--radius-card)] p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="font-medium">{interpolate(t.plan, { plan: planName })}</p>
-        <Link href={href("appSubscription", locale)} className="text-sm text-violet-300 hover:underline">{t.manage} →</Link>
+        <Link href={href("appSubscription", locale)} className="text-sm text-brand-300 hover:underline">{t.manage} →</Link>
       </div>
       <p className="mt-3 text-sm text-fg-muted tabular-nums">{interpolate(t.used, { used, included })}</p>
       <ProgressIndicator className="mt-2" value={included ? (used / included) * 100 : 0} label={interpolate(t.used, { used, included })} />
       <div className="mt-3 flex flex-wrap justify-between gap-2 text-xs text-fg-subtle">
         {summary.period_end && <span>{interpolate(summary.cancel_at_period_end ? t.cancels : t.renews, { date: fmt.format(new Date(summary.period_end)) })}</span>}
-        {remaining === 1 && <span className="flex items-center gap-1 text-orchid-400"><Icon name="clock" className="size-3.5" /> {interpolate(t.lowRemaining, { count: remaining })}</span>}
+        {remaining === 1 && <span className="flex items-center gap-1 text-brand-300"><Icon name="clock" className="size-3.5" /> {interpolate(t.lowRemaining, { count: remaining })}</span>}
       </div>
     </div>
   );

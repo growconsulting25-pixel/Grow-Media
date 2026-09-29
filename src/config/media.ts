@@ -8,7 +8,7 @@ const unsplash = (id: string) => `https://images.unsplash.com/${id}`;
 export interface PropertyImage {
   src: string;
   /** Localized alt text key in `dict.media.alt`. */
-  alt: "exterior" | "pool" | "kitchen" | "living" | "bedroom" | "dining" | "facade" | "interior";
+  alt: "exterior" | "pool" | "kitchen" | "living" | "bedroom" | "dining" | "facade" | "interior" | "agentWoman" | "agentMan" | "agentPhone" | "keys" | "handshake";
   /** Tonal fallback (shown while loading / on error). */
   tone: string;
 }
@@ -22,6 +22,12 @@ export const propertyImages = {
   dining: { src: unsplash("photo-1600607687939-ce8a6c25118c"), alt: "dining", tone: "#322f2d" },
   facade: { src: unsplash("photo-1600585154340-be6161a56a0c"), alt: "facade", tone: "#27303a" },
   interior: { src: unsplash("photo-1600573472550-8090b5e0745e"), alt: "interior", tone: "#33302e" },
+  // People — real estate professionals and clients
+  agentWoman: { src: unsplash("photo-1573496359142-b8d87734a5a2"), alt: "agentWoman", tone: "#2b3440" },
+  agentMan: { src: unsplash("photo-1560250097-0b93528c311a"), alt: "agentMan", tone: "#2a2f38" },
+  agentPhone: { src: unsplash("photo-1556157382-97eda2d62296"), alt: "agentPhone", tone: "#2e3238" },
+  keys: { src: unsplash("photo-1560518883-ce09059eeffa"), alt: "keys", tone: "#2f2d2a" },
+  handshake: { src: unsplash("photo-1521791136064-7986c2920216"), alt: "handshake", tone: "#2c3036" },
 } satisfies Record<string, PropertyImage>;
 
 export type PropertyImageKey = keyof typeof propertyImages;

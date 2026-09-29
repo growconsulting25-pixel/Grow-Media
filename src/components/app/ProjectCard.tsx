@@ -20,7 +20,7 @@ export function ProjectCard({ project, dict, locale, cover, fileCount }: { proje
 
   return (
     <Link href={link} className="surface hover-glow group flex flex-col overflow-hidden rounded-[var(--radius-card)]">
-      <div className="relative aspect-[16/9] bg-[radial-gradient(120%_90%_at_30%_20%,#26253a,#0d0d15)]">
+      <div className="relative aspect-[16/9] bg-ink-800">
         {cover ? (
           // eslint-disable-next-line @next/next/no-img-element -- short-lived signed URL
           <img src={cover} alt="" loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
@@ -49,7 +49,7 @@ export function ProjectCard({ project, dict, locale, cover, fileCount }: { proje
         {!draft && step < 3 && step >= 0 && (
           <ProgressIndicator value={((step + 1) / 4) * 100} label={dict.app.status[project.status]} animated={project.status === "in_production"} />
         )}
-        {draft && <p className="mt-auto text-sm font-medium text-violet-300">{dict.app.dashboard.continueDraft} →</p>}
+        {draft && <p className="mt-auto text-sm font-medium text-brand-300">{dict.app.dashboard.continueDraft} →</p>}
       </div>
     </Link>
   );

@@ -7,34 +7,39 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Dark surfaces — near-black with a navy undertone */
-  --color-ink-950: #06060b;
-  --color-ink-900: #0a0a12;
-  --color-ink-850: #0e0e18;
-  --color-ink-800: #13131e;
-  --color-ink-700: #1b1b28;
-  --color-ink-600: #262635;
+  /* Dark surfaces — navy-black, biased toward the brand blue */
+  --color-ink-950: #050a10;
+  --color-ink-900: #08101a;
+  --color-ink-850: #0c1622;
+  --color-ink-800: #111d2b;
+  --color-ink-700: #182838;
+  --color-ink-600: #223447;
 
-  /* Foreground on dark */
-  --color-fg: #f4f3f8;
-  --color-fg-muted: #a3a1b3;
-  --color-fg-subtle: #6d6b80;
+  /* Foreground on dark — cool slate greys */
+  --color-fg: #f2f6fa;
+  --color-fg-muted: #9aabbd;
+  --color-fg-subtle: #62758a;
 
-  /* Accent — electric violet, used sparingly */
-  --color-violet-300: #d4c2ff;
-  --color-violet-400: #b692ff;
-  --color-violet-500: #8f5cf7;
-  --color-violet-600: #7336ec;
-  --color-violet-700: #5b22c9;
-  --color-orchid-400: #d17df2;
-  --color-lavender: #e7defd;
+  /* Brand — Grow cyan (#00ABFF). Used solid, never as a gradient. */
+  --color-brand-100: #e6f6ff;
+  --color-brand-200: #b3e6ff;
+  --color-brand-300: #66ccff;
+  --color-brand-400: #33bcff;
+  --color-brand-500: #00abff;
+  --color-brand-600: #0096e0;
+  --color-brand-700: #0077b3;
+  /* Secondary — deep navy, for quiet fills and depth */
+  --color-navy-700: #0f2d48;
+  --color-navy-800: #0b2239;
+  /* Text/icons placed on a solid brand fill */
+  --color-on-brand: #041320;
 
-  /* Light sections — warm paper and lavender-gray */
-  --color-paper: #f5f3ef;
-  --color-paper-2: #ecebf1;
-  --color-paper-3: #e2e0ea;
-  --color-ink-on-paper: #121119;
-  --color-muted-on-paper: #5b5968;
+  /* Light sections — cool paper greys */
+  --color-paper: #f4f6f8;
+  --color-paper-2: #e9eef3;
+  --color-paper-3: #dce4ec;
+  --color-ink-on-paper: #0b1622;
+  --color-muted-on-paper: #4f6275;
 
   --color-success: #4ade80;
 
@@ -97,11 +102,11 @@
     overflow-x: clip;
   }
   ::selection {
-    background: color-mix(in oklab, var(--color-violet-500) 45%, transparent);
+    background: color-mix(in oklab, var(--color-brand-500) 45%, transparent);
     color: white;
   }
   :focus-visible {
-    outline: 2px solid var(--color-violet-400);
+    outline: 2px solid var(--color-brand-400);
     outline-offset: 3px;
     border-radius: 6px;
   }
@@ -116,17 +121,12 @@
    Components (kept small — most styling lives in Tailwind classes)
    ========================================================================== */
 @layer components {
-  /* Headline gradient — light lavender to violet, as in the accent words */
-  .text-gradient {
-    background: linear-gradient(100deg, #f4f0ff 0%, var(--color-violet-300) 28%, var(--color-violet-400) 55%, var(--color-orchid-400) 78%, var(--color-violet-500) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* Accent words in headlines — solid brand color (no gradients). */
+  .text-accent {
+    color: var(--color-brand-500);
   }
-  .on-paper .text-gradient {
-    background: linear-gradient(100deg, var(--color-violet-700) 0%, var(--color-violet-600) 45%, #a44bd8 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
+  .on-paper .text-accent {
+    color: var(--color-brand-700);
   }
 
   .display {
@@ -136,67 +136,60 @@
     text-wrap: balance;
   }
 
-  /* Primary pill button */
+  /* Primary pill button — solid Grow cyan with dark text for contrast */
   .btn-primary {
-    background:
-      radial-gradient(120% 140% at 85% 0%, rgba(232, 150, 255, 0.55) 0%, transparent 55%),
-      linear-gradient(180deg, #8a4cf5 0%, #6a2ee0 100%);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.28),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-      0 10px 30px -10px rgba(128, 64, 240, 0.8);
-    color: white;
-    transition: transform 0.25s var(--ease-out-expo), box-shadow 0.25s ease, filter 0.25s ease;
+    background: var(--color-brand-500);
+    color: var(--color-on-brand);
+    box-shadow: 0 8px 24px -12px rgba(0, 171, 255, 0.55);
+    transition: transform 0.25s var(--ease-out-expo), background-color 0.2s ease, box-shadow 0.25s ease;
   }
   .btn-primary:hover {
-    filter: brightness(1.08);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.32),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.25),
-      0 14px 40px -10px rgba(150, 80, 255, 0.95);
+    background: var(--color-brand-400);
+    box-shadow: 0 10px 30px -12px rgba(0, 171, 255, 0.7);
   }
   .btn-primary:active { transform: translateY(1px) scale(0.99); }
 
   .btn-secondary {
-    background: rgba(255, 255, 255, 0.02);
-    box-shadow: inset 0 0 0 1px rgba(160, 120, 255, 0.45);
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.45);
     color: var(--color-fg);
-    transition: background 0.25s ease, box-shadow 0.25s ease;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
   }
   .btn-secondary:hover {
-    background: rgba(143, 92, 247, 0.1);
-    box-shadow: inset 0 0 0 1px rgba(182, 146, 255, 0.75);
+    background: rgba(0, 171, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.8);
   }
   .on-paper .btn-secondary {
     color: var(--color-ink-on-paper);
-    box-shadow: inset 0 0 0 1px rgba(91, 34, 201, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(0, 119, 179, 0.4);
   }
 
-  /* Surfaces */
+  /* Surfaces — flat fills with a hairline edge */
   .surface {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), 0 1px 0 rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
   }
   .surface-raised {
-    background: linear-gradient(180deg, #1a1a27 0%, #12121c 100%);
+    background: var(--color-ink-800);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
   }
   .glass {
-    background: rgba(12, 12, 20, 0.62);
+    background: rgba(8, 16, 26, 0.72);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
 
-  /* Violet hairline on the top edge of a card, as in the reference UI */
+  /* Brand hairline on the top edge of a highlighted card */
   .edge-glow {
     position: relative;
   }
   .edge-glow::before {
     content: "";
     position: absolute;
-    inset: 0 18% auto;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(190, 140, 255, 0.85), transparent);
+    inset: 0 1.5rem auto;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: var(--color-brand-500);
     pointer-events: none;
   }
 
@@ -204,7 +197,7 @@
     transition: box-shadow 0.35s ease, transform 0.35s var(--ease-out-expo);
   }
   .hover-glow:hover {
-    box-shadow: inset 0 0 0 1px rgba(170, 125, 255, 0.4), 0 20px 50px -25px rgba(130, 70, 240, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(0,171,255,0.4), 0 20px 50px -25px rgba(0,171,255,0.55);
   }
 
   /* Faint architectural grid used behind some sections */
@@ -216,11 +209,6 @@
     mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
   }
 
-  .shimmer-bar {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 0%, rgba(190, 150, 255, 0.35) 50%, rgba(255, 255, 255, 0.04) 100%);
-    background-size: 200% 100%;
-    animation: var(--animate-shimmer);
-  }
 
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }

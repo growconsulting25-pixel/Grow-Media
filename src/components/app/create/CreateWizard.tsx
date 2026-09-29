@@ -184,7 +184,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
 
       {/* Stepper */}
       <nav aria-label={t.title} className="mt-3">
-        <p className="text-xs font-medium tracking-wide text-violet-300 uppercase">
+        <p className="text-xs font-medium tracking-wide text-brand-300 uppercase">
           {interpolate(t.stepOf, { current: step + 1, total: STEPS.length })} · {t.steps[current]}
         </p>
         <ol className="mt-3 grid grid-cols-7 gap-1.5">
@@ -195,7 +195,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                 onClick={() => goTo(i)}
                 aria-label={t.steps[s]}
                 aria-current={i === step ? "step" : undefined}
-                className={cn("block h-1.5 w-full rounded-full transition-colors duration-500", i <= step ? "bg-gradient-to-r from-violet-600 to-orchid-400" : "bg-white/10 hover:bg-white/20")}
+                className={cn("block h-1.5 w-full rounded-full transition-colors duration-500", i <= step ? "bg-brand-500 text-on-brand" : "bg-white/10 hover:bg-white/20")}
               />
             </li>
           ))}
@@ -217,7 +217,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     onClick={() => set("type", type)}
                     className={cn(
                       "flex items-start gap-4 rounded-2xl p-5 text-left transition-all",
-                      active ? "bg-violet-500/12 shadow-[inset_0_0_0_1.5px_rgba(170,125,255,0.6)]" : "surface hover:bg-white/[0.05]",
+                      active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(0,171,255,0.6)]" : "surface hover:bg-white/[0.05]",
                     )}
                   >
                     <span className={cn("grid size-10 shrink-0 place-items-center rounded-xl", active ? "btn-primary" : "bg-white/[0.05] text-fg-muted")}>
@@ -294,7 +294,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     role="radio"
                     aria-checked={active}
                     onClick={() => set("branding", { ...form.branding, useBrandKit: useKit })}
-                    className={cn("rounded-2xl p-5 text-left transition-all", active ? "bg-violet-500/12 shadow-[inset_0_0_0_1.5px_rgba(170,125,255,0.6)]" : "surface")}
+                    className={cn("rounded-2xl p-5 text-left transition-all", active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(0,171,255,0.6)]" : "surface")}
                   >
                     <span className="block font-medium">{useKit ? t.useBrandKit : t.customize}</span>
                     {useKit && <span className="mt-1 block text-sm text-fg-muted">{t.useBrandKitHint}</span>}
@@ -315,8 +315,8 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                 </Field>
                 <Field id="primaryColor" label={t.primaryColor}>
                   <div className="flex items-center gap-3">
-                    <input id="primaryColor" type="color" value={form.branding.primaryColor ?? "#7336ec"} onChange={(e) => set("branding", { ...form.branding, primaryColor: e.target.value })} className="h-11 w-16 cursor-pointer rounded-lg bg-transparent" />
-                    <span className="font-mono text-sm text-fg-muted">{form.branding.primaryColor ?? "#7336ec"}</span>
+                    <input id="primaryColor" type="color" value={form.branding.primaryColor ?? "#00abff"} onChange={(e) => set("branding", { ...form.branding, primaryColor: e.target.value })} className="h-11 w-16 cursor-pointer rounded-lg bg-transparent" />
+                    <span className="font-mono text-sm text-fg-muted">{form.branding.primaryColor ?? "#00abff"}</span>
                   </div>
                 </Field>
               </div>
@@ -393,7 +393,7 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit }: { form: ReviewF
                 <dt className="text-xs text-fg-subtle">{r.label}</dt>
                 <dd className="mt-0.5 truncate text-sm">{r.value}</dd>
               </div>
-              <button type="button" onClick={() => onEdit(r.step)} className="shrink-0 text-xs text-violet-300 hover:underline">{t.edit}</button>
+              <button type="button" onClick={() => onEdit(r.step)} className="shrink-0 text-xs text-brand-300 hover:underline">{t.edit}</button>
             </div>
           ))}
         </dl>
@@ -407,7 +407,7 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit }: { form: ReviewF
         </div>
         {q?.mode === "payment_required" && (
           <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-fg-muted">
-            {t.paymentRequired} <a className="text-violet-300 underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+            {t.paymentRequired} <a className="text-brand-300 underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
           </p>
         )}
       </div>
@@ -415,7 +415,7 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit }: { form: ReviewF
   }
 
 const inputClass =
-  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none transition-shadow focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]";
+  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none transition-shadow focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
 
 function Step({ title, hint, headingRef, children }: { title: string; hint?: string; headingRef: React.RefObject<HTMLHeadingElement | null>; children: React.ReactNode }) {
   return (

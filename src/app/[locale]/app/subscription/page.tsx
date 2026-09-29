@@ -44,7 +44,7 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
             <a href={mail(t.cancel)} className={buttonClasses({ variant: "ghost" })}>{t.cancel}</a>
           </div>
         )}
-        <p className="rounded-xl bg-violet-500/10 px-4 py-3 text-sm text-violet-300">{t.billingSoon}</p>
+        <p className="rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">{t.billingSoon}</p>
       </section>
 
       <section aria-labelledby="plans-title">
@@ -54,7 +54,7 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
             const copy = dict.pricing.plans[p.id];
             const current = summary.plan_id === p.id;
             return (
-              <li key={p.id} className={cn("flex flex-col rounded-[var(--radius-panel)] p-6", p.highlighted ? "edge-glow bg-violet-500/[0.08] shadow-[inset_0_0_0_1px_rgba(170,125,255,0.4)]" : "surface")}>
+              <li key={p.id} className={cn("flex flex-col rounded-[var(--radius-panel)] p-6", p.highlighted ? "edge-glow bg-brand-500/[0.08] shadow-[inset_0_0_0_1px_rgba(0,171,255,0.4)]" : "surface")}>
                 <div className="flex items-center justify-between">
                   <p className="font-semibold">{copy.name}</p>
                   {current && <span className="rounded-full bg-success/12 px-2.5 py-0.5 text-xs text-success">{t.currentBadge}</span>}
@@ -64,7 +64,7 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
                 </p>
                 <ul className="mt-4 flex-1 space-y-2">
                   {copy.features.slice(0, 5).map((f) => (
-                    <li key={f} className="flex gap-2 text-sm text-fg-muted"><Icon name="check" className="mt-0.5 size-4 shrink-0 text-violet-300" /> {f}</li>
+                    <li key={f} className="flex gap-2 text-sm text-fg-muted"><Icon name="check" className="mt-0.5 size-4 shrink-0 text-brand-300" /> {f}</li>
                   ))}
                 </ul>
                 {!current && (
@@ -84,13 +84,13 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
           {addOns.map((a) => (
             <li key={a.id} className="surface flex items-center justify-between gap-4 rounded-2xl px-5 py-4">
               <span className="flex items-center gap-3 text-sm font-medium">
-                <Icon name={a.id === "walkthrough" ? "cube" : "megaphone"} className="size-4 text-violet-300" />
+                <Icon name={a.id === "walkthrough" ? "cube" : "megaphone"} className="size-4 text-brand-300" />
                 {dict.pricing.addOns[a.id].name}
               </span>
               {a.price !== null ? (
                 <span className="font-semibold">{interpolate(dict.pricing.addOns[a.id].price, { price: formatPrice(a.price, locale) })}</span>
               ) : (
-                <a href={mail(dict.pricing.addOns[a.id].name)} className="text-sm text-violet-300 hover:underline">{dict.pricing.addOns[a.id].price}</a>
+                <a href={mail(dict.pricing.addOns[a.id].name)} className="text-sm text-brand-300 hover:underline">{dict.pricing.addOns[a.id].price}</a>
               )}
             </li>
           ))}

@@ -74,7 +74,7 @@ export default async function VideosPage({ params, searchParams }: PageProps<"/[
                   {video?.format && ` · ${t.format} ${video.format}`}
                 </p>
                 {video?.url && (
-                  <a href={video.url} download className="mt-auto inline-flex items-center gap-1.5 text-sm text-violet-300 hover:underline">
+                  <a href={video.url} download className="mt-auto inline-flex items-center gap-1.5 text-sm text-brand-300 hover:underline">
                     <Icon name="download" className="size-4" /> {dict.app.ready.download}
                   </a>
                 )}

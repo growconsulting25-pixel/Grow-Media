@@ -27,7 +27,7 @@ export default async function MessagesPage({ params }: PageProps<"/[locale]/app/
           {threads.map((th) => (
             <li key={th.project_id}>
               <Link href={`${projectHref(locale, th.project_id)}#messages`} className="flex items-start gap-4 px-5 py-4 transition-colors hover:bg-white/[0.03]">
-                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${th.is_staff ? "bg-violet-500/15 text-violet-300" : "bg-white/[0.05] text-fg-muted"}`}>
+                <span className={`grid size-10 shrink-0 place-items-center rounded-full ${th.is_staff ? "bg-brand-500/15 text-brand-300" : "bg-white/[0.05] text-fg-muted"}`}>
                   <Icon name="comment" className="size-4" />
                 </span>
                 <span className="min-w-0 flex-1">

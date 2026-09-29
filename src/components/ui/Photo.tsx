@@ -29,7 +29,7 @@ export function Photo({ name, width = 800, sizes, priority, className, imgClassN
   return (
     <div
       className={cn("relative overflow-hidden", className)}
-      style={{ background: `radial-gradient(120% 90% at 30% 20%, ${image.tone}, #0d0d15)` }}
+      style={{ background: image.tone }}
     >
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element -- remote CDN handles resizing via srcset

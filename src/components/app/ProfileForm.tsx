@@ -8,7 +8,7 @@ import { useI18n } from "@/i18n/I18nProvider";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 const input =
-  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)] disabled:opacity-60";
+  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)] disabled:opacity-60";
 
 export function ProfileForm({ userId, email, firstName, lastName, preferred }: { userId: string; email: string; firstName: string; lastName: string; preferred: Locale }) {
   const { dict, locale } = useI18n();

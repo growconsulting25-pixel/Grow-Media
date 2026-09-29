@@ -10,7 +10,7 @@ export default function NotFound() {
   return (
     <main id="main" className="grid min-h-dvh place-items-center px-4 text-center">
       <div>
-        <p className="font-mono text-sm text-violet-300">404</p>
+        <p className="font-mono text-sm text-brand-300">404</p>
         <h1 className="display mt-4 text-4xl sm:text-5xl">{dict.notFound.title}</h1>
         <Link href={href("home", locale)} className={buttonClasses({ className: "mt-8" })}>
           {dict.notFound.back}

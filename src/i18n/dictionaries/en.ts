@@ -574,6 +574,11 @@ const en = {
       dining: "Dining area with large windows",
       facade: "Contemporary house facade",
       interior: "Light-filled interior",
+      agentWoman: "Real estate agent smiling",
+      agentMan: "Real estate broker portrait",
+      agentPhone: "Agent reviewing content on a phone",
+      keys: "Agent handing house keys to new owners",
+      handshake: "Agent shaking hands with a client",
     },
   },
 

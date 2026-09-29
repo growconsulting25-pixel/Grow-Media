@@ -99,7 +99,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
   if (confirmSent) {
     return (
       <div className="px-6 pt-14 pb-8 text-center sm:px-8" aria-live="polite">
-        <div className="mx-auto mb-5 grid size-14 place-items-center rounded-full bg-violet-500/15 text-violet-300">
+        <div className="mx-auto mb-5 grid size-14 place-items-center rounded-full bg-brand-500/15 text-brand-300">
           <Icon name="send" className="size-6" />
         </div>
         <h3 className="text-2xl font-semibold tracking-tight">{t.confirm.title}</h3>
@@ -112,7 +112,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
     const subject = encodeURIComponent(t.title);
     return (
       <div className="px-6 pt-14 pb-8 text-center sm:px-8" aria-live="polite">
-        <div className="mx-auto mb-5 grid size-14 place-items-center rounded-full bg-violet-500/15 text-violet-300">
+        <div className="mx-auto mb-5 grid size-14 place-items-center rounded-full bg-brand-500/15 text-brand-300">
           <Icon name="sparkle" className="size-6" />
         </div>
         <h3 className="text-2xl font-semibold tracking-tight">{t.pending.title}</h3>
@@ -131,7 +131,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
 
   return (
     <form noValidate onSubmit={onSubmit} className="px-6 pt-12 pb-7 sm:px-8">
-      <p className="text-xs font-medium tracking-wide text-violet-300 uppercase">
+      <p className="text-xs font-medium tracking-wide text-brand-300 uppercase">
         {interpolate(t.stepOf, { current: step + 1, total: 3 })} · {t.steps[step]}
       </p>
       <h3 className="mt-2 text-[1.6rem] leading-tight font-semibold tracking-tight">{t.title}</h3>
@@ -139,7 +139,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
 
       <ol className="mt-5 grid grid-cols-3 gap-1.5" aria-hidden>
         {[0, 1, 2].map((i) => (
-          <li key={i} className={cn("h-1 rounded-full transition-colors duration-500", i <= step ? "bg-gradient-to-r from-violet-600 to-orchid-400" : "bg-white/10")} />
+          <li key={i} className={cn("h-1 rounded-full transition-colors duration-500", i <= step ? "bg-brand-500 text-on-brand" : "bg-white/10")} />
         ))}
       </ol>
 
@@ -194,8 +194,8 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
         <p role="alert" className="mt-5 rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-300">{serverError}</p>
       )}
       {progress && (
-        <p aria-live="polite" className="mt-5 flex items-center gap-2 text-sm text-violet-300">
-          <span className="size-3.5 animate-spin rounded-full border-2 border-violet-300 border-t-transparent" /> {progress}
+        <p aria-live="polite" className="mt-5 flex items-center gap-2 text-sm text-brand-300">
+          <span className="size-3.5 animate-spin rounded-full border-2 border-brand-300 border-t-transparent" /> {progress}
         </p>
       )}
 
@@ -230,7 +230,7 @@ function inputClass(invalid: boolean) {
   return cn(
     "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle",
     "shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none transition-shadow",
-    "focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]",
+    "focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]",
     invalid && "shadow-[inset_0_0_0_1.5px_#f87171]",
   );
 }
@@ -275,11 +275,11 @@ function PhotoPicker({ files, onChange, error, inputRef }: { files: File[]; onCh
         onDrop={(e) => { e.preventDefault(); setDragging(false); add(e.dataTransfer.files); }}
         className={cn(
           "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-2xl border border-dashed px-4 py-8 text-center transition-colors",
-          dragging ? "border-violet-400 bg-violet-500/10" : "border-white/15 bg-white/[0.02] hover:border-white/25",
+          dragging ? "border-brand-400 bg-brand-500/10" : "border-white/15 bg-white/[0.02] hover:border-white/25",
           error && "border-red-400/70",
         )}
       >
-        <span className="grid size-11 place-items-center rounded-full bg-violet-500/15 text-violet-300">
+        <span className="grid size-11 place-items-center rounded-full bg-brand-500/15 text-brand-300">
           <Icon name="upload" className="size-5" />
         </span>
         <span className="text-sm text-fg">{t.browse}</span>

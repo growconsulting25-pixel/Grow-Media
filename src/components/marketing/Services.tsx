@@ -17,8 +17,8 @@ import { formatPrice } from "@/lib/format";
 const visuals: Record<ServiceId, { icon: IconName; image: PropertyImageKey }> = {
   listing: { icon: "play", image: "exterior" },
   walkthrough: { icon: "cube", image: "interior" },
-  ugc: { icon: "user", image: "living" },
-  ads: { icon: "megaphone", image: "pool" },
+  ugc: { icon: "user", image: "agentWoman" },
+  ads: { icon: "megaphone", image: "agentPhone" },
 };
 
 export function Services({ dict, locale }: { dict: Dictionary; locale: Locale }) {
@@ -40,9 +40,9 @@ export function Services({ dict, locale }: { dict: Dictionary; locale: Locale })
                 className={cn("surface hover-glow group relative flex flex-col overflow-hidden rounded-[var(--radius-panel)]", primary && "edge-glow")}
               >
                 <div className="relative h-44 overflow-hidden sm:h-52">
-                  <Photo name={v.image} width={720} sizes="(min-width: 768px) 45vw, 92vw" decorative className="size-full" imgClassName="transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105" />
+                  <Photo name={v.image} width={720} sizes="(min-width: 768px) 45vw, 92vw" decorative className="size-full" imgClassName={cn("transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-105", (service.id === "ugc" || service.id === "ads") && "object-[center_22%]")} />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink-850 via-ink-850/40 to-transparent" />
-                  <span className={cn("absolute top-4 left-4 grid size-10 place-items-center rounded-xl", primary ? "btn-primary" : "glass text-violet-300 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]")}>
+                  <span className={cn("absolute top-4 left-4 grid size-10 place-items-center rounded-xl", primary ? "btn-primary" : "glass text-brand-300 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)]")}>
                     <Icon name={v.icon} className="size-5" />
                   </span>
                 </div>

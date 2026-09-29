@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a12",
+  themeColor: "#08101a",
   colorScheme: "dark",
 };
 

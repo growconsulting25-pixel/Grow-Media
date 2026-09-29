@@ -76,10 +76,10 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
-                      active ? "bg-violet-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(170,125,255,0.35)]" : "text-fg-muted hover:bg-white/[0.04] hover:text-fg",
+                      active ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.35)]" : "text-fg-muted hover:bg-white/[0.04] hover:text-fg",
                     )}
                   >
-                    <Icon name={item.icon} className={cn("size-4", active && "text-violet-300")} />
+                    <Icon name={item.icon} className={cn("size-4", active && "text-brand-300")} />
                     {t[item.key]}
                   </Link>
                 </li>
@@ -115,7 +115,7 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
             return (
               <li key={item.route}>
                 <Link href={href(item.route, locale)} aria-current={active ? "page" : undefined} className={cn("flex flex-col items-center gap-1 py-2 text-[0.66rem]", active ? "text-fg" : "text-fg-subtle")}>
-                  <span className={cn("grid size-8 place-items-center rounded-full", primary ? "btn-primary" : active && "bg-violet-500/15 text-violet-300")}>
+                  <span className={cn("grid size-8 place-items-center rounded-full", primary ? "btn-primary" : active && "bg-brand-500/15 text-brand-300")}>
                     <Icon name={item.icon} className="size-4" />
                   </span>
                   <span className="max-w-full truncate px-0.5">{t[item.key]}</span>
@@ -125,7 +125,7 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
           })}
           <li>
             <button type="button" onClick={() => setMoreOpen(true)} aria-expanded={moreOpen} aria-controls="app-more" className={cn("flex w-full flex-col items-center gap-1 py-2 text-[0.66rem]", moreActive ? "text-fg" : "text-fg-subtle")}>
-              <span className={cn("grid size-8 place-items-center rounded-full", moreActive && "bg-violet-500/15 text-violet-300")}>
+              <span className={cn("grid size-8 place-items-center rounded-full", moreActive && "bg-brand-500/15 text-brand-300")}>
                 <Icon name="menu" className="size-4" />
               </span>
               {t.more}
@@ -142,8 +142,8 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
             <ul className="grid grid-cols-2 gap-2">
               {moreItems.map((item) => (
                 <li key={item.route}>
-                  <Link href={href(item.route, locale)} onClick={() => setMoreOpen(false)} className={cn("flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm", isActive(item.route) ? "bg-violet-500/12 text-fg" : "bg-white/[0.03] text-fg-muted")}>
-                    <Icon name={item.icon} className="size-4 text-violet-300" />
+                  <Link href={href(item.route, locale)} onClick={() => setMoreOpen(false)} className={cn("flex items-center gap-3 rounded-2xl px-4 py-3.5 text-sm", isActive(item.route) ? "bg-brand-500/12 text-fg" : "bg-white/[0.03] text-fg-muted")}>
+                    <Icon name={item.icon} className="size-4 text-brand-300" />
                     {t[item.key]}
                   </Link>
                 </li>

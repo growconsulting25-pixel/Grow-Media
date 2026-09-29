@@ -6,8 +6,8 @@ export type Status = "uploading" | "submitted" | "production" | "review" | "read
 const styles: Record<Status, string> = {
   uploading: "bg-white/[0.06] text-fg-muted",
   submitted: "bg-white/[0.06] text-fg",
-  production: "bg-violet-500/15 text-violet-300",
-  review: "bg-orchid-400/15 text-orchid-400",
+  production: "bg-brand-500/15 text-brand-300",
+  review: "bg-brand-300/15 text-brand-300",
   ready: "bg-success/12 text-success",
 };
 

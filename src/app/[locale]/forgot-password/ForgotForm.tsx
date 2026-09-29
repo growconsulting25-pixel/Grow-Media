@@ -37,7 +37,7 @@ export function ForgotForm() {
       <h1 className="display text-4xl">{t.forgotTitle}</h1>
       <p className="mt-2 text-fg-muted">{t.forgotSubtitle}</p>
       {sentTo ? (
-        <p role="status" className="mt-8 rounded-xl bg-violet-500/10 px-4 py-3 text-sm text-violet-300">{interpolate(t.forgotSent, { email: sentTo })}</p>
+        <p role="status" className="mt-8 rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">{interpolate(t.forgotSent, { email: sentTo })}</p>
       ) : (
         <form className="mt-8 space-y-4" onSubmit={onSubmit}>
           <div>

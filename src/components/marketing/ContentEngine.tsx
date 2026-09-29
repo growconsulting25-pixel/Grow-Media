@@ -64,7 +64,7 @@ export function ContentEngine() {
           "group relative flex shrink-0 items-center gap-3 rounded-2xl px-3.5 py-3 text-left transition-all duration-300 lg:w-60",
           side === "right" && "lg:flex-row-reverse lg:text-right",
           selected
-            ? "bg-violet-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(170,125,255,0.5)]"
+            ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5)]"
             : "bg-white/[0.025] text-fg-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] hover:bg-white/[0.05] hover:text-fg",
         )}
       >
@@ -80,8 +80,8 @@ export function ContentEngine() {
           aria-hidden
           className={cn(
             "absolute top-1/2 hidden h-px w-10 transition-opacity lg:block",
-            side === "left" ? "left-full bg-gradient-to-r" : "right-full bg-gradient-to-l",
-            selected ? "from-violet-400/80 to-transparent opacity-100" : "from-white/10 to-transparent opacity-60",
+            side === "left" ? "left-full" : "right-full",
+            selected ? "bg-brand-500 text-on-brand" : "bg-white/10",
           )}
         />
       </button>
@@ -91,7 +91,6 @@ export function ContentEngine() {
   return (
     <section aria-labelledby="content-title" className="relative overflow-hidden py-24 sm:py-32">
       <div aria-hidden className="grid-lines absolute inset-0 opacity-70" />
-      <div aria-hidden className="absolute top-1/2 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(115,54,236,0.2),transparent)]" />
       <Container className="relative">
         <SectionHeading eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="content-title" />
 
@@ -152,12 +151,9 @@ function Stage({ id }: { id: FormatId }) {
       return phone(["pool", "facade"], null, { badge: f.overlay, price: reel.price, cta: reel.cta });
     case "ugc":
       return phone(
-        ["living", "kitchen"],
-        <div className="absolute inset-x-3 top-[38%] z-10 flex items-end gap-2">
-          <span className="grid size-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-orchid-400 ring-2 ring-white/70">
-            <Icon name="user" className="size-6 text-white" />
-          </span>
-          <span className="rounded-2xl rounded-bl-sm bg-white/90 px-3 py-2 text-[0.72rem] font-medium text-ink-900 shadow-lg">{f.overlay}</span>
+        ["agentWoman", "living", "kitchen"],
+        <div className="absolute inset-x-3 top-[46%] z-10">
+          <span className="inline-block rounded-2xl rounded-bl-sm bg-white/90 px-3 py-2 text-[0.72rem] font-medium text-ink-900 shadow-lg">{f.overlay}</span>
         </div>,
         { caption: reel.caption, agent: reel.agent, audio: reel.audio },
       );
@@ -182,7 +178,7 @@ function Stage({ id }: { id: FormatId }) {
             <svg viewBox="0 0 60 44" className="h-11 w-15 text-white/80" fill="none" stroke="currentColor" strokeWidth="1.2">
               <rect x="1" y="1" width="58" height="42" rx="2" />
               <path d="M24 1v18H1M24 19h12v24M36 27h23" />
-              <circle cx="14" cy="30" r="2.5" fill="#b692ff" stroke="none" />
+              <circle cx="14" cy="30" r="2.5" fill="#66ccff" stroke="none" />
             </svg>
           </div>
           <p className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-ink-900">
@@ -194,7 +190,7 @@ function Stage({ id }: { id: FormatId }) {
       return (
         <div className="w-[82%] max-w-[20rem] overflow-hidden rounded-2xl bg-white text-ink-900 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
           <div className="flex items-center gap-2 px-3 py-2.5">
-            <span className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-orchid-400" />
+            <Photo name="agentMan" width={80} sizes="28px" decorative className="size-7 rounded-full" />
             <div className="text-[0.68rem] leading-tight">
               <p className="font-semibold">{reel.agent}</p>
               <p className="text-muted-on-paper">{dict.content.sponsored}</p>
@@ -218,7 +214,7 @@ function Stage({ id }: { id: FormatId }) {
             <div>
               <p className="text-[0.7rem] font-medium tracking-[0.3em] text-white/80 uppercase">{reel.handle}</p>
               <p className="mt-2 text-3xl font-semibold tracking-tight text-white">{f.overlay}</p>
-              <p className="mx-auto mt-3 h-px w-12 bg-orchid-400" />
+              <p className="mx-auto mt-3 h-px w-12 bg-brand-300" />
             </div>
           </div>
         </div>

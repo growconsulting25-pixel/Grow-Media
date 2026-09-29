@@ -50,7 +50,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
 
       <section className="grid gap-4 lg:grid-cols-2">
         {summary.free_credits > 0 && (
-          <div className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-violet-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(170,125,255,0.3)]">
+          <div className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-brand-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.3)]">
             <span className="btn-primary grid size-11 shrink-0 place-items-center rounded-xl"><Icon name="sparkle" className="size-5" fill="currentColor" /></span>
             <div>
               <p className="font-medium">{t.dashboard.freeCredit}</p>
@@ -88,7 +88,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
       <section aria-labelledby="current-title">
         <div className="mb-4 flex items-center justify-between">
           <h2 id="current-title" className="text-lg font-semibold tracking-tight">{t.dashboard.currentProjects}</h2>
-          {projects.length > 0 && <Link href={href("appProjects", locale)} className="text-sm text-violet-300 hover:underline">{t.dashboard.viewAll}</Link>}
+          {projects.length > 0 && <Link href={href("appProjects", locale)} className="text-sm text-brand-300 hover:underline">{t.dashboard.viewAll}</Link>}
         </div>
         {current.length || drafts.length ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -96,7 +96,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
           </div>
         ) : (
           <div className="surface flex flex-col items-center rounded-[var(--radius-panel)] px-6 py-14 text-center">
-            <span className="grid size-12 place-items-center rounded-full bg-violet-500/15 text-violet-300"><Icon name="upload" className="size-5" /></span>
+            <span className="grid size-12 place-items-center rounded-full bg-brand-500/15 text-brand-300"><Icon name="upload" className="size-5" /></span>
             <p className="mt-4 text-lg font-medium">{t.dashboard.emptyTitle}</p>
             <p className="mt-1.5 max-w-sm text-sm text-fg-muted">{t.dashboard.emptyDescription}</p>
             <Link href={href("appCreate", locale)} className={buttonClasses({ className: "mt-6" })}>{t.dashboard.newVideo}</Link>
@@ -108,7 +108,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
         <section aria-labelledby="ideas-title">
           <div className="mb-4 flex items-center justify-between">
             <h2 id="ideas-title" className="text-lg font-semibold tracking-tight">{t.ideas.dashboardTitle}</h2>
-            <Link href={href("appIdeas", locale)} className="text-sm text-violet-300 hover:underline">{t.dashboard.viewAll}</Link>
+            <Link href={href("appIdeas", locale)} className="text-sm text-brand-300 hover:underline">{t.dashboard.viewAll}</Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {ideas.map((idea) => <IdeaCard key={idea.id} idea={idea} dict={dict} locale={locale} />)}

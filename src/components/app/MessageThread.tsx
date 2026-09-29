@@ -88,8 +88,8 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
             const mine = !m.is_staff;
             return (
               <li key={m.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
-                <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm", mine ? "rounded-br-sm bg-violet-600/80 text-white" : "rounded-bl-sm bg-white/[0.06] text-fg")}>
-                  <p className={cn("mb-0.5 text-[0.7rem]", mine ? "text-white/70" : "text-violet-300")}>{mine ? t.you : t.team} · {fmt.format(new Date(m.created_at))}</p>
+                <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm", mine ? "rounded-br-sm bg-brand-500 text-on-brand" : "rounded-bl-sm bg-white/[0.06] text-fg")}>
+                  <p className={cn("mb-0.5 text-[0.7rem]", mine ? "text-on-brand/70" : "text-brand-300")}>{mine ? t.you : t.team} · {fmt.format(new Date(m.created_at))}</p>
                   <p className="whitespace-pre-line">{m.body}</p>
                   {m.attachment_path && (
                     m.attachment_url ? (
@@ -108,7 +108,7 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
       <form onSubmit={send} className="mt-5 space-y-2">
         <label htmlFor="message-body" className="sr-only">{t.placeholder}</label>
         <textarea id="message-body" rows={3} maxLength={5000} value={body} onChange={(e) => setBody(e.target.value)} placeholder={t.placeholder}
-          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]" />
+          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs text-fg-muted">
             <button type="button" onClick={() => fileRef.current?.click()} className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-3 py-1.5 hover:text-fg">

@@ -4,7 +4,7 @@ import { Photo } from "@/components/ui/Photo";
 export function DeliveryPreview({ checklist, actions }: { checklist: string[]; actions: { download: string; revise: string; share: string } }) {
   return (
     <div className="flex h-full gap-4 p-5">
-      <div className="relative aspect-[9/16] w-[36%] shrink-0 overflow-hidden rounded-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_20px_40px_-20px_rgba(143,92,247,0.6)]">
+      <div className="relative aspect-[9/16] w-[36%] shrink-0 overflow-hidden rounded-xl shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_20px_40px_-20px_rgba(0,171,255,0.6)]">
         <Photo name="pool" width={220} sizes="120px" decorative className="size-full" imgClassName="animate-kenburns" />
         <span className="absolute inset-0 grid place-items-center">
           <span className="grid size-9 place-items-center rounded-full bg-white/20 backdrop-blur">

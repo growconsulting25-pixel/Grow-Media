@@ -20,7 +20,7 @@ export function UploadPreview({ address, uploaded, hint, items }: { address: str
               <Photo name={name} width={160} sizes="90px" decorative className="aspect-[4/3] rounded-md" />
               {i === thumbs.length - 1 && (
                 <span className="absolute inset-x-1.5 bottom-1.5 h-1 overflow-hidden rounded-full bg-black/50">
-                  <span className="block h-full origin-left animate-progress bg-violet-300" />
+                  <span className="block h-full origin-left animate-progress bg-brand-300" />
                 </span>
               )}
             </div>

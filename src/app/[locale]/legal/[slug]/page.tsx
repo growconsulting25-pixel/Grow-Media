@@ -39,7 +39,7 @@ export default async function LegalPage({ params }: PageProps<"/[locale]/legal/[
       <Logo href={href("home", locale)} />
       <h1 className="display mt-14 text-4xl sm:text-5xl">{dict.legal.title[doc]}</h1>
       <p className="mt-6 leading-relaxed text-fg-muted">{dict.legal.pending}</p>
-      <Link href={href("home", locale)} className="mt-10 inline-block text-sm text-violet-300 hover:underline">← {dict.legal.back}</Link>
+      <Link href={href("home", locale)} className="mt-10 inline-block text-sm text-brand-300 hover:underline">← {dict.legal.back}</Link>
     </main>
   );
 }

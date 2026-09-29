@@ -13,6 +13,8 @@ export interface ReelContent {
   caption?: string;
   cta?: string;
   agent?: string;
+  /** Portrait shown in the agent branding bar. */
+  agentPhoto?: PropertyImageKey;
   audio?: string;
 }
 
@@ -94,7 +96,7 @@ export function ReelScreen({ images, content, interval = 3200, minimal, classNam
 
       {content.badge && (
         <div className="absolute top-14 left-3 flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-[0.62rem] font-semibold tracking-wide uppercase backdrop-blur-md">
-          <span className="size-1.5 rounded-full bg-orchid-400" />
+          <span className="size-1.5 rounded-full bg-brand-300" />
           {content.badge}
         </div>
       )}
@@ -116,7 +118,7 @@ export function ReelScreen({ images, content, interval = 3200, minimal, classNam
         )}
         {(content.agent || content.audio) && (
           <div className="mt-2.5 flex items-center gap-2 border-t border-white/15 pt-2">
-            <span className="grid size-5 shrink-0 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-orchid-400 text-[0.5rem] font-bold">GM</span>
+            <Photo name={content.agentPhoto ?? "agentWoman"} width={80} sizes="24px" decorative className="size-6 shrink-0 rounded-full ring-1 ring-white/60" />
             <div className="min-w-0 text-[0.58rem] leading-tight">
               {content.agent && <p className="truncate font-medium">{content.agent}</p>}
               {content.audio && (

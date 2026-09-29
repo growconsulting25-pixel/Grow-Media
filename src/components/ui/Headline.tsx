@@ -4,7 +4,7 @@ import { GradientText } from "./GradientText";
 
 type Tag = "h1" | "h2" | "h3";
 
-/** Renders a localized multi-line headline with gradient accent words. */
+/** Renders a localized multi-line headline with brand-colored accent words. */
 export function Headline({ lines, as: As = "h2", className, id }: { lines: HeadlineLine[]; as?: Tag; className?: string; id?: string }) {
   return (
     <As id={id} className={cn("display", className)}>

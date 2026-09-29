@@ -56,12 +56,12 @@ export function RevisionForm({ projectId }: { projectId: string }) {
       <div>
         <label htmlFor="revision-message" className="mb-1.5 block text-sm font-medium">{t.whatLabel}</label>
         <textarea id="revision-message" required rows={4} maxLength={5000} value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.whatPlaceholder}
-          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]" />
+          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
       </div>
       <div className="max-w-40">
         <label htmlFor="revision-stamp" className="mb-1.5 block text-sm font-medium">{t.timestampLabel}</label>
         <input id="revision-stamp" inputMode="numeric" value={stamp} onChange={(e) => setStamp(e.target.value)} placeholder={t.timestampHint}
-          className="h-10 w-full rounded-xl bg-white/[0.04] px-3.5 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]" />
+          className="h-10 w-full rounded-xl bg-white/[0.04] px-3.5 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
       </div>
       {result === "error" && <p role="alert" className="text-sm text-red-300">{t.error}</p>}
       <div className="flex gap-2">

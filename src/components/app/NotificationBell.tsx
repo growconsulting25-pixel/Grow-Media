@@ -92,13 +92,13 @@ export function NotificationBell({ initialUnread }: { initialUnread: number }) {
         className="relative grid size-9 place-items-center rounded-full bg-white/[0.05] text-fg-muted transition-colors hover:text-fg"
       >
         <Icon name="bell" className="size-4" />
-        {unread > 0 && <span className="absolute -top-0.5 -right-0.5 grid min-w-4 place-items-center rounded-full bg-violet-500 px-1 text-[0.6rem] font-semibold text-white">{unread > 9 ? "9+" : unread}</span>}
+        {unread > 0 && <span className="absolute -top-0.5 -right-0.5 grid min-w-4 place-items-center rounded-full bg-brand-500 px-1 text-[0.6rem] font-semibold text-on-brand">{unread > 9 ? "9+" : unread}</span>}
       </button>
       {open && (
         <div className="surface-raised absolute top-11 right-0 z-50 w-[min(22rem,calc(100vw-2rem))] overflow-hidden rounded-2xl lg:right-auto lg:left-0">
           <div className="flex items-center justify-between border-b border-white/[0.06] px-4 py-3">
             <p className="text-sm font-medium">{t.title}</p>
-            {unread > 0 && <button type="button" onClick={markAll} className="text-xs text-violet-300 hover:underline">{t.markAll}</button>}
+            {unread > 0 && <button type="button" onClick={markAll} className="text-xs text-brand-300 hover:underline">{t.markAll}</button>}
           </div>
           <ul className="max-h-96 overflow-y-auto">
             {items === null ? (
@@ -111,9 +111,9 @@ export function NotificationBell({ initialUnread }: { initialUnread: number }) {
                   <Link
                     href={n.project_id ? projectHref(locale, n.project_id) : "#"}
                     onClick={() => setOpen(false)}
-                    className={cn("flex gap-3 border-b border-white/[0.04] px-4 py-3 text-sm transition-colors hover:bg-white/[0.03]", !n.read_at && "bg-violet-500/[0.05]")}
+                    className={cn("flex gap-3 border-b border-white/[0.04] px-4 py-3 text-sm transition-colors hover:bg-white/[0.03]", !n.read_at && "bg-brand-500/[0.05]")}
                   >
-                    <span className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.read_at ? "bg-transparent" : "bg-violet-400")} />
+                    <span className={cn("mt-1.5 size-2 shrink-0 rounded-full", n.read_at ? "bg-transparent" : "bg-brand-400")} />
                     <span className="min-w-0">
                       <span className="block text-fg">{label(n)}</span>
                       <span className="text-xs text-fg-subtle">{fmt.format(new Date(n.created_at))}</span>

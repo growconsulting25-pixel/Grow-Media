@@ -34,7 +34,7 @@ export function Accordion({ items, className }: { items: AccordionItem[]; classN
                   aria-hidden
                   className={cn(
                     "relative grid size-8 shrink-0 place-items-center rounded-full transition-colors duration-300",
-                    isOpen ? "bg-violet-600 text-white" : "bg-white/[0.05] text-fg-muted group-hover:bg-white/10",
+                    isOpen ? "bg-brand-600 text-on-brand" : "bg-white/[0.05] text-fg-muted group-hover:bg-white/10",
                   )}
                 >
                   <span className="absolute h-[1.5px] w-3 rounded bg-current" />

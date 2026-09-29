@@ -13,7 +13,7 @@ const inputs: { name: PropertyImageKey; className: string; rotate: number; delay
   { name: "exterior", className: "left-[2%] top-[6%] w-[46%]", rotate: -5, delay: 0 },
   { name: "kitchen", className: "left-[44%] top-[0%] w-[42%]", rotate: 4, delay: 0.8 },
   { name: "living", className: "left-[8%] top-[48%] w-[42%]", rotate: 3, delay: 1.6 },
-  { name: "pool", className: "left-[48%] top-[44%] w-[46%]", rotate: -3, delay: 2.4 },
+  { name: "agentWoman", className: "left-[48%] top-[44%] w-[40%]", rotate: -3, delay: 2.4 },
 ];
 
 const reelShots: PropertyImageKey[] = ["exterior", "kitchen", "living", "pool", "bedroom"];
@@ -48,8 +48,11 @@ export function HeroVisual() {
               className={cn("absolute animate-drift", p.className)}
               style={{ "--drift-rotate": `${p.rotate}deg`, "--drift-x": "8px", animationDelay: `${p.delay}s` } as CSSProperties}
             >
-              <div className="rounded-xl bg-white/[0.06] p-1 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.9),inset_0_0_0_1px_rgba(255,255,255,0.08)]" style={{ transform: `rotate(${p.rotate}deg)` }}>
-                <Photo name={p.name} width={320} sizes="(min-width: 768px) 14vw, 0px" priority={p.name === "exterior"} decorative className="aspect-[4/3] rounded-[0.6rem]" />
+              <div className="relative rounded-xl bg-white/[0.06] p-1 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.9),inset_0_0_0_1px_rgba(255,255,255,0.08)]" style={{ transform: `rotate(${p.rotate}deg)` }}>
+                <Photo name={p.name} width={320} sizes="(min-width: 768px) 14vw, 0px" priority={p.name === "exterior"} decorative className={cn("rounded-[0.6rem]", p.name === "agentWoman" ? "aspect-[4/5]" : "aspect-[4/3]")} />
+                {p.name === "agentWoman" && (
+                  <span className="absolute bottom-2 left-2 rounded-md bg-ink-900/80 px-1.5 py-0.5 text-[0.62rem] font-medium text-fg">{dict.how.steps.upload.items[1]}</span>
+                )}
               </div>
             </div>
           ))}
@@ -57,18 +60,18 @@ export function HeroVisual() {
 
         {/* 2 — Production core (desktop) */}
         <div aria-hidden className="relative hidden h-full w-40 items-center justify-center md:flex lg:w-52">
-          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-white/5 via-violet-400/60 to-white/5" />
+          <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-brand-500/40" />
           <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 overflow-hidden">
-            <span className="absolute h-px w-16 animate-[beam_2.6s_linear_infinite] bg-gradient-to-r from-transparent via-white to-transparent" />
+            <span className="absolute h-px w-16 animate-[beam_2.6s_linear_infinite] bg-white/80" />
           </div>
           <div className="relative flex flex-col items-center gap-3">
-            <div className="relative grid size-20 place-items-center rounded-full bg-ink-800 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_0_60px_-10px_rgba(143,92,247,0.7)]">
+            <div className="relative grid size-20 place-items-center rounded-full bg-ink-800 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_0_60px_-10px_rgba(0,171,255,0.7)]">
               <svg viewBox="0 0 80 80" className="absolute inset-0 size-full animate-[spin_6s_linear_infinite]">
                 <circle cx="40" cy="40" r="37" fill="none" stroke="url(#arc)" strokeWidth="1.5" strokeDasharray="60 180" strokeLinecap="round" />
                 <defs>
                   <linearGradient id="arc" x1="0" x2="1">
-                    <stop offset="0" stopColor="#d17df2" stopOpacity="0" />
-                    <stop offset="1" stopColor="#d17df2" />
+                    <stop offset="0" stopColor="#66ccff" stopOpacity="0" />
+                    <stop offset="1" stopColor="#66ccff" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -76,9 +79,9 @@ export function HeroVisual() {
                 <Icon name="sparkle" className="size-5" fill="currentColor" />
               </span>
             </div>
-            <p className="text-[0.7rem] font-medium tracking-wide text-violet-300 uppercase">{v.processing}</p>
+            <p className="text-[0.7rem] font-medium tracking-wide text-brand-300 uppercase">{v.processing}</p>
             <div className="h-1 w-20 overflow-hidden rounded-full bg-white/[0.07]">
-              <div className="h-full w-full origin-left animate-progress rounded-full bg-gradient-to-r from-violet-600 to-orchid-400" />
+              <div className="h-full w-full origin-left animate-progress rounded-full bg-brand-500 text-on-brand" />
             </div>
           </div>
         </div>
@@ -95,7 +98,6 @@ export function HeroVisual() {
           </div>
 
           <div className="relative w-[min(62vw,15.5rem)] animate-float sm:w-[16.5rem]">
-            <div aria-hidden className="absolute -inset-10 rounded-full bg-violet-600/25 blur-3xl" />
             <PhoneMockup className="relative">
               <ReelScreen
                 images={reelShots}
@@ -122,7 +124,7 @@ export function HeroVisual() {
                                   )}
                 style={{ animation: `float 6s ease-in-out ${i * 0.7}s infinite` }}
               >
-                <Icon name={["sparkle", "user", "comment", "music", "phone"][i] as "sparkle"} className="size-3.5 text-violet-300" />
+                <Icon name={["sparkle", "user", "comment", "music", "phone"][i] as "sparkle"} className="size-3.5 text-brand-300" />
                 {tag}
               </span>
             ))}

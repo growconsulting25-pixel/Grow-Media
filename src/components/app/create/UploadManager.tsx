@@ -143,13 +143,13 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
         }}
         className={cn(
           "flex flex-col items-center justify-center gap-3 rounded-[var(--radius-panel)] border border-dashed px-6 py-12 text-center transition-colors",
-          dragging ? "border-violet-400 bg-violet-500/10" : "border-white/15 bg-white/[0.02]",
+          dragging ? "border-brand-400 bg-brand-500/10" : "border-white/15 bg-white/[0.02]",
         )}
       >
-        <span className="grid size-14 place-items-center rounded-full bg-violet-500/15 text-violet-300">
+        <span className="grid size-14 place-items-center rounded-full bg-brand-500/15 text-brand-300">
           <Icon name="upload" className="size-6" />
         </span>
-        <p className="text-base font-medium">{dragging ? t.dropHere : <><button type="button" onClick={() => inputRef.current?.click()} className="text-violet-300 underline-offset-4 hover:underline">{t.browse}</button> <span className="text-fg-muted">{t.orDrag}</span></>}</p>
+        <p className="text-base font-medium">{dragging ? t.dropHere : <><button type="button" onClick={() => inputRef.current?.click()} className="text-brand-300 underline-offset-4 hover:underline">{t.browse}</button> <span className="text-fg-muted">{t.orDrag}</span></>}</p>
         <p className="text-xs text-fg-subtle">{t.uploadHint}</p>
         <input
           ref={inputRef}
@@ -186,7 +186,7 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
                   if (dragIndex !== null) void move(dragIndex, i);
                   setDragIndex(null);
                 }}
-                className={cn("group relative aspect-square cursor-grab overflow-hidden rounded-xl bg-ink-800 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] active:cursor-grabbing", dragIndex === i && "opacity-40", i === 0 && "ring-2 ring-violet-400/70")}
+                className={cn("group relative aspect-square cursor-grab overflow-hidden rounded-xl bg-ink-800 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] active:cursor-grabbing", dragIndex === i && "opacity-40", i === 0 && "ring-2 ring-brand-400/70")}
               >
                 {f.url ? (
                   // eslint-disable-next-line @next/next/no-img-element -- local object URL or signed URL
@@ -224,7 +224,7 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
                       <span className="sr-only">{interpolate(t.uploadingProgress, { name: p.file.name })}</span>
                       <span className="font-mono text-xs tabular-nums">{Math.round(p.progress * 100)}%</span>
                       <span className="h-1 w-3/4 overflow-hidden rounded-full bg-white/15">
-                        <span className="block h-full rounded-full bg-gradient-to-r from-violet-500 to-orchid-400 transition-[width]" style={{ width: `${p.progress * 100}%` }} />
+                        <span className="block h-full rounded-full bg-brand-500 transition-[width] text-on-brand" style={{ width: `${p.progress * 100}%` }} />
                       </span>
                     </>
                   )}

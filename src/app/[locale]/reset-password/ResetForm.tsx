@@ -44,7 +44,7 @@ export function ResetForm() {
       <h1 className="display text-4xl">{t.resetTitle}</h1>
       <p className="mt-2 text-fg-muted">{t.resetSubtitle}</p>
       {hasSession === false ? (
-        <p className="mt-8 rounded-xl bg-violet-500/10 px-4 py-3 text-sm text-violet-300">
+        <p className="mt-8 rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">
           {t.resetNoSession}{" "}
           <Link href={href("forgotPassword", locale)} className="underline">{t.forgotSubmit}</Link>
         </p>

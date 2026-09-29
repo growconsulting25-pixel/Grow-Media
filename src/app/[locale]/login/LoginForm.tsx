@@ -70,7 +70,7 @@ export function LoginForm({ next, initialError }: { next?: string; initialError?
         </div>
         {error && <p role="alert" className="rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</p>}
         <Button type="submit" className="w-full" arrow disabled={busy}>{busy ? t.submitting : t.submit}</Button>
-        {notice && <p role="status" className="rounded-xl bg-violet-500/10 px-4 py-3 text-sm text-violet-300">{t.unavailable}</p>}
+        {notice && <p role="status" className="rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">{t.unavailable}</p>}
       </form>
       <div className="mt-10 border-t border-white/[0.07] pt-6 text-sm text-fg-muted">
         <p className="mb-3">{t.noAccount}</p>

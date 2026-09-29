@@ -16,7 +16,7 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
 
   return (
     <section id={sectionIds.howItWorks} aria-labelledby="how-title" className="relative overflow-hidden py-24 sm:py-32">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-white/10" />
       <Container>
         <SectionHeading eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="how-title" />
 
@@ -37,7 +37,7 @@ export function HowItWorks({ dict }: { dict: Dictionary }) {
                 <p className="mb-2 text-xs text-fg-subtle">{s.customize.briefLabel}</p>
                 <div className="rounded-xl bg-ink-950/60 px-3.5 py-3 text-sm text-fg-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07)]">
                   “{s.customize.briefExample}”
-                  <span aria-hidden className="ml-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse-soft bg-violet-300" />
+                  <span aria-hidden className="ml-0.5 inline-block h-4 w-px translate-y-0.5 animate-pulse-soft bg-brand-300" />
                 </div>
               </div>
             </div>
@@ -66,9 +66,9 @@ function Step({ number, label, title, description, delay, children }: { number: 
     <Reveal as="li" delay={delay} className="surface hover-glow flex flex-col overflow-hidden rounded-[var(--radius-panel)]">
       <div className="m-2 min-h-[16.5rem] flex-1 overflow-hidden rounded-[1.2rem] bg-ink-850/80 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)]">{children}</div>
       <div className="px-6 pt-4 pb-7">
-        <p className="flex items-center gap-2 text-xs font-medium text-violet-300">
+        <p className="flex items-center gap-2 text-xs font-medium text-brand-300">
           <span className="font-mono">{number}</span>
-          <span className="h-px w-5 bg-violet-400/40" />
+          <span className="h-px w-5 bg-brand-400/40" />
           {label}
         </p>
         <h3 className="mt-2.5 text-xl font-semibold tracking-tight">{title}</h3>

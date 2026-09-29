@@ -42,7 +42,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
         <div className="mt-4 flex flex-wrap items-center gap-3">
           <h1 className="display text-3xl sm:text-4xl">{projectLabel(project, dict)}</h1>
           <ProjectStatusBadge status={project.status} dict={dict} />
-          {project.is_free && <span className="rounded-full bg-violet-500/15 px-2.5 py-1 text-xs font-medium text-violet-300">{t.free}</span>}
+          {project.is_free && <span className="rounded-full bg-brand-500/15 px-2.5 py-1 text-xs font-medium text-brand-300">{t.free}</span>}
         </div>
         <p className="mt-2 text-fg-muted">{dict.app.statusHint[project.status]}</p>
         <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-fg-subtle">
@@ -63,10 +63,10 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
             return (
               <li key={step} className="flex items-center gap-3 sm:flex-col sm:items-start" aria-current={active ? "step" : undefined}>
                 <div className="flex w-full items-center gap-2">
-                  <span className={cn("grid size-7 shrink-0 place-items-center rounded-full text-xs", done ? "bg-violet-500 text-white" : active ? "bg-violet-500/20 text-violet-300 ring-2 ring-violet-400/60" : "bg-white/[0.06] text-fg-subtle")}>
+                  <span className={cn("grid size-7 shrink-0 place-items-center rounded-full text-xs", done ? "bg-brand-500 text-on-brand" : active ? "bg-brand-500/20 text-brand-300 ring-2 ring-brand-400/60" : "bg-white/[0.06] text-fg-subtle")}>
                     {done ? <Icon name="check" className="size-3.5" /> : i + 1}
                   </span>
-                  {i < timelineSteps.length - 1 && <span className={cn("hidden h-px flex-1 sm:block", i < current ? "bg-violet-500" : "bg-white/10")} />}
+                  {i < timelineSteps.length - 1 && <span className={cn("hidden h-px flex-1 sm:block", i < current ? "bg-brand-500 text-on-brand" : "bg-white/10")} />}
                 </div>
                 <div>
                   <p className={cn("text-sm font-medium", !done && !active && "text-fg-subtle")}>
@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
             <video src={video.url} controls playsInline preload="metadata" className={cn("w-full rounded-2xl bg-black", video.format === "16:9" ? "aspect-video" : "aspect-[9/16] max-h-[70vh]")} />
             <div className="flex flex-col gap-4">
               {video.caption && <p className="text-sm leading-relaxed whitespace-pre-line text-fg-muted">{video.caption}</p>}
-              {video.hashtags && <p className="text-sm text-violet-300">{video.hashtags}</p>}
+              {video.hashtags && <p className="text-sm text-brand-300">{video.hashtags}</p>}
               <div className="flex flex-wrap items-start gap-3">
                 {revisable && <RevisionForm projectId={project.id} />}
                 <a href={video.url} download className={buttonClasses({})}><Icon name="download" className="size-4" /> {t.download}</a>
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
           </div>
         ) : (
           <div className="surface flex items-center gap-4 rounded-[var(--radius-panel)] p-6">
-            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-violet-500/15 text-violet-300"><Icon name="clock" className="size-5" /></span>
+            <span className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-500/15 text-brand-300"><Icon name="clock" className="size-5" /></span>
             <p className="text-sm text-fg-muted">{t.deliverablesPending}</p>
           </div>
         )}
@@ -113,7 +113,7 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
               <li key={r.id} className="rounded-xl bg-white/[0.03] px-4 py-3 text-sm">
                 <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-fg-subtle">
                   <span>{fmt.format(new Date(r.created_at))}{r.timestamp_seconds !== null && ` · ${Math.floor(r.timestamp_seconds / 60)}:${String(Math.round(r.timestamp_seconds % 60)).padStart(2, "0")}`}</span>
-                  <span className={cn("rounded-full px-2 py-0.5", r.status === "done" ? "bg-success/12 text-success" : "bg-violet-500/15 text-violet-300")}>{dict.app.revision.status[r.status]}</span>
+                  <span className={cn("rounded-full px-2 py-0.5", r.status === "done" ? "bg-success/12 text-success" : "bg-brand-500/15 text-brand-300")}>{dict.app.revision.status[r.status]}</span>
                 </div>
                 <p className="mt-1.5 whitespace-pre-line text-fg-muted">{r.message}</p>
               </li>

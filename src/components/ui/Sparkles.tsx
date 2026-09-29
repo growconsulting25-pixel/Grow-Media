@@ -17,7 +17,7 @@ export function Sparkles({ className, density = 12 }: { className?: string; dens
           <svg
             key={i}
             viewBox="0 0 20 20"
-            className="absolute size-3 animate-pulse-soft text-violet-300/70"
+            className="absolute size-3 animate-pulse-soft text-brand-300/70"
             style={{ left: `${x}%`, top: `${y}%`, animationDelay: `${i * 0.37}s` }}
           >
             <path d="M10 1v18M1 10h18" stroke="currentColor" strokeWidth="1" />

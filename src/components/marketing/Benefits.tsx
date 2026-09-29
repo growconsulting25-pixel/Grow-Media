@@ -32,7 +32,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
               {i.fast.timeline.map((step, idx) => (
                 <div key={step} className="flex flex-1 items-center gap-2">
                   <div className="flex-1">
-                    <div className={cn("h-1.5 rounded-full", idx < 2 ? "bg-gradient-to-r from-violet-600 to-orchid-400" : "bg-paper-3")} />
+                    <div className={cn("h-1.5 rounded-full", idx < 2 ? "bg-brand-500 text-on-brand" : "bg-paper-3")} />
                     <p className="mt-2 flex items-center gap-1 text-xs text-muted-on-paper">
                       {idx === 2 && <Icon name="check" className="size-3 text-emerald-600" />}
                       {step}
@@ -48,14 +48,14 @@ export function Benefits({ dict }: { dict: Dictionary }) {
             <div className="mt-auto space-y-1.5 pt-5" aria-hidden>
               <div className="h-2 w-[85%] rounded-full bg-paper-3" />
               <div className="h-2 w-[60%] rounded-full bg-paper-3" />
-              <p className="pt-1 text-xs font-medium text-violet-700">#justlisted #realestate</p>
+              <p className="pt-1 text-xs font-medium text-brand-700">#justlisted #realestate</p>
             </div>
           </Tile>
 
           <Tile k="cost" icon="coins" dict={dict} delay={180}>
             <div className="mt-auto flex items-end gap-2 pt-5" aria-hidden>
               <div className="h-16 w-7 rounded-md bg-paper-3" />
-              <div className="h-5 w-7 rounded-md bg-gradient-to-t from-violet-600 to-orchid-400" />
+              <div className="h-5 w-7 rounded-md bg-brand-500 text-on-brand" />
             </div>
           </Tile>
 
@@ -64,7 +64,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
               {i.consistent.days.map((d, idx) => (
                 <div key={idx} className="text-center">
                   <p className="text-[0.68rem] text-muted-on-paper">{d}</p>
-                  <div className={cn("mt-1.5 aspect-[3/4] rounded-md", [0, 2, 4, 5].includes(idx) ? "bg-gradient-to-b from-violet-500 to-violet-700" : "bg-paper-3")} />
+                  <div className={cn("mt-1.5 aspect-[3/4] rounded-md", [0, 2, 4, 5].includes(idx) ? "bg-brand-500 text-on-brand" : "bg-paper-3")} />
                 </div>
               ))}
             </div>
@@ -72,7 +72,8 @@ export function Benefits({ dict }: { dict: Dictionary }) {
 
           <Tile k="brand" icon="palette" dict={dict} delay={60}>
             <div className="mt-auto flex items-center gap-2 pt-5" aria-hidden>
-              {["#121119", "#7336ec", "#d17df2", "#e2e0ea"].map((c) => (
+              <Photo name="agentMan" width={96} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" imgClassName="object-[center_20%]" />
+              {["#0b1622", "#00abff", "#dce4ec"].map((c) => (
                 <span key={c} className="size-7 rounded-full ring-2 ring-white" style={{ background: c }} />
               ))}
               <span className="ml-auto rounded-md bg-ink-on-paper px-2 py-1 text-[0.62rem] font-bold tracking-wide text-white">LOGO</span>
@@ -83,7 +84,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
             <div className="mt-auto flex items-end gap-2 pt-5" aria-hidden>
               {[["9:16", "h-12 w-7"], ["4:5", "h-10 w-8"], ["1:1", "size-8"], ["16:9", "h-6 w-10"]].map(([r, size]) => (
                 <div key={r} className="text-center">
-                  <div className={cn("rounded border border-violet-600/40 bg-violet-600/10", size)} />
+                  <div className={cn("rounded border border-brand-600/40 bg-brand-600/10", size)} />
                   <p className="mt-1 font-mono text-[0.6rem] text-muted-on-paper">{r}</p>
                 </div>
               ))}
@@ -109,13 +110,13 @@ function Tile({ k, icon, dict, className, children, delay, horizontal }: { k: Ke
     <Reveal
       delay={delay}
       className={cn(
-        "flex min-w-0 rounded-[1.5rem] bg-white p-6 shadow-[0_1px_0_rgba(18,17,25,0.04),0_0_0_1px_rgba(18,17,25,0.06),0_24px_48px_-32px_rgba(40,20,90,0.25)] transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(115,54,236,0.25),0_30px_60px_-30px_rgba(91,34,201,0.35)]",
+        "flex min-w-0 rounded-[1.5rem] bg-white p-6 shadow-[0_1px_0_rgba(11,22,34,0.04),0_0_0_1px_rgba(11,22,34,0.06),0_24px_48px_-32px_rgba(11,34,57,0.25)] transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(0,171,255,0.25),0_30px_60px_-30px_rgba(0,171,255,0.35)]",
         horizontal ? "flex-col gap-6 lg:flex-row lg:items-center" : "flex-col",
         className,
       )}
     >
       <div className={cn(horizontal && "lg:w-80 lg:shrink-0")}>
-        <span className="grid size-10 place-items-center rounded-xl bg-violet-600/10 text-violet-700">
+        <span className="grid size-10 place-items-center rounded-xl bg-brand-600/10 text-brand-700">
           <Icon name={icon} className="size-5" />
         </span>
         <h3 className="mt-4 text-lg font-semibold tracking-tight">{item.title}</h3>
@@ -137,7 +138,7 @@ function MoreContentVisual({ labels }: { labels: string[] }) {
     <div className="relative mt-auto pt-8">
       <div className="flex items-start justify-center gap-2.5">
         {tiles.map((tile, i) => (
-          <figure key={tile.name} className={cn("relative overflow-hidden rounded-xl shadow-[0_20px_40px_-20px_rgba(18,17,25,0.5)]", tile.cls)}>
+          <figure key={tile.name} className={cn("relative overflow-hidden rounded-xl shadow-[0_20px_40px_-20px_rgba(11,22,34,0.5)]", tile.cls)}>
             <Photo name={tile.name} width={240} sizes="(min-width: 1024px) 140px, 25vw" decorative className="size-full" />
             <figcaption className="absolute inset-x-1.5 bottom-1.5 truncate rounded-md bg-black/55 px-1.5 py-0.5 text-[0.6rem] font-medium text-white backdrop-blur">
               {labels[i]}
@@ -157,7 +158,7 @@ function ScaleVisual({ label }: { label: string }) {
         {names.map((n, i) => (
           <div key={n} className="relative w-28 shrink-0 overflow-hidden rounded-xl bg-paper-2 p-1 lg:flex-1">
             <Photo name={n} width={220} sizes="160px" decorative className="aspect-[4/3] rounded-lg" />
-            <span className={cn("absolute top-2 right-2 size-2 rounded-full ring-2 ring-white", i < 4 ? "bg-emerald-500" : "bg-violet-500")} />
+            <span className={cn("absolute top-2 right-2 size-2 rounded-full ring-2 ring-white", i < 4 ? "bg-emerald-500" : "bg-brand-500 text-on-brand")} />
           </div>
         ))}
       </div>

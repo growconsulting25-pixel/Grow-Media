@@ -578,6 +578,11 @@ const fr: Dictionary = {
       dining: "Salle à manger aux grandes fenêtres",
       facade: "Façade de maison contemporaine",
       interior: "Intérieur baigné de lumière",
+      agentWoman: "Courtière immobilière souriante",
+      agentMan: "Portrait d'un courtier immobilier",
+      agentPhone: "Courtier consultant du contenu sur son téléphone",
+      keys: "Remise des clés d'une maison aux nouveaux propriétaires",
+      handshake: "Courtier serrant la main d'un client",
     },
   },
 

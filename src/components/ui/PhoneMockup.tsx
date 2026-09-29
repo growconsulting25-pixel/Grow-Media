@@ -8,8 +8,8 @@ export function PhoneMockup({ children, className, label }: { children: ReactNod
       role={label ? "img" : undefined}
       aria-label={label}
       className={cn(
-        "relative aspect-[9/19.2] rounded-[2.6rem] bg-gradient-to-b from-[#2a2a36] via-[#15151e] to-[#23232e] p-[7px]",
-        "shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_50px_100px_-30px_rgba(0,0,0,0.9),0_30px_80px_-40px_rgba(140,80,255,0.55)]",
+        "relative aspect-[9/19.2] rounded-[2.6rem] bg-[#1a2330] p-[7px]",
+        "shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_50px_100px_-30px_rgba(0,0,0,0.9),0_30px_80px_-40px_rgba(0,171,255,0.55)]",
         className,
       )}
     >

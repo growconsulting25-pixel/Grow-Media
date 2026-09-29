@@ -12,7 +12,7 @@ const SOCIALS = ["instagram", "facebook", "tiktok", "youtube", "linkedin"] as co
 const SOCIAL_LABELS: Record<(typeof SOCIALS)[number], string> = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok", youtube: "YouTube", linkedin: "LinkedIn" };
 
 const input =
-  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-violet-400)]";
+  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
 
 type AssetKey = "logo_path" | "profile_photo_path";
 
@@ -25,7 +25,7 @@ export function BrandKitForm({ userId, kit, logoUrl, photoUrl }: { userId: strin
     phone: kit?.phone ?? "",
     email: kit?.email ?? "",
     website: kit?.website ?? "",
-    primary_color: kit?.primary_color ?? "#7336ec",
+    primary_color: kit?.primary_color ?? "#00abff",
     secondary_color: kit?.secondary_color ?? "#f4f3f8",
   });
   const [social, setSocial] = useState<Record<string, string>>(kit?.social ?? {});
@@ -129,7 +129,7 @@ export function BrandKitForm({ userId, kit, logoUrl, photoUrl }: { userId: strin
       {/* Live preview of how branding appears on a video */}
       <aside aria-label={t.preview} className="lg:sticky lg:top-10 lg:self-start">
         <p className="mb-2 text-sm text-fg-muted">{t.preview}</p>
-        <div className="relative aspect-[9/16] overflow-hidden rounded-[1.75rem] bg-[radial-gradient(120%_90%_at_30%_20%,#3a3530,#0d0d15)] shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-[1.75rem] bg-ink-700 shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/85" />
           {assets.logo_path.url && (
             // eslint-disable-next-line @next/next/no-img-element -- signed/local URL
