@@ -230,7 +230,7 @@ create index orders_user_idx on public.orders (user_id, created_at desc);
 -- updated_at trigger
 -- ---------------------------------------------------------------------------
 create or replace function public.touch_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = public as $$
 begin
   new.updated_at = now();
   return new;
@@ -277,7 +277,7 @@ create trigger on_auth_user_created
 -- Status changes → timeline event + notification
 -- ---------------------------------------------------------------------------
 create or replace function public.stamp_delivery()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = public as $$
 begin
   if new.status = 'ready' and new.delivered_at is null then
     new.delivered_at := now();
