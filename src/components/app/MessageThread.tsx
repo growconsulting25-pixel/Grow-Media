@@ -13,7 +13,7 @@ import { getSupabaseBrowser } from "@/lib/supabase/client";
 const MAX_ATTACHMENT = 25 * 1024 * 1024;
 
 /** Simple per-project conversation with the production team. Live via Realtime. */
-export function MessageThread({ projectId, userId, initial }: { projectId: string; userId: string; initial: Message[] }) {
+export function MessageThread({ projectId, userId, initial, asStaff = false, ownerId }: { projectId: string; userId: string; initial: Message[]; asStaff?: boolean; ownerId?: string }) {
   const { dict, locale } = useI18n();
   const t = dict.app.messages;
   const [messages, setMessages] = useState(initial);
@@ -55,7 +55,7 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
       let attachment_path: string | null = null;
       let attachment_url: string | undefined;
       if (file) {
-        const path = `${userId}/${projectId}/messages/${crypto.randomUUID()}-${file.name.replace(/[^\w.-]+/g, "-").slice(-80)}`;
+        const path = `${ownerId ?? userId}/${projectId}/messages/${crypto.randomUUID()}-${file.name.replace(/[^\w.-]+/g, "-").slice(-80)}`;
         const { error: upErr } = await supabase.storage.from(PROJECT_BUCKET).upload(path, file, { contentType: file.type });
         if (upErr) throw upErr;
         attachment_path = path;
@@ -63,7 +63,7 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
       }
       const { data, error: insErr } = await supabase
         .from("messages")
-        .insert({ project_id: projectId, author_id: userId, body: text, attachment_path })
+        .insert({ project_id: projectId, author_id: userId, body: text, attachment_path, is_staff: asStaff })
         .select()
         .single();
       if (insErr) throw insErr;
@@ -85,11 +85,11 @@ export function MessageThread({ projectId, userId, initial }: { projectId: strin
       ) : (
         <ol ref={listRef} className="mt-5 max-h-[28rem] space-y-3 overflow-y-auto pr-1">
           {messages.map((m) => {
-            const mine = !m.is_staff;
+            const mine = m.is_staff === asStaff;
             return (
               <li key={m.id} className={cn("flex", mine ? "justify-end" : "justify-start")}>
                 <div className={cn("max-w-[85%] rounded-2xl px-4 py-2.5 text-sm", mine ? "rounded-br-sm bg-brand-600 text-on-brand" : "rounded-bl-sm bg-white/[0.06] text-fg")}>
-                  <p className={cn("mb-0.5 text-[0.7rem]", mine ? "text-on-brand/70" : "text-brand-300")}>{mine ? t.you : t.team} · {fmt.format(new Date(m.created_at))}</p>
+                  <p className={cn("mb-0.5 text-[0.7rem]", mine ? "text-on-brand/70" : "text-brand-300")}>{mine ? t.you : asStaff ? dict.app.admin.client : t.team} · {fmt.format(new Date(m.created_at))}</p>
                   <p className="whitespace-pre-line">{m.body}</p>
                   {m.attachment_path && (
                     m.attachment_url ? (

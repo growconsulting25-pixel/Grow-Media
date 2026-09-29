@@ -484,6 +484,9 @@ const fr: Dictionary = {
       description: "Nous avons envoyé un lien de confirmation à {email}. Ouvrez-le pour activer votre compte — votre vidéo gratuite commence juste après.",
     },
     serverErrors: {
+      invalidEmail: "Cette adresse courriel semble incorrecte. Vérifiez les fautes de frappe (ex. .com et non .coom).",
+      rateLimited: "Trop d'inscriptions en peu de temps. Patientez quelques minutes, puis réessayez.",
+      emailSend: "Impossible d'envoyer votre courriel de confirmation. Réessayez sous peu ou écrivez-nous.",
       exists: "Un compte existe déjà avec ce courriel. Connectez-vous plutôt.",
       weak: "Choisissez un mot de passe plus robuste (au moins 8 caractères).",
       generic: "Impossible de créer votre compte pour l'instant. Réessayez dans un instant.",

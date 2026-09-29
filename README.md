@@ -20,7 +20,7 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` for canonical
 | 1 | Foundation, design system, i18n, navigation, homepage, responsive marketing site | ✅ Done |
 | 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | ✅ Done |
 | 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | ✅ Done (plan changes by email until Stripe) |
-| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | Next |
+| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | In progress: admin + email done, Stripe next |
 | 5 | UX polish, mobile QA, accessibility, conversion optimization | — |
 
 ## Architecture
@@ -135,3 +135,12 @@ Homepage CTA → 3-step modal (details → password → photos) → account crea
 
 ### Database tests
 `npm run test:db` runs 26 checks (isolation between users, locked submitted projects, free credit, subscription usage, delivery, revisions) against a throwaway local Postgres, using stubs for Supabase's auth and storage schemas.
+
+## Production admin & email notifications (Phase 4)
+
+- `/fr/admin` (or `/en/admin`) is only for staff (`profiles.role = 'admin'`). It has:
+  - a queue by status (New, In production, Review, Revisions, Ready, Completed);
+  - a project page with source-file downloads, status changes, final-video upload (to the client's private `deliverables` folder, with caption and hashtags), revision handling and the message thread as staff.
+- **Emails** go through [Resend](https://resend.com). Database triggers create notifications, and `/api/email/dispatch` emails them to clients in their language. It runs every 5 minutes (`netlify/functions/dispatch-emails.mts`) and immediately after staff actions. New projects also alert `ADMIN_NOTIFY_EMAIL`.
+- **Required Netlify env vars:** `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_NOTIFY_EMAIL`, `CRON_SECRET` (see `.env.example`).
+- **Supabase auth emails** (confirmation, password reset) go through Resend too. Configure this in Supabase → Authentication → Emails → SMTP settings: host `smtp.resend.com`, port `465`, user `resend`, password = Resend API key.

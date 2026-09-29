@@ -93,6 +93,9 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
     if (result.reason === "not_configured") setPending(true);
     else if (result.reason === "exists") { setServerError(t.serverErrors.exists); setStep(0); }
     else if (result.reason === "weak") { setServerError(t.serverErrors.weak); setStep(1); }
+    else if (result.reason === "invalid_email") { setErrors({ email: t.serverErrors.invalidEmail }); setStep(0); }
+    else if (result.reason === "rate_limited") setServerError(t.serverErrors.rateLimited);
+    else if (result.reason === "email_send") setServerError(t.serverErrors.emailSend);
     else setServerError(t.serverErrors.generic);
   };
 

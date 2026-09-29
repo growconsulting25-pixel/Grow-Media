@@ -29,7 +29,7 @@ const items: { route: RouteKey; icon: IconName; key: NavKey }[] = [
 const mobileTabs: NavKey[] = ["dashboard", "projects", "create", "videos"];
 
 /** Sidebar on desktop; top bar + bottom tab bar (with a "More" sheet) on mobile. */
-export function AppNav({ name, email, unread }: { name: string; email: string; unread: number }) {
+export function AppNav({ name, email, unread, isAdmin = false }: { name: string; email: string; unread: number; isAdmin?: boolean }) {
   const { dict, locale } = useI18n();
   const t = dict.app.nav;
   const pathname = usePathname() ?? "";
@@ -88,6 +88,11 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
           </ul>
         </nav>
         <div className="space-y-4 border-t border-white/[0.06] pt-5">
+          {isAdmin && (
+            <Link href={`/${locale}/admin`} className="flex items-center gap-3 rounded-xl bg-brand-600 px-3 py-2.5 text-sm font-semibold text-on-brand">
+              <Icon name="layers" className="size-4" /> {dict.app.admin.nav}
+            </Link>
+          )}
           <div className="px-2">
             <p className="truncate text-sm font-medium">{name}</p>
             <p className="truncate text-xs text-fg-subtle">{email}</p>
@@ -149,6 +154,11 @@ export function AppNav({ name, email, unread }: { name: string; email: string; u
                 </li>
               ))}
             </ul>
+            {isAdmin && (
+              <Link href={`/${locale}/admin`} onClick={() => setMoreOpen(false)} className="mt-2 flex items-center gap-3 rounded-2xl bg-brand-600 px-4 py-3.5 text-sm font-semibold text-on-brand">
+                <Icon name="layers" className="size-4" /> {dict.app.admin.nav}
+              </Link>
+            )}
             <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
               <LanguageSwitcher />
               <button type="button" onClick={signOut} className="text-sm text-fg-muted">{dict.auth.signOut}</button>

@@ -480,6 +480,9 @@ const en = {
       description: "We sent a confirmation link to {email}. Open it to activate your account — your free video starts right after.",
     },
     serverErrors: {
+      invalidEmail: "This email address doesn't look right. Check for typos (e.g. .com, not .coom).",
+      rateLimited: "Too many sign-ups in a short time. Wait a few minutes and try again.",
+      emailSend: "We couldn't send your confirmation email. Try again shortly, or write to us.",
       exists: "An account already exists with this email. Log in instead.",
       weak: "Choose a stronger password (at least 8 characters).",
       generic: "We couldn't create your account. Try again in a moment.",

@@ -21,7 +21,7 @@ export interface SignupInput {
 export type SignupResult =
   | { ok: true; next: "app"; redirect: string; uploadFailed: boolean }
   | { ok: true; next: "confirm" }
-  | { ok: false; reason: "not_configured" | "exists" | "weak" | "error" };
+  | { ok: false; reason: "not_configured" | "exists" | "weak" | "invalid_email" | "email_send" | "rate_limited" | "error" };
 
 export async function signUp(input: SignupInput, onUpload?: (current: number, total: number) => void): Promise<SignupResult> {
   const supabase = getSupabaseBrowser();
@@ -38,9 +38,13 @@ export async function signUp(input: SignupInput, onUpload?: (current: number, to
   });
 
   if (error) {
+    const code = (error as { code?: string }).code ?? "";
     const msg = error.message.toLowerCase();
-    if (msg.includes("registered") || msg.includes("exists")) return { ok: false, reason: "exists" };
-    if (msg.includes("password")) return { ok: false, reason: "weak" };
+    if (code === "user_already_exists" || msg.includes("registered") || msg.includes("exists")) return { ok: false, reason: "exists" };
+    if (code === "email_address_invalid" || code === "validation_failed" || msg.includes("invalid")) return { ok: false, reason: "invalid_email" };
+    if (code.startsWith("over_") || msg.includes("rate limit")) return { ok: false, reason: "rate_limited" };
+    if (msg.includes("sending") || msg.includes("not authorized") || code === "email_address_not_authorized") return { ok: false, reason: "email_send" };
+    if (code === "weak_password" || msg.includes("password")) return { ok: false, reason: "weak" };
     return { ok: false, reason: "error" };
   }
   // Supabase returns a user with no identities when the email is already taken.
