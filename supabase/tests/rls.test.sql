@@ -88,6 +88,7 @@ select pg_temp.act_as(:'alice');
 select pg_temp.assert((select q->>'mode' = 'subscription' and (q->>'used')::int = 0 from public.get_submission_quote() q), 'subscription covers video');
 select pg_temp.assert((select status = 'submitted' from public.submit_project('aaaaaaaa-0000-0000-0000-000000000002')), 'subscription submission');
 select pg_temp.assert((select (q->>'used')::int = 1 from public.get_submission_quote() q), 'usage counted (1/4)');
+select pg_temp.assert((select s->>'plan_id' = 'agent' and (s->>'used')::int = 1 and (s->>'included')::int = 4 from public.get_account_summary() s), 'account summary shows plan usage');
 reset role;
 
 -- Staff delivers; client is notified and can request a revision
@@ -100,6 +101,16 @@ select pg_temp.assert((select delivered_at is not null from public.projects wher
 select pg_temp.act_as(:'alice');
 select pg_temp.assert((select count(*) = 1 from public.notifications where type = 'video_ready'), 'video ready notification');
 select public.request_revision('aaaaaaaa-0000-0000-0000-000000000001', 'Slower opening please');
+insert into public.messages (project_id, author_id, body) values ('aaaaaaaa-0000-0000-0000-000000000001', :'alice', 'Thanks!');
+do $$ begin
+  insert into public.messages (project_id, author_id, body, is_staff) values ('aaaaaaaa-0000-0000-0000-000000000001', auth.uid(), 'fake staff', true);
+  raise exception 'client posted as staff';
+exception when insufficient_privilege then raise notice 'ok - client cannot post as staff'; end $$;
+do $$ begin
+  update public.brand_kits set agency = 'My Agency' where user_id = auth.uid();
+  if not found then raise exception 'brand kit not updatable'; end if;
+  raise notice 'ok - brand kit editable by owner';
+end $$;
 select pg_temp.assert((select status = 'revision_requested' from public.projects where id = 'aaaaaaaa-0000-0000-0000-000000000001'), 'revision requested');
 reset role;
 

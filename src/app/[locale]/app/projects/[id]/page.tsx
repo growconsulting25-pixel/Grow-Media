@@ -1,14 +1,16 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { projectLabel } from "@/components/app/ProjectCard";
+import { MessageThread } from "@/components/app/MessageThread";
 import { ProjectStatusBadge } from "@/components/app/ProjectStatusBadge";
+import { RevisionForm } from "@/components/app/RevisionForm";
+import { Upsell } from "@/components/app/Upsell";
 import { buttonClasses } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { siteConfig } from "@/config/site";
 import { isLocale, localeTags } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { href } from "@/i18n/routing";
-import { getProjectDetail } from "@/lib/projects/server";
+import { getMessages, getProjectDetail, getRevisions } from "@/lib/projects/server";
 import { timelineIndex, timelineSteps } from "@/lib/projects/types";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/cn";
@@ -24,6 +26,8 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
   const detail = await getProjectDetail(session.supabase, id);
   if (!detail) notFound();
   const { project, files, events, deliverables } = detail;
+  const [messages, revisions] = await Promise.all([getMessages(session.supabase, project.id), getRevisions(session.supabase, project.id)]);
+  const revisable = ["ready", "review", "completed"].includes(project.status);
   if (project.status === "draft") redirect(`${href("appCreate", locale)}?project=${project.id}`);
 
   const fmt = new Intl.DateTimeFormat(localeTags[locale], { dateStyle: "medium", timeStyle: "short" });
@@ -85,11 +89,9 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
             <div className="flex flex-col gap-4">
               {video.caption && <p className="text-sm leading-relaxed whitespace-pre-line text-fg-muted">{video.caption}</p>}
               {video.hashtags && <p className="text-sm text-violet-300">{video.hashtags}</p>}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap items-start gap-3">
+                {revisable && <RevisionForm projectId={project.id} />}
                 <a href={video.url} download className={buttonClasses({})}><Icon name="download" className="size-4" /> {t.download}</a>
-                <a href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(`${t.requestRevision} — ${projectLabel(project, dict)}`)}`} className={buttonClasses({ variant: "secondary" })}>
-                  <Icon name="revise" className="size-4" /> {t.requestRevision}
-                </a>
               </div>
             </div>
           </div>
@@ -101,6 +103,27 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
         )}
       </section>
 
+      {project.is_free && (project.status === "ready" || project.status === "completed") && <Upsell dict={dict} locale={locale} />}
+
+      {revisions.length > 0 && (
+        <section aria-labelledby="revisions-title" className="surface rounded-[var(--radius-panel)] p-6">
+          <h2 id="revisions-title" className="text-lg font-semibold tracking-tight">{dict.app.revision.history}</h2>
+          <ul className="mt-4 space-y-3">
+            {revisions.map((r) => (
+              <li key={r.id} className="rounded-xl bg-white/[0.03] px-4 py-3 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-fg-subtle">
+                  <span>{fmt.format(new Date(r.created_at))}{r.timestamp_seconds !== null && ` · ${Math.floor(r.timestamp_seconds / 60)}:${String(Math.round(r.timestamp_seconds % 60)).padStart(2, "0")}`}</span>
+                  <span className={cn("rounded-full px-2 py-0.5", r.status === "done" ? "bg-success/12 text-success" : "bg-violet-500/15 text-violet-300")}>{dict.app.revision.status[r.status]}</span>
+                </div>
+                <p className="mt-1.5 whitespace-pre-line text-fg-muted">{r.message}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <MessageThread projectId={project.id} userId={session.user.id} initial={messages} />
+
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Brief */}
         <section aria-labelledby="brief-title" className="surface rounded-[var(--radius-panel)] p-6">
@@ -110,7 +133,6 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
             {project.description && <div><dt className="text-fg-subtle">{dict.app.create.description}</dt><dd className="mt-0.5 whitespace-pre-line text-fg-muted">{project.description}</dd></div>}
             <div><dt className="text-fg-subtle">{t.notes}</dt><dd className="mt-0.5 whitespace-pre-line text-fg-muted">{project.notes || t.noNotes}</dd></div>
           </dl>
-          <p className="mt-6 border-t border-white/[0.06] pt-4 text-xs text-fg-subtle">{t.messagesSoon} <a className="text-violet-300" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></p>
         </section>
 
         {/* Files */}

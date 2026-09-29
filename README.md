@@ -18,9 +18,9 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` for canonical
 | Phase | Scope | Status |
 | --- | --- | --- |
 | 1 | Foundation, design system, i18n, navigation, homepage, responsive marketing site | ✅ Done |
-| 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | ✅ Done (needs a Supabase project) |
-| 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | Next |
-| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | — |
+| 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | ✅ Done |
+| 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | ✅ Done (plan changes by email until Stripe) |
+| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | Next |
 | 5 | UX polish, mobile QA, accessibility, conversion optimization | — |
 
 ## Architecture
@@ -120,5 +120,18 @@ Homepage CTA → 3-step modal (details → password → photos) → account crea
 - `submit_project()` decides the price on the server: free credit first, then the subscription allowance, otherwise payment is required. Paid checkout arrives in Phase 4.
 - Staff (`role = 'admin'`) can see and update everything. Status changes automatically log timeline events and create notifications.
 
+### Client area (Phase 3)
+| Page | What it does |
+| --- | --- |
+| Dashboard | Greeting, free-video banner, plan usage (e.g. 2 / 4 videos), ready videos (watch, revision), current projects, content ideas |
+| Projects / Project | Status timeline, video player and download, structured revision request, revision history, live message thread with attachments, post-delivery upsell for free videos |
+| My Videos | Library of every non-draft project with its latest video; filters All / Ready / Processing / Revision |
+| Ideas | Starter ideas per language; "Use This Idea" opens the wizard with the idea prefilled and linked |
+| Messages | Latest message per project |
+| Brand Kit | Name, agency, contact, logo, profile photo, colors, social handles, with a live preview of how branding appears on a video |
+| Subscription | Current plan and usage, plans and add-ons. Changes go through email until Stripe (Phase 4) |
+| Profile | Name, preferred language, password |
+| Notifications | Bell with unread count and live updates (Supabase Realtime) |
+
 ### Database tests
-`npm run test:db` runs 23 checks (isolation between users, locked submitted projects, free credit, subscription usage, delivery, revisions) against a throwaway local Postgres, using stubs for Supabase's auth and storage schemas.
+`npm run test:db` runs 26 checks (isolation between users, locked submitted projects, free credit, subscription usage, delivery, revisions) against a throwaway local Postgres, using stubs for Supabase's auth and storage schemas.

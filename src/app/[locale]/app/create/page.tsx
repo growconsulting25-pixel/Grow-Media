@@ -29,6 +29,7 @@ export default async function CreatePage({ params, searchParams }: PageProps<"/[
       initialStep={one(sp.step) ?? (detail ? "upload" : undefined)}
       initialType={one(sp.type)}
       initialNotes={one(sp.idea)}
+      initialIdeaId={/^[0-9a-f-]{36}$/i.test(one(sp.ideaId) ?? "") ? one(sp.ideaId) : undefined}
     />
   );
 }

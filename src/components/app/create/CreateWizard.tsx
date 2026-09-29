@@ -38,9 +38,10 @@ interface Props {
   initialStep?: string;
   initialType?: string;
   initialNotes?: string;
+  initialIdeaId?: string;
 }
 
-export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes }: Props) {
+export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes, initialIdeaId }: Props) {
   const { dict, locale } = useI18n();
   const t = dict.app.create;
   const router = useRouter();
@@ -103,7 +104,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
       branding: form.branding,
     };
     if (!project) {
-      const created = await createDraft(supabase, { type: form.type, address: patch.address ?? undefined, title: patch.title ?? undefined, description: patch.description ?? undefined, notes: patch.notes ?? undefined });
+      const created = await createDraft(supabase, { type: form.type, address: patch.address ?? undefined, title: patch.title ?? undefined, description: patch.description ?? undefined, notes: patch.notes ?? undefined, idea_id: initialIdeaId });
       setProject(created);
       track("project_started", { type: form.type });
       window.history.replaceState(null, "", `?project=${created.id}`);

@@ -9,7 +9,7 @@ import { ACCEPTED_UPLOADS, PROJECT_BUCKET, type Project, type ProjectFile, type 
  * and status changes go through database functions (`submit_project`).
  */
 
-export async function createDraft(supabase: SupabaseClient, input: { type: ProjectType; title?: string; address?: string; description?: string; notes?: string }) {
+export async function createDraft(supabase: SupabaseClient, input: { type: ProjectType; title?: string; address?: string; description?: string; notes?: string; idea_id?: string }) {
   const { data: auth } = await supabase.auth.getUser();
   if (!auth.user) throw new Error("not_authenticated");
   const { data, error } = await supabase
