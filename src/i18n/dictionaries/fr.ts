@@ -109,6 +109,9 @@ const fr: Dictionary = {
     },
   },
 
+  trust: {
+    label: "Conçu pour les courtiers des grandes bannières du Québec et du Canada — et prêt pour les plateformes de vos acheteurs",
+  },
   examples: {
     eyebrow: "Exemples",
     headline: [{ text: "Voyez le résultat ", accent: "en mouvement." }],

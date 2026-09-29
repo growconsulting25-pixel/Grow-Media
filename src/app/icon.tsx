@@ -1,14 +1,20 @@
 import { ImageResponse } from "next/og";
+import { markArrow, markRings, markViewBox } from "@/components/layout/Logo";
 
 export const size = { width: 64, height: 64 };
 export const contentType = "image/png";
 
-/** Grow arrow favicon (PNG works in every browser, unlike SVG favicons). */
+/** Favicon: the Grow mark with black rings (PNG works in every browser). */
 export default function Icon() {
   return new ImageResponse(
     (
-      <svg width="64" height="64" viewBox="0 0 105 104">
-        <path d="M5 5 100 43 58 60 41 99Z" fill="#00abff" stroke="#00abff" strokeWidth="9" strokeLinejoin="round" />
+      <svg width="64" height="64" viewBox={markViewBox}>
+        <g fill="none" stroke="#000000" strokeWidth="15" strokeLinecap="round">
+          {markRings.map((d) => (
+            <path key={d} d={d} />
+          ))}
+        </g>
+        <path transform={markArrow.transform} d={markArrow.d} fill="#00abff" stroke="#00abff" strokeWidth="9" strokeLinejoin="round" />
       </svg>
     ),
     size,
