@@ -83,7 +83,7 @@ async function run() {
 
   // 6. Cancelled subscription, user resolved from the Stripe customer
   f = fakeDb({ profileByCustomer: "user_9" });
-  await handleStripeEvent(f.db, null, { type: "customer.subscription.deleted", data: { object: { ...sub, status: "canceled", metadata: { plan_id: "pro" } } } } as Stripe.Event);
+  await handleStripeEvent(f.db, null, { type: "customer.subscription.deleted", data: { object: { ...sub, status: "canceled", metadata: { plan_id: "pro" } } } } as unknown as Stripe.Event);
   const del = f.calls.find((c) => c.table === "subscriptions")!.payload as Record<string, unknown>;
   assert.equal(del.status, "canceled");
   assert.equal(del.user_id, "user_9");
