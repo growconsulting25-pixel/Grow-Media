@@ -12,6 +12,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { href } from "@/i18n/routing";
 import { getMessages, getProjectDetail, getRevisions } from "@/lib/projects/server";
 import { timelineIndex, timelineSteps } from "@/lib/projects/types";
+import { confirmCheckoutSession } from "@/lib/stripe/reconcile";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/cn";
 
@@ -23,6 +24,8 @@ export default async function ProjectPage({ params, searchParams }: PageProps<"/
   const session = await getCurrentUser();
   if (!session) return null;
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
+  const checkoutSession = (await searchParams).session_id;
+  if (typeof checkoutSession === "string") await confirmCheckoutSession(checkoutSession, session.user.id);
   const detail = await getProjectDetail(session.supabase, id);
   if (!detail) notFound();
   const { project, files, events, deliverables } = detail;
