@@ -15,7 +15,7 @@ import { timelineIndex, timelineSteps } from "@/lib/projects/types";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { cn } from "@/lib/cn";
 
-export default async function ProjectPage({ params }: PageProps<"/[locale]/app/projects/[id]">) {
+export default async function ProjectPage({ params, searchParams }: PageProps<"/[locale]/app/projects/[id]">) {
   const { locale, id } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
@@ -44,6 +44,9 @@ export default async function ProjectPage({ params }: PageProps<"/[locale]/app/p
           <ProjectStatusBadge status={project.status} dict={dict} />
           {project.is_free && <span className="rounded-full bg-brand-500/15 px-2.5 py-1 text-xs font-medium text-brand-300">{t.free}</span>}
         </div>
+        {(await searchParams).checkout === "success" && (
+          <p role="status" className="mt-4 rounded-xl bg-success/10 px-4 py-3 text-sm text-success">{dict.app.billing.successProject}</p>
+        )}
         <p className="mt-2 text-fg-muted">{dict.app.statusHint[project.status]}</p>
         <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-fg-subtle">
           <div className="flex gap-1.5"><dt>{t.type}:</dt><dd className="text-fg-muted">{dict.app.types[project.type].label}</dd></div>

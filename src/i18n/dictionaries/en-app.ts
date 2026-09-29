@@ -204,6 +204,18 @@ const app = {
     notAllowed: "This area is for the production team.",
     error: "Something went wrong. Try again.",
   },
+  billing: {
+    payAndSubmit: "Pay {price} and submit",
+    redirecting: "Opening secure checkout…",
+    manage: "Manage billing",
+    manageHint: "Change plan, update your card, download invoices or cancel.",
+    secure: "Secure payment by Stripe",
+    success: "Payment received. Your plan is being activated; refresh in a few seconds if it isn't showing yet.",
+    successProject: "Payment received. Your project is submitted and production starts shortly.",
+    cancelled: "Checkout cancelled. Nothing was charged.",
+    error: "We couldn't open checkout. Try again in a moment.",
+    alreadySubscribed: "You already have an active plan. Use “Manage billing” to change it.",
+  },
   notConfigured: {
     title: "Client accounts are opening soon.",
     description: "The client platform isn't connected yet. Start with your free video and we'll set up your account personally.",

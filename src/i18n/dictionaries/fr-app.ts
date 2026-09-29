@@ -208,6 +208,18 @@ const appFr: Widen<typeof app> = {
     notAllowed: "Cet espace est réservé à l'équipe de production.",
     error: "Une erreur est survenue. Réessayez.",
   },
+  billing: {
+    payAndSubmit: "Payer {price} et envoyer",
+    redirecting: "Ouverture du paiement sécurisé…",
+    manage: "Gérer la facturation",
+    manageHint: "Changez de forfait, mettez à jour votre carte, téléchargez vos factures ou annulez.",
+    secure: "Paiement sécurisé par Stripe",
+    success: "Paiement reçu. Votre forfait est en cours d'activation; actualisez dans quelques secondes s'il n'apparaît pas encore.",
+    successProject: "Paiement reçu. Votre projet est envoyé et la production commence sous peu.",
+    cancelled: "Paiement annulé. Aucuns frais n'ont été facturés.",
+    error: "Impossible d'ouvrir le paiement. Réessayez dans un instant.",
+    alreadySubscribed: "Vous avez déjà un forfait actif. Utilisez « Gérer la facturation » pour le modifier.",
+  },
   notConfigured: {
     title: "Les comptes clients ouvrent bientôt.",
     description: "La plateforme client n'est pas encore branchée. Commencez par votre vidéo gratuite et nous créerons votre compte personnellement.",

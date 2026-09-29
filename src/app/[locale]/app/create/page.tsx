@@ -3,6 +3,7 @@ import { CreateWizard } from "@/components/app/create/CreateWizard";
 import type { UploadedFile } from "@/components/app/create/UploadManager";
 import { isLocale } from "@/i18n/config";
 import { getProjectDetail } from "@/lib/projects/server";
+import { isStripeConfigured } from "@/lib/stripe/server";
 import { getCurrentUser } from "@/lib/supabase/server";
 
 export default async function CreatePage({ params, searchParams }: PageProps<"/[locale]/app/create">) {
@@ -28,6 +29,7 @@ export default async function CreatePage({ params, searchParams }: PageProps<"/[
       initialFiles={(detail?.files ?? []) as UploadedFile[]}
       initialStep={one(sp.step) ?? (detail ? "upload" : undefined)}
       initialType={one(sp.type)}
+      billingEnabled={isStripeConfigured()}
       initialNotes={one(sp.idea)}
       initialIdeaId={/^[0-9a-f-]{36}$/i.test(one(sp.ideaId) ?? "") ? one(sp.ideaId) : undefined}
     />

@@ -1,5 +1,8 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { UsageCard } from "@/components/app/UsageCard";
+import { BillingButton } from "@/components/app/billing/BillingButton";
+import { isStripeConfigured } from "@/lib/stripe/server";
 import { buttonClasses } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { addOns, plans } from "@/config/pricing";
@@ -7,6 +10,7 @@ import { siteConfig } from "@/config/site";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { interpolate } from "@/i18n/interpolate";
+import { href } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 import { getAccountSummary } from "@/lib/projects/server";
@@ -16,7 +20,7 @@ import { getCurrentUser } from "@/lib/supabase/server";
  * Plan overview. Changing plans goes through Stripe in Phase 4; until then
  * every plan action opens an email so nothing is faked.
  */
-export default async function SubscriptionPage({ params }: PageProps<"/[locale]/app/subscription">) {
+export default async function SubscriptionPage({ params, searchParams }: PageProps<"/[locale]/app/subscription">) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
@@ -26,25 +30,35 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
   const summary = await getAccountSummary(session.supabase);
   const mail = (subject: string) => `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const hasPlan = summary.plan_id === "agent" || summary.plan_id === "pro";
+  const billing = isStripeConfigured();
+  const checkout = (await searchParams).checkout;
 
   return (
     <div className="space-y-10">
       <div>
         <h1 className="display text-3xl sm:text-4xl">{t.title}</h1>
+        {checkout === "success" && <p role="status" className="mt-4 rounded-xl bg-success/10 px-4 py-3 text-sm text-success">{dict.app.billing.success}</p>}
+        {checkout === "cancelled" && <p role="status" className="mt-4 rounded-xl bg-white/[0.05] px-4 py-3 text-sm text-fg-muted">{dict.app.billing.cancelled}</p>}
       </div>
 
       <section aria-labelledby="current-plan" className="space-y-4">
         <h2 id="current-plan" className="text-lg font-semibold tracking-tight">{t.current}</h2>
         <UsageCard summary={summary} dict={dict} locale={locale} />
         {!hasPlan && <p className="text-sm text-fg-muted">{summary.free_credits > 0 ? t.freeCredit : t.none}</p>}
-        {hasPlan && (
+        {billing && (
+          <div className="max-w-sm">
+            <BillingButton action={{ kind: "portal" }} variant="secondary">{dict.app.billing.manage}</BillingButton>
+            <p className="mt-2 text-xs text-fg-subtle">{dict.app.billing.manageHint}</p>
+          </div>
+        )}
+        {!billing && hasPlan && (
           <div className="flex flex-wrap gap-3">
             {summary.plan_id === "agent" && <a href={mail(t.upgrade)} className={buttonClasses({})}>{t.upgrade}</a>}
             <a href={mail(t.change)} className={buttonClasses({ variant: "secondary" })}>{t.change}</a>
             <a href={mail(t.cancel)} className={buttonClasses({ variant: "ghost" })}>{t.cancel}</a>
           </div>
         )}
-        <p className="rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">{t.billingSoon}</p>
+        {!billing && <p className="rounded-xl bg-brand-500/10 px-4 py-3 text-sm text-brand-300">{t.billingSoon}</p>}
       </section>
 
       <section aria-labelledby="plans-title">
@@ -67,7 +81,15 @@ export default async function SubscriptionPage({ params }: PageProps<"/[locale]/
                     <li key={f} className="flex gap-2 text-sm text-fg-muted"><Icon name="check" className="mt-0.5 size-4 shrink-0 text-brand-300" /> {f}</li>
                   ))}
                 </ul>
-                {!current && (
+                {!current && billing && p.id === "single" && (
+                  <Link href={href("appCreate", locale)} className={buttonClasses({ variant: "secondary", className: "mt-6 w-full" })}>{copy.cta}</Link>
+                )}
+                {!current && billing && p.id !== "single" && (
+                  hasPlan
+                    ? <BillingButton className="mt-6" variant={p.highlighted ? "primary" : "secondary"} action={{ kind: "portal" }}>{interpolate(t.choose, { plan: copy.name })}</BillingButton>
+                    : <BillingButton className="mt-6" variant={p.highlighted ? "primary" : "secondary"} action={{ kind: "subscription", plan: p.id as "agent" | "pro" }}>{interpolate(t.choose, { plan: copy.name })}</BillingButton>
+                )}
+                {!current && !billing && (
                   <a href={mail(interpolate(t.choose, { plan: copy.name }))} className={buttonClasses({ variant: p.highlighted ? "primary" : "secondary", className: "mt-6 w-full" })}>
                     {interpolate(t.choose, { plan: copy.name })}
                   </a>

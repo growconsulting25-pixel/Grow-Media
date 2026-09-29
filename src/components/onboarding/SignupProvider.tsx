@@ -34,6 +34,10 @@ export function SignupProvider({ children }: { children: ReactNode }) {
   const openSignup = useCallback(
     (from: string) => {
       if (signedIn) {
+        if (from.startsWith("plan_")) {
+          router.push(href("appSubscription", locale));
+          return;
+        }
         track("project_started", { source: from });
         router.push(href("appCreate", locale));
         return;
