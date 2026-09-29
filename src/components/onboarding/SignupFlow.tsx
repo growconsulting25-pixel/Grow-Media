@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -10,7 +11,7 @@ import { interpolate } from "@/i18n/interpolate";
 import { href } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
-import { authProviders, signUp } from "./auth-adapter";
+import { authProviders, signInWithGoogle, signUp } from "./auth-adapter";
 
 const ACCEPTED = ["image/jpeg", "image/png", "image/webp"];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -32,6 +33,10 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [pending, setPending] = useState(false);
+  const [confirmSent, setConfirmSent] = useState(false);
+  const [progress, setProgress] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
+  const router = useRouter();
   const firstFieldRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -66,16 +71,42 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
       return;
     }
     setSubmitting(true);
-    track("photos_uploaded", { count: files.length, source });
-    const result = await signUp({ ...values, email: values.email.trim(), files, source, locale });
+    setServerError(null);
+    setProgress(t.creating);
+    const result = await signUp({ ...values, email: values.email.trim(), files, source, locale }, (current, total) =>
+      setProgress(interpolate(t.uploading, { current, total })),
+    );
     setSubmitting(false);
+    setProgress(null);
     if (result.ok) {
       track("signup_completed", { source });
+      if (result.next === "confirm") {
+        setConfirmSent(true);
+        return;
+      }
+      track("project_started", { source: "signup" });
+      if (files.length) track("photos_uploaded", { count: files.length, source: "signup" });
       onDone?.();
-    } else {
-      setPending(true);
+      router.push(result.redirect);
+      return;
     }
+    if (result.reason === "not_configured") setPending(true);
+    else if (result.reason === "exists") { setServerError(t.serverErrors.exists); setStep(0); }
+    else if (result.reason === "weak") { setServerError(t.serverErrors.weak); setStep(1); }
+    else setServerError(t.serverErrors.generic);
   };
+
+  if (confirmSent) {
+    return (
+      <div className="px-6 pt-14 pb-8 text-center sm:px-8" aria-live="polite">
+        <div className="mx-auto mb-5 grid size-14 place-items-center rounded-full bg-violet-500/15 text-violet-300">
+          <Icon name="send" className="size-6" />
+        </div>
+        <h3 className="text-2xl font-semibold tracking-tight">{t.confirm.title}</h3>
+        <p className="mx-auto mt-3 max-w-sm leading-relaxed text-fg-muted">{interpolate(t.confirm.description, { email: values.email.trim() })}</p>
+      </div>
+    );
+  }
 
   if (pending) {
     const subject = encodeURIComponent(t.title);
@@ -117,7 +148,7 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
           <>
             {authProviders.google && (
               <>
-                <Button variant="secondary" className="w-full" onClick={() => track("signup_started", { method: "google" })}>
+                <Button variant="secondary" className="w-full" onClick={() => { track("signup_started", { method: "google" }); void signInWithGoogle(locale); }}>
                   <Icon name="google" className="size-4" /> {t.google}
                 </Button>
                 <p className="text-center text-xs text-fg-subtle">{t.or}</p>
@@ -158,6 +189,15 @@ export function SignupFlow({ source, onDone }: { source: string; onDone?: () => 
 
         {step === 2 && <PhotoPicker files={files} onChange={(f) => { setFiles(f); setErrors({}); }} error={errors.files} inputRef={firstFieldRef} />}
       </div>
+
+      {serverError && (
+        <p role="alert" className="mt-5 rounded-xl bg-red-500/10 px-4 py-3 text-sm text-red-300">{serverError}</p>
+      )}
+      {progress && (
+        <p aria-live="polite" className="mt-5 flex items-center gap-2 text-sm text-violet-300">
+          <span className="size-3.5 animate-spin rounded-full border-2 border-violet-300 border-t-transparent" /> {progress}
+        </p>
+      )}
 
       <div className="mt-7 flex items-center gap-3">
         {step > 0 && (

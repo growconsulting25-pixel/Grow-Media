@@ -7,6 +7,8 @@
  * - Headline arrays are rendered line by line; `accent` marks the words that
  *   receive the gradient treatment.
  */
+import app from "./en-app";
+
 const en = {
   meta: {
     title: "Professional real estate listing videos — without the shoot",
@@ -471,6 +473,18 @@ const en = {
   },
 
   signup: {
+    creating: "Creating your account…",
+    uploading: "Uploading photo {current} of {total}…",
+    confirm: {
+      title: "Check your inbox.",
+      description: "We sent a confirmation link to {email}. Open it to activate your account — your free video starts right after.",
+    },
+    serverErrors: {
+      exists: "An account already exists with this email. Log in instead.",
+      weak: "Choose a stronger password (at least 8 characters).",
+      generic: "We couldn't create your account. Try again in a moment.",
+      upload: "Your account is ready, but some photos didn't upload. You can add them in the next step.",
+    },
     title: "Create your first video — free",
     subtitle: "Three quick steps. No credit card.",
     stepOf: "Step {current} of {total}",
@@ -513,8 +527,30 @@ const en = {
     password: "Password",
     forgot: "Forgot password?",
     submit: "Log in",
+    submitting: "Logging in…",
     noAccount: "New here?",
     unavailable: "Client accounts open shortly. In the meantime, start with your free video.",
+    google: "Continue with Google",
+    or: "or",
+    errors: {
+      invalid: "That email and password don't match. Check both and try again.",
+      unconfirmed: "Confirm your email first — we sent you a link when you signed up.",
+      link: "That link has expired or was already used. Request a new one below.",
+      generic: "Something went wrong. Try again in a moment.",
+      rateLimited: "Too many attempts. Wait a minute and try again.",
+    },
+    forgotTitle: "Reset your password",
+    forgotSubtitle: "Enter your email and we'll send you a link to choose a new password.",
+    forgotSubmit: "Send reset link",
+    forgotSent: "If an account exists for {email}, a reset link is on its way. Check your inbox.",
+    backToLogin: "Back to login",
+    resetTitle: "Choose a new password",
+    resetSubtitle: "Use at least 8 characters.",
+    newPassword: "New password",
+    resetSubmit: "Save new password",
+    resetDone: "Password updated. Taking you to your dashboard…",
+    resetNoSession: "Open the reset link from your email to continue.",
+    signOut: "Sign out",
   },
 
   legal: {
@@ -540,6 +576,8 @@ const en = {
       interior: "Light-filled interior",
     },
   },
+
+  app,
 };
 
 export default en;

@@ -18,8 +18,8 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` for canonical
 | Phase | Scope | Status |
 | --- | --- | --- |
 | 1 | Foundation, design system, i18n, navigation, homepage, responsive marketing site | ✅ Done |
-| 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | Next |
-| 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | — |
+| 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | ✅ Done (needs a Supabase project) |
+| 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | Next |
 | 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | — |
 | 5 | UX polish, mobile QA, accessibility, conversion optimization | — |
 
@@ -47,6 +47,12 @@ src/
     media.ts               Property imagery + example YouTube videos
     navigation.ts          Section anchor ids
   data/testimonials.ts     Real customer stories only (empty until real ones exist)
+  lib/supabase/            Browser/server clients, session refresh (used by proxy.ts)
+  lib/projects/            Domain types, client API (uploads, submit), server loaders
+  components/app/          Client platform: nav, project cards, create wizard + upload manager
+supabase/
+  migrations/              Schema, RLS, storage buckets, database functions
+  tests/                   Local RLS test suite (npm run test:db)
   lib/                     analytics (typed events), format (Intl currency), seo, cn
   components/
     ui/                    Button, Headline, SectionHeading, Eyebrow, Photo, PhoneMockup,
@@ -83,5 +89,36 @@ Placeholder Unsplash photos are listed in `config/media.ts`. Replace them with y
 
 Events go to `window.dataLayer` (GTM-ready) and are re-emitted as a `gm:analytics` DOM event.
 
-### Signup today
-The CTA modal runs the full 3-step flow (details → password → photos) with validation. The auth adapter deliberately returns `not_configured`, and the user sees an honest "accounts open soon, email us your photos" message. Nothing is faked or stored. Phase 2 replaces `components/onboarding/auth-adapter.ts` with Supabase.
+## Client platform (Phase 2)
+
+### Connect Supabase
+1. Create a Supabase project, preferably in `ca-central-1`.
+2. Apply `supabase/migrations/*.sql`, either with `supabase db push` or by pasting the file into the SQL editor. This creates:
+   - all tables, with Row Level Security
+   - private storage buckets
+   - the database functions for free credits and submission
+   - starter content ideas
+3. Put `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in `.env.local` (and in your host's environment).
+4. In Authentication → URL Configuration, add `https://your-domain/auth/callback` (and `http://localhost:3000/auth/callback`) to the redirect URLs.
+5. Optional: turn off "Confirm email" so new agents land in their first project immediately. With it on, they confirm first and then continue.
+6. Optional: enable Google under Providers and set `NEXT_PUBLIC_AUTH_GOOGLE=true`.
+7. To give a team member staff access, run `update profiles set role = 'admin' where email = '…'`.
+
+Without these variables the site still runs, and the client area shows an "accounts opening soon" screen.
+
+### Flow
+Homepage CTA → 3-step modal (details → password → photos) → account created → a draft project is created and the photos upload → the wizard continues at "Property details":
+
+**type → details → upload → style → branding → notes → review → submit**
+
+- Uploads use signed URLs with real progress bars, 2 at a time. Files can be reordered by drag or with the arrow buttons.
+- Drafts save at every step and can be resumed from the dashboard.
+
+### Security model
+- Clients can only read and write their own rows and their own storage folder (`{user_id}/…`).
+- Clients can only edit drafts. They can't change a status, a price or their credits.
+- `submit_project()` decides the price on the server: free credit first, then the subscription allowance, otherwise payment is required. Paid checkout arrives in Phase 4.
+- Staff (`role = 'admin'`) can see and update everything. Status changes automatically log timeline events and create notifications.
+
+### Database tests
+`npm run test:db` runs 23 checks (isolation between users, locked submitted projects, free credit, subscription usage, delivery, revisions) against a throwaway local Postgres, using stubs for Supabase's auth and storage schemas.

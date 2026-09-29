@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { defaultLocale, isLocale, LOCALE_COOKIE, locales, type Locale } from "@/i18n/config";
-import { internalPath } from "@/i18n/routing";
+import { href, internalPath } from "@/i18n/routing";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { refreshSession } from "@/lib/supabase/proxy";
 
 /** Picks a locale: saved preference → Accept-Language → default. */
 function preferredLocale(request: NextRequest): Locale {
@@ -18,23 +20,45 @@ function preferredLocale(request: NextRequest): Locale {
   return ranked.map((r) => r.lang).find(isLocale) ?? defaultLocale;
 }
 
-export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const hasLocale = locales.some((l) => pathname === `/${l}` || pathname.startsWith(`/${l}/`));
-  if (hasLocale) {
-    const internal = internalPath(pathname);
-    if (!internal) return;
+const APP_PATH = /^\/(en|fr)\/app(\/|$)/;
+const AUTH_PATH = /^\/(en|fr)\/(login|connexion|signup|inscription|reset-password|nouveau-mot-de-passe)$/;
+
+export async function proxy(request: NextRequest) {
+  const { pathname, search } = request.nextUrl;
+  const locale = pathname.split("/")[1];
+
+  if (!locales.some((l) => l === locale)) {
     const url = request.nextUrl.clone();
-    url.pathname = internal;
-    return NextResponse.rewrite(url);
+    url.pathname = `/${preferredLocale(request)}${pathname === "/" ? "" : pathname}`;
+    return NextResponse.redirect(url);
   }
 
-  const url = request.nextUrl.clone();
-  url.pathname = `/${preferredLocale(request)}${pathname === "/" ? "" : pathname}`;
-  return NextResponse.redirect(url);
+  const internal = internalPath(pathname);
+  let response: NextResponse;
+  if (internal) {
+    const url = request.nextUrl.clone();
+    url.pathname = internal;
+    response = NextResponse.rewrite(url);
+  } else {
+    response = NextResponse.next({ request });
+  }
+
+  // Session work only where it matters, so marketing pages stay fast.
+  if (isSupabaseConfigured && (APP_PATH.test(pathname) || AUTH_PATH.test(pathname))) {
+    const signedIn = await refreshSession(request, response);
+    if (APP_PATH.test(pathname) && !signedIn) {
+      const url = request.nextUrl.clone();
+      url.pathname = href("login", locale as Locale);
+      url.search = `?next=${encodeURIComponent(pathname + search)}`;
+      const redirect = NextResponse.redirect(url);
+      response.cookies.getAll().forEach((c) => redirect.cookies.set(c));
+      return redirect;
+    }
+  }
+  return response;
 }
 
 export const config = {
-  // Skip Next internals, API routes and any file with an extension.
-  matcher: ["/((?!_next|api|.*\\..*).*)"],
+  // Skip Next internals, API routes, the auth callback and any file with an extension.
+  matcher: ["/((?!_next|api|auth/|.*\\..*).*)"],
 };

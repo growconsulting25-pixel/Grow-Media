@@ -1,4 +1,5 @@
 import type { Dictionary } from "./index";
+import app from "./fr-app";
 
 /**
  * Français (Canada). Rédigé comme langue principale — pas une traduction
@@ -476,6 +477,18 @@ const fr: Dictionary = {
   },
 
   signup: {
+    creating: "Création de votre compte…",
+    uploading: "Téléversement de la photo {current} sur {total}…",
+    confirm: {
+      title: "Vérifiez votre boîte de réception.",
+      description: "Nous avons envoyé un lien de confirmation à {email}. Ouvrez-le pour activer votre compte — votre vidéo gratuite commence juste après.",
+    },
+    serverErrors: {
+      exists: "Un compte existe déjà avec ce courriel. Connectez-vous plutôt.",
+      weak: "Choisissez un mot de passe plus robuste (au moins 8 caractères).",
+      generic: "Impossible de créer votre compte pour l'instant. Réessayez dans un instant.",
+      upload: "Votre compte est prêt, mais certaines photos n'ont pas été téléversées. Vous pourrez les ajouter à l'étape suivante.",
+    },
     title: "Créez votre première vidéo — gratuitement",
     subtitle: "Trois étapes rapides. Aucune carte de crédit.",
     stepOf: "Étape {current} sur {total}",
@@ -518,8 +531,30 @@ const fr: Dictionary = {
     password: "Mot de passe",
     forgot: "Mot de passe oublié?",
     submit: "Se connecter",
+    submitting: "Connexion…",
     noAccount: "Nouveau ici?",
     unavailable: "Les comptes clients ouvrent sous peu. En attendant, commencez par votre vidéo gratuite.",
+    google: "Continuer avec Google",
+    or: "ou",
+    errors: {
+      invalid: "Ce courriel et ce mot de passe ne correspondent pas. Vérifiez-les et réessayez.",
+      unconfirmed: "Confirmez d'abord votre courriel — nous vous avons envoyé un lien à l'inscription.",
+      link: "Ce lien a expiré ou a déjà été utilisé. Demandez-en un nouveau ci-dessous.",
+      generic: "Une erreur est survenue. Réessayez dans un instant.",
+      rateLimited: "Trop de tentatives. Patientez une minute, puis réessayez.",
+    },
+    forgotTitle: "Réinitialiser votre mot de passe",
+    forgotSubtitle: "Entrez votre courriel et nous vous enverrons un lien pour choisir un nouveau mot de passe.",
+    forgotSubmit: "Envoyer le lien",
+    forgotSent: "Si un compte existe pour {email}, un lien de réinitialisation est en route. Vérifiez votre boîte de réception.",
+    backToLogin: "Retour à la connexion",
+    resetTitle: "Choisissez un nouveau mot de passe",
+    resetSubtitle: "Au moins 8 caractères.",
+    newPassword: "Nouveau mot de passe",
+    resetSubmit: "Enregistrer le mot de passe",
+    resetDone: "Mot de passe mis à jour. Redirection vers votre tableau de bord…",
+    resetNoSession: "Ouvrez le lien reçu par courriel pour continuer.",
+    signOut: "Se déconnecter",
   },
 
   legal: {
@@ -545,6 +580,8 @@ const fr: Dictionary = {
       interior: "Intérieur baigné de lumière",
     },
   },
+
+  app,
 };
 
 export default fr;
