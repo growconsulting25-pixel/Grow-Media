@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { IdeaCard } from "@/components/app/IdeaCard";
+import { siteConfig } from "@/config/site";
 import { ProjectCard, projectLabel } from "@/components/app/ProjectCard";
 import { UsageCard } from "@/components/app/UsageCard";
 import { buttonClasses } from "@/components/ui/Button";
@@ -28,7 +29,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
     getProfile(session.supabase, session.user.id),
     listProjects(session.supabase, 24),
     getAccountSummary(session.supabase),
-    listIdeas(session.supabase, locale, 3),
+    siteConfig.contentIdeas ? listIdeas(session.supabase, locale, 3) : Promise.resolve([]),
   ]);
 
   const drafts = projects.filter((p) => p.project.status === "draft");

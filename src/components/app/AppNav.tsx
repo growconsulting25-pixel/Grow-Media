@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Logo } from "@/components/layout/Logo";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/I18nProvider";
 import { href, type RouteKey } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
@@ -14,7 +15,7 @@ import { NotificationBell } from "./NotificationBell";
 
 type NavKey = "dashboard" | "create" | "projects" | "videos" | "ideas" | "messages" | "brand" | "subscription" | "profile";
 
-const items: { route: RouteKey; icon: IconName; key: NavKey }[] = [
+const allItems: { route: RouteKey; icon: IconName; key: NavKey }[] = [
   { route: "app", icon: "layers", key: "dashboard" },
   { route: "appCreate", icon: "plus", key: "create" },
   { route: "appProjects", icon: "image", key: "projects" },
@@ -25,6 +26,7 @@ const items: { route: RouteKey; icon: IconName; key: NavKey }[] = [
   { route: "appSubscription", icon: "coins", key: "subscription" },
   { route: "appProfile", icon: "user", key: "profile" },
 ];
+const items = allItems.filter((i) => i.key !== "ideas" || siteConfig.contentIdeas);
 
 const mobileTabs: NavKey[] = ["dashboard", "projects", "create", "videos"];
 
