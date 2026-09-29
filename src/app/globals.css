@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Dark surfaces — navy-black, biased toward the brand blue */
+  --color-ink-950: #050a10;
+  --color-ink-900: #08101a;
+  --color-ink-850: #0c1622;
+  --color-ink-800: #111d2b;
+  --color-ink-700: #182838;
+  --color-ink-600: #223447;
+
+  /* Foreground on dark — cool slate greys */
+  --color-fg: #f2f6fa;
+  --color-fg-muted: #9aabbd;
+  --color-fg-subtle: #62758a;
+
+  /* Brand — Grow cyan (#00ABFF). Used solid, never as a gradient. */
+  --color-brand-100: #e6f6ff;
+  --color-brand-200: #b3e6ff;
+  --color-brand-300: #66ccff;
+  --color-brand-400: #33bcff;
+  --color-brand-500: #00abff;
+  --color-brand-600: #0096e0;
+  --color-brand-700: #0077b3;
+  /* Secondary — deep navy, for quiet fills and depth */
+  --color-navy-700: #0f2d48;
+  --color-navy-800: #0b2239;
+  /* Text/icons placed on a solid brand fill */
+  --color-on-brand: #041320;
+
+  /* Light sections — cool paper greys */
+  --color-paper: #f4f6f8;
+  --color-paper-2: #e9eef3;
+  --color-paper-3: #dce4ec;
+  --color-ink-on-paper: #0b1622;
+  --color-muted-on-paper: #4f6275;
+
+  --color-success: #4ade80;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 1.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-kenburns: kenburns 14s ease-in-out infinite alternate;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-drift: drift 9s ease-in-out infinite;
+  --animate-progress: progress 3.2s var(--ease-out-expo) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(var(--float-rotate, 0deg)); }
+    50% { transform: translateY(-10px) rotate(var(--float-rotate, 0deg)); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1.02) translate3d(0, 0, 0); }
+    to { transform: scale(1.14) translate3d(-2%, -2%, 0); }
+  }
+  @keyframes shimmer {
+    from { background-position: -200% 0; }
+    to { background-position: 200% 0; }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.55; }
+    50% { opacity: 1; }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--drift-rotate, 0deg)); }
+    50% { transform: translate3d(var(--drift-x, 6px), -8px, 0) rotate(var(--drift-rotate, 0deg)); }
+  }
+  @keyframes progress {
+    0% { transform: scaleX(0.08); }
+    70%, 100% { transform: scaleX(1); }
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-ink-900);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand-500) 45%, transparent);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  button:not(:disabled),
+  [role="button"],
+  [role="tab"] {
+    cursor: pointer;
+  }
+}
+
+/* ==========================================================================
+   Components (kept small — most styling lives in Tailwind classes)
+   ========================================================================== */
+@layer components {
+  /* Accent words in headlines — solid brand color (no gradients). */
+  .text-accent {
+    color: var(--color-brand-500);
+  }
+  .on-paper .text-accent {
+    color: var(--color-brand-700);
+  }
+
+  .display {
+    font-weight: 600;
+    letter-spacing: -0.038em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  /* Primary pill button — solid Grow cyan with dark text for contrast */
+  .btn-primary {
+    background: var(--color-brand-500);
+    color: var(--color-on-brand);
+    box-shadow: 0 8px 24px -12px rgba(0, 171, 255, 0.55);
+    transition: transform 0.25s var(--ease-out-expo), background-color 0.2s ease, box-shadow 0.25s ease;
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-400);
+    box-shadow: 0 10px 30px -12px rgba(0, 171, 255, 0.7);
+  }
+  .btn-primary:active { transform: translateY(1px) scale(0.99); }
+
+  .btn-secondary {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.45);
+    color: var(--color-fg);
+    transition: background-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(0, 171, 255, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.8);
+  }
+  .on-paper .btn-secondary {
+    color: var(--color-ink-on-paper);
+    box-shadow: inset 0 0 0 1px rgba(0, 119, 179, 0.4);
+  }
+
+  /* Surfaces — flat fills with a hairline edge */
+  .surface {
+    background: rgba(255, 255, 255, 0.03);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  }
+  .surface-raised {
+    background: var(--color-ink-800);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
+  }
+  .glass {
+    background: rgba(8, 16, 26, 0.72);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+
+  /* Brand hairline on the top edge of a highlighted card */
+  .edge-glow {
+    position: relative;
+  }
+  .edge-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0 1.5rem auto;
+    height: 2px;
+    border-radius: 0 0 2px 2px;
+    background: var(--color-brand-500);
+    pointer-events: none;
+  }
+
+  .hover-glow {
+    transition: box-shadow 0.35s ease, transform 0.35s var(--ease-out-expo);
+  }
+  .hover-glow:hover {
+    box-shadow: inset 0 0 0 1px rgba(0,171,255,0.4), 0 20px 50px -25px rgba(0,171,255,0.55);
+  }
+
+  /* Faint architectural grid used behind some sections */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 75%);
+  }
+
+
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Scroll reveal (progressively enhanced — content is visible without JS) */
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Reduced motion — keep layout, drop movement
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
