@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { UsageCard } from "@/components/app/UsageCard";
 import { BillingButton } from "@/components/app/billing/BillingButton";
+import { confirmCheckoutSession, reconcileCustomer } from "@/lib/stripe/reconcile";
 import { isStripeConfigured } from "@/lib/stripe/server";
 import { buttonClasses } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -27,11 +28,15 @@ export default async function SubscriptionPage({ params, searchParams }: PagePro
   const t = dict.app.subscription;
   const session = await getCurrentUser();
   if (!session) return null;
+  const query = await searchParams;
+  const checkoutSession = typeof query.session_id === "string" ? query.session_id : null;
+  if (checkoutSession) await confirmCheckoutSession(checkoutSession, session.user.id);
+  else await reconcileCustomer(session.user.id);
   const summary = await getAccountSummary(session.supabase);
   const mail = (subject: string) => `mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(subject)}`;
   const hasPlan = summary.plan_id === "agent" || summary.plan_id === "pro";
   const billing = isStripeConfigured();
-  const checkout = (await searchParams).checkout;
+  const checkout = query.checkout;
 
   return (
     <div className="space-y-10">

@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       customer_update: process.env.STRIPE_AUTOMATIC_TAX === "true" ? { address: "auto" } : undefined,
       metadata: { kind: "subscription", user_id: session.user.id, plan_id: plan.id },
       subscription_data: { metadata: { user_id: session.user.id, plan_id: plan.id } },
-      success_url: `${origin}/${locale}/app/subscription?checkout=success`,
+      success_url: `${origin}/${locale}/app/subscription?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${locale}/app/subscription?checkout=cancelled`,
     });
     return NextResponse.json({ url: checkout.url });
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
       automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === "true" },
       customer_update: process.env.STRIPE_AUTOMATIC_TAX === "true" ? { address: "auto" } : undefined,
       metadata: { kind: "single", user_id: session.user.id, project_id: projectId },
-      success_url: `${origin}/${locale}/app/projects/${projectId}?checkout=success`,
+      success_url: `${origin}/${locale}/app/projects/${projectId}?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${locale}/app/create?project=${projectId}&step=review`,
     });
     return NextResponse.json({ url: checkout.url });
