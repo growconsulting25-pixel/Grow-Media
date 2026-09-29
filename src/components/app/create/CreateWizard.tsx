@@ -21,6 +21,7 @@ import {
 import { projectTypes, videoStyles, type Branding, type Project, type ProjectType, type Quote, type VideoStyle } from "@/lib/projects/types";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 import { UploadManager, type UploadedFile } from "./UploadManager";
+import { BillingButton } from "../billing/BillingButton";
 
 const STEPS = ["type", "details", "upload", "style", "branding", "notes", "review"] as const;
 type StepId = (typeof STEPS)[number];
@@ -39,9 +40,11 @@ interface Props {
   initialType?: string;
   initialNotes?: string;
   initialIdeaId?: string;
+  /** Stripe is configured: paid videos go through checkout instead of email. */
+  billingEnabled?: boolean;
 }
 
-export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes, initialIdeaId }: Props) {
+export function CreateWizard({ initialProject, initialFiles, initialStep, initialType, initialNotes, initialIdeaId, billingEnabled = false }: Props) {
   const { dict, locale } = useI18n();
   const t = dict.app.create;
   const router = useRouter();
@@ -334,7 +337,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
 
         {current === "review" && (
           <Step title={t.reviewTitle} headingRef={headingRef}>
-            <ReviewSummary form={form} fileCount={files.length} quote={quote} onEdit={(s) => goTo(STEPS.indexOf(s))} />
+            <ReviewSummary form={form} fileCount={files.length} quote={quote} billingEnabled={billingEnabled} onEdit={(s) => goTo(STEPS.indexOf(s))} />
           </Step>
         )}
       </section>
@@ -348,7 +351,14 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
             {t.back}
           </Button>
         )}
-        {current === "review" ? (
+        {current === "review" && quote?.mode === "payment_required" && billingEnabled && project ? (
+          <div className="ml-auto text-right">
+            <BillingButton action={{ kind: "single", projectId: project.id }}>
+              {interpolate(dict.app.billing.payAndSubmit, { price: formatPrice(quote.price_cents / 100, locale) })}
+            </BillingButton>
+            <p className="mt-1.5 text-xs text-fg-subtle">{dict.app.billing.secure}</p>
+          </div>
+        ) : current === "review" ? (
           <Button size="lg" arrow className="ml-auto" onClick={onSubmit} disabled={busy || uploading || quote?.mode === "payment_required"}>
             {busy ? t.submitting : t.submit}
           </Button>
@@ -372,7 +382,7 @@ interface ReviewForm {
   branding: Branding;
 }
 
-function ReviewSummary({ form: f, fileCount, quote: q, onEdit }: { form: ReviewForm; fileCount: number; quote: Quote | null; onEdit: (s: StepId) => void }) {
+function ReviewSummary({ form: f, fileCount, quote: q, onEdit, billingEnabled }: { form: ReviewForm; fileCount: number; quote: Quote | null; onEdit: (s: StepId) => void; billingEnabled: boolean }) {
     const { dict, locale } = useI18n();
     const t = dict.app.create;
     const rows: { step: StepId; label: string; value: string }[] = [
@@ -405,7 +415,7 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit }: { form: ReviewF
           </div>
           <p className="text-2xl font-semibold tracking-tight tabular-nums">{q ? formatPrice(q.price_cents / 100, locale) : "…"}</p>
         </div>
-        {q?.mode === "payment_required" && (
+        {q?.mode === "payment_required" && !billingEnabled && (
           <p className="border-t border-white/[0.06] px-5 py-4 text-sm text-fg-muted">
             {t.paymentRequired} <a className="text-brand-300 underline" href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
           </p>

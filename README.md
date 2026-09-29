@@ -20,7 +20,7 @@ Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL` for canonical
 | 1 | Foundation, design system, i18n, navigation, homepage, responsive marketing site | ✅ Done |
 | 2 | Supabase Auth, free-video onboarding, project creation, uploads, project status | ✅ Done |
 | 3 | Dashboard, video library, Brand Kit, messages, revisions, subscriptions | ✅ Done (plan changes by email until Stripe) |
-| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | In progress: admin + email done, Stripe next |
+| 4 | Stripe, notifications, admin workflow, analytics provider, SEO polish | In progress: admin, email and Stripe built; activation needs keys |
 | 5 | UX polish, mobile QA, accessibility, conversion optimization | — |
 
 ## Architecture
@@ -144,3 +144,15 @@ Homepage CTA → 3-step modal (details → password → photos) → account crea
 - **Emails** go through [Resend](https://resend.com). Database triggers create notifications, and `/api/email/dispatch` emails them to clients in their language. It runs every 5 minutes (`netlify/functions/dispatch-emails.mts`) and immediately after staff actions. New projects also alert `ADMIN_NOTIFY_EMAIL`.
 - **Required Netlify env vars:** `SUPABASE_SERVICE_ROLE_KEY`, `RESEND_API_KEY`, `EMAIL_FROM`, `ADMIN_NOTIFY_EMAIL`, `CRON_SECRET` (see `.env.example`).
 - **Supabase auth emails** (confirmation, password reset) go through Resend too. Configure this in Supabase → Authentication → Emails → SMTP settings: host `smtp.resend.com`, port `465`, user `resend`, password = Resend API key.
+
+## Payments (Stripe)
+
+- **Plans:** the Subscription page opens Stripe Checkout for Agent and Pro. "Manage billing" opens the Stripe customer portal to change plan, update the card, get invoices or cancel.
+- **Single videos:** when a client has no free credit and no plan allowance left, the wizard's last step becomes "Pay 49,95 $ and submit". The Stripe webhook submits the project once the payment is confirmed.
+- **Server-side truth:** prices come from `src/config/pricing.ts` (or optional `STRIPE_PRICE_*` IDs). Subscription status and paid submissions are written only by the signature-verified webhook (`/api/stripe/webhook`), which is idempotent on the checkout session and subscription IDs.
+- **Setup:**
+  1. Stripe → Developers → API keys: add `STRIPE_SECRET_KEY` to Netlify.
+  2. Webhooks → Add endpoint `https://<site>/api/stripe/webhook` with the events `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `customer.subscription.created`, `customer.subscription.updated` and `customer.subscription.deleted`. Put its signing secret in `STRIPE_WEBHOOK_SECRET`.
+  3. Settings → Billing → Customer portal: activate it (allow plan switching between Agent and Pro, and cancellation).
+  4. `SUPABASE_SERVICE_ROLE_KEY` must be set; the webhook uses it.
+- **Tests:** `npm run test:stripe` runs offline tests of signature verification and the webhook's database writes.

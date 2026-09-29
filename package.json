@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test:db": "bash supabase/tests/run.sh"
+    "test:db": "bash supabase/tests/run.sh",
+    "test:stripe": "tsx --conditions=react-server tests/stripe-webhook.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
@@ -17,7 +18,8 @@
     "next": "^16.3.7",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "stripe": "^22.6.2"
   },
   "devDependencies": {
     "@netlify/plugin-nextjs": "^5.16.0",
@@ -28,6 +30,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.7",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3"
   }
 }
