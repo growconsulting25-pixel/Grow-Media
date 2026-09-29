@@ -113,6 +113,9 @@ const en = {
     },
   },
 
+  trust: {
+    label: "Agents from these brokerages already work with Grow",
+  },
   examples: {
     eyebrow: "Examples",
     headline: [{ text: "See it in ", accent: "motion." }],
@@ -394,6 +397,8 @@ const en = {
     eyebrow: "FAQ",
     headline: [{ text: "Questions, ", accent: "answered." }],
     stillQuestions: "Still have a question?",
+    showMore: "Show {count} more questions",
+    showLess: "Show fewer questions",
     contact: "Write to us",
     items: [
       {
@@ -569,6 +574,12 @@ const en = {
 
   media: {
     alt: {
+      winter: "Family home on a snowy winter day",
+      forSale: "House with a for-sale sign on the lawn",
+      bathroom: "Bright, simple bathroom",
+      entrance: "Front entrance and hallway of a home",
+      couple: "Couple in front of their new home",
+      creator: "Real estate agent smiling at the camera",
       exterior: "Front of a family home",
       frontYard: "House with a front yard on a sunny day",
       twoStory: "Two-storey suburban house",

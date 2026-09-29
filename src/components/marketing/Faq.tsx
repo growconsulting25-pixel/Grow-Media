@@ -30,7 +30,7 @@ export function Faq({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           </Reveal>
         </div>
         <Reveal delay={80}>
-          <Accordion items={faqItems(dict, locale)} />
+          <Accordion items={faqItems(dict, locale)} initialCount={6} moreLabel={t.showMore} lessLabel={t.showLess} />
         </Reveal>
       </Container>
     </section>

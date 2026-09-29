@@ -144,14 +144,14 @@ function Stage({ id }: { id: FormatId }) {
 
   switch (id) {
     case "reel":
-      return phone(["exterior", "living", "kitchen", "bedroom"]);
+      return phone(["garageFacade", "sectional", "islandKitchen"]);
     case "story":
-      return phone(["kitchen", "dining", "living"], null, { badge: f.overlay, caption: reel.handle, cta: reel.cta });
+      return phone(["brightKitchen", "minimalDining", "fireplace"], null, { badge: f.overlay, caption: reel.handle, cta: reel.cta });
     case "shortAd":
-      return phone(["townhouse", "frontYard"], null, { badge: f.overlay, price: reel.price, cta: reel.cta });
+      return phone(["forSaleSign", "winterHouse"], null, { badge: f.overlay, price: reel.price, cta: reel.cta });
     case "ugc":
       return phone(
-        ["agentWoman", "living", "kitchen"],
+        ["agentShowing", "stairs"],
         <div className="absolute inset-x-3 top-[46%] z-10">
           <span className="inline-block rounded-2xl rounded-bl-sm bg-white/90 px-3 py-2 text-[0.72rem] font-medium text-ink-900 shadow-lg">{f.overlay}</span>
         </div>,
@@ -167,7 +167,7 @@ function Stage({ id }: { id: FormatId }) {
     case "walkthrough":
       return (
         <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_40px_80px_-30px_rgba(0,0,0,0.9)]">
-          <Photo name="living" width={640} sizes="(min-width: 1024px) 448px, 92vw" decorative className="size-full" imgClassName="animate-kenburns" />
+          <Photo name="blueLiving" width={640} sizes="(min-width: 1024px) 448px, 92vw" decorative className="size-full" imgClassName="animate-kenburns" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           {[["28%", "44%"], ["62%", "58%"], ["76%", "32%"]].map(([x, y], i) => (
             <span key={i} className="absolute grid size-7 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white/25 backdrop-blur" style={{ left: x, top: y }}>
@@ -190,14 +190,14 @@ function Stage({ id }: { id: FormatId }) {
       return (
         <div className="w-[82%] max-w-[20rem] overflow-hidden rounded-2xl bg-white text-ink-900 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]">
           <div className="flex items-center gap-2 px-3 py-2.5">
-            <Photo name="agentMan" width={80} sizes="28px" decorative className="size-7 rounded-full" />
+            <Photo name="agentMan" width={80} ratio={1} sizes="28px" decorative className="size-7 rounded-full" />
             <div className="text-[0.68rem] leading-tight">
               <p className="font-semibold">{reel.agent}</p>
               <p className="text-muted-on-paper">{dict.content.sponsored}</p>
             </div>
           </div>
           <div className="relative aspect-[4/5]">
-            <Photo name="exterior" width={400} sizes="320px" decorative className="size-full" imgClassName="animate-kenburns" />
+            <Photo name="woodHouse" width={400} ratio={4 / 5} sizes="320px" decorative className="size-full" imgClassName="animate-kenburns" />
             <span className="absolute top-3 left-3 rounded-full bg-black/55 px-2.5 py-1 text-[0.65rem] font-semibold text-white backdrop-blur">{f.overlay}</span>
           </div>
           <div className="flex items-center justify-between gap-2 bg-paper px-3 py-2.5">
@@ -209,7 +209,7 @@ function Stage({ id }: { id: FormatId }) {
     case "teaser":
       return (
         <div className="relative aspect-square w-[88%] max-w-[22rem] overflow-hidden rounded-2xl shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_40px_80px_-30px_rgba(0,0,0,0.9)]">
-          <Photo name="twoStory" width={480} sizes="352px" decorative className="size-full" imgClassName="animate-kenburns" />
+          <Photo name="brickHouse" width={480} ratio={1} sizes="352px" decorative className="size-full" imgClassName="animate-kenburns" />
           <div className="absolute inset-0 grid place-items-center bg-black/35 text-center">
             <div>
               <p className="text-[0.7rem] font-medium tracking-[0.3em] text-white/80 uppercase">{reel.handle}</p>

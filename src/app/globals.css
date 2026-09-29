@@ -54,6 +54,12 @@
   --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
   --animate-drift: drift 9s ease-in-out infinite;
   --animate-progress: progress 3.2s var(--ease-out-expo) infinite;
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
   @keyframes float {
     0%, 100% { transform: translateY(0) rotate(var(--float-rotate, 0deg)); }

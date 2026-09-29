@@ -2,7 +2,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Photo } from "@/components/ui/Photo";
 import type { PropertyImageKey } from "@/config/media";
 
-const thumbs: PropertyImageKey[] = ["exterior", "kitchen", "living", "bedroom", "dining", "frontYard"];
+const thumbs: PropertyImageKey[] = ["snowStreet", "openPlan", "livingView", "pillowBed", "lightDining", "modernBath"];
 
 export function UploadPreview({ address, uploaded, hint, items }: { address: string; uploaded: string; hint: string; items: string[] }) {
   return (

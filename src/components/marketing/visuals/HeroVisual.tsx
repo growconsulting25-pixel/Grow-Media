@@ -16,7 +16,7 @@ const inputs: { name: PropertyImageKey; className: string; rotate: number; delay
   { name: "agentWoman", className: "left-[48%] top-[44%] w-[40%]", rotate: -3, delay: 2.4 },
 ];
 
-const reelShots: PropertyImageKey[] = ["exterior", "kitchen", "living", "bedroom", "frontYard"];
+const reelShots: PropertyImageKey[] = ["frontYard", "living", "bedroom"];
 
 /**
  * Photos → production → phone. The whole product story in one composition.
@@ -49,7 +49,7 @@ export function HeroVisual() {
               style={{ "--drift-rotate": `${p.rotate}deg`, "--drift-x": "8px", animationDelay: `${p.delay}s` } as CSSProperties}
             >
               <div className="relative rounded-xl bg-white/[0.06] p-1 shadow-[0_20px_40px_-20px_rgba(0,0,0,0.9),inset_0_0_0_1px_rgba(255,255,255,0.08)]" style={{ transform: `rotate(${p.rotate}deg)` }}>
-                <Photo name={p.name} width={320} sizes="(min-width: 768px) 14vw, 0px" priority={p.name === "exterior"} decorative className={cn("rounded-[0.6rem]", p.name === "agentWoman" ? "aspect-[4/5]" : "aspect-[4/3]")} />
+                <Photo name={p.name} width={320} ratio={p.name === "agentWoman" ? 4 / 5 : 4 / 3} sizes="(min-width: 768px) 14vw, 0px" priority={p.name === "exterior"} decorative className={cn("rounded-[0.6rem]", p.name === "agentWoman" ? "aspect-[4/5]" : "aspect-[4/3]")} />
                 {p.name === "agentWoman" && (
                   <span className="absolute bottom-2 left-2 rounded-md bg-ink-900/80 px-1.5 py-0.5 text-[0.62rem] font-medium text-fg">{dict.how.steps.upload.items[1]}</span>
                 )}
@@ -90,9 +90,9 @@ export function HeroVisual() {
         <div className="relative flex justify-center md:justify-start">
           {/* mobile-only mini photo strip behind the phone */}
           <div aria-hidden className="absolute inset-x-0 top-[18%] flex justify-between px-0 md:hidden">
-            {(["kitchen", "frontYard"] as const).map((n, i) => (
+            {(["openKitchen", "garageHouse"] as const).map((n, i) => (
               <div key={n} className="w-[34%] rounded-lg bg-white/[0.06] p-0.5 opacity-70" style={{ transform: `rotate(${i ? 6 : -6}deg)` }}>
-                <Photo name={n} width={240} sizes="34vw" decorative className="aspect-[4/3] rounded-md" />
+                <Photo name={n} width={240} ratio={4 / 3} sizes="34vw" decorative className="aspect-[4/3] rounded-md" />
               </div>
             ))}
           </div>

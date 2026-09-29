@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { BrandMarquee } from "@/components/marketing/BrandMarquee";
 import { Benefits } from "@/components/marketing/Benefits";
 import { ContentEngine } from "@/components/marketing/ContentEngine";
 import { Examples } from "@/components/marketing/Examples";
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]">) {
 
 /**
  * Homepage — a continuous product demonstration:
- * hero → transformation → examples → how it works → content engine →
+ * hero → transformation → brand band → examples → how it works → content engine →
  * benefits (light) → services → pricing → results (light) → FAQ → final CTA.
  */
 export default async function HomePage({ params }: PageProps<"/[locale]">) {
@@ -58,6 +59,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       <main id="main">
         <Hero dict={dict} />
         <Transformation />
+        <BrandMarquee dict={dict} />
         <Examples dict={dict} />
         <HowItWorks dict={dict} />
         <ContentEngine />

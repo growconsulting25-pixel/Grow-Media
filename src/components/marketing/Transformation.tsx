@@ -54,7 +54,7 @@ export function Transformation() {
               {/* AFTER (full) */}
               <div className="absolute inset-0">
                 <ReelScreen
-                  images={["facade", "dining", "kitchen", "bedroom"]}
+                  images={["facadeSide", "dining", "whiteKitchen", "windowBedroom"]}
                   sizes="(min-width: 1024px) 432px, 92vw"
                   content={{
                     badge: dict.content.formats.reel.overlay,

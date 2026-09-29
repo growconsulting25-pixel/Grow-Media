@@ -15,10 +15,10 @@ import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 
 const visuals: Record<ServiceId, { icon: IconName; image: PropertyImageKey }> = {
-  listing: { icon: "play", image: "exterior" },
+  listing: { icon: "play", image: "houseForSale" },
   walkthrough: { icon: "cube", image: "interior" },
-  ugc: { icon: "user", image: "agentWoman" },
-  ads: { icon: "megaphone", image: "agentPhone" },
+  ugc: { icon: "user", image: "ugcCreator" },
+  ads: { icon: "megaphone", image: "adsCreator" },
 };
 
 export function Services({ dict, locale }: { dict: Dictionary; locale: Locale }) {
