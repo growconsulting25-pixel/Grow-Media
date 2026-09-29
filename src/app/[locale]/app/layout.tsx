@@ -25,7 +25,7 @@ export default async function AppLayout({ children, params }: LayoutProps<"/[loc
 
   return (
     <div className="min-h-dvh lg:flex">
-      <AppNav name={name} email={session.user.email ?? ""} unread={unread} />
+      <AppNav name={name} email={session.user.email ?? ""} unread={unread} isAdmin={profile?.role === "admin"} />
       <main id="main" className="min-w-0 flex-1 px-4 pt-6 pb-28 sm:px-8 lg:px-12 lg:pt-10 lg:pb-16">
         <div className="mx-auto max-w-6xl">{children}</div>
       </main>

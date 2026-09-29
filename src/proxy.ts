@@ -20,7 +20,7 @@ function preferredLocale(request: NextRequest): Locale {
   return ranked.map((r) => r.lang).find(isLocale) ?? defaultLocale;
 }
 
-const APP_PATH = /^\/(en|fr)\/app(\/|$)/;
+const APP_PATH = /^\/(en|fr)\/(app|admin)(\/|$)/;
 const AUTH_PATH = /^\/(en|fr)\/(login|connexion|signup|inscription|reset-password|nouveau-mot-de-passe)$/;
 
 export async function proxy(request: NextRequest) {
@@ -60,5 +60,5 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
   // Skip Next internals, API routes, the auth callback and any file with an extension.
-  matcher: ["/((?!_next|api|auth/|.*\\..*).*)"],
+  matcher: ["/((?!_next|api|auth/|icon|apple-icon|.*\\..*).*)"],
 };
