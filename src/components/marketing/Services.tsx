@@ -11,6 +11,7 @@ import { services, type ServiceId } from "@/config/services";
 import type { PropertyImageKey } from "@/config/media";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { href } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 
@@ -21,12 +22,12 @@ const visuals: Record<ServiceId, { icon: IconName; image: PropertyImageKey }> = 
   ads: { icon: "megaphone", image: "adsCreator" },
 };
 
-export function Services({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+export function Services({ dict, locale, flush = false }: { dict: Dictionary; locale: Locale; flush?: boolean }) {
   const t = dict.services;
   return (
-    <section id={sectionIds.services} aria-labelledby="services-title" className="relative py-24 sm:py-32">
+    <section id={sectionIds.services} aria-labelledby="services-title" className={cn("relative", flush ? "pt-8 pb-24 sm:pt-10 sm:pb-32" : "py-24 sm:py-32")}>
       <Container>
-        <SectionHeading eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="services-title" />
+        <SectionHeading eyebrow={flush ? undefined : t.eyebrow} lines={t.headline} description={t.description} titleId="services-title" />
 
         <div className="mt-14 grid gap-4 sm:mt-16 md:grid-cols-2 lg:gap-5">
           {services.map((service, idx) => {
@@ -71,7 +72,7 @@ export function Services({ dict, locale }: { dict: Dictionary; locale: Locale })
                     {service.cta === "create" ? (
                       <FreeVideoButton source={`service_${service.id}`} label={item.cta} size="md" />
                     ) : (
-                      <Link href={service.href} className={buttonClasses({ variant: "secondary", size: "md" })}>
+                      <Link href={service.cta === "contact" ? `${href("contact", locale)}?topic=${service.id}` : (service.href ?? "#faq")} className={buttonClasses({ variant: "secondary", size: "md" })}>
                         {item.cta}
                         <Icon name="arrowRight" className="size-4 transition-transform group-hover:translate-x-0.5" />
                       </Link>

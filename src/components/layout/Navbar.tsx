@@ -32,11 +32,11 @@ export function Navbar() {
   }, [menuOpen]);
 
   const links = [
-    { id: sectionIds.howItWorks, label: dict.nav.howItWorks },
-    { id: sectionIds.examples, label: dict.nav.examples },
-    { id: sectionIds.services, label: dict.nav.services },
-    { id: sectionIds.pricing, label: dict.nav.pricing },
-    { id: sectionIds.faq, label: dict.nav.faq },
+    { href: `${home}#${sectionIds.howItWorks}`, label: dict.nav.howItWorks },
+    { href: `${home}#${sectionIds.examples}`, label: dict.nav.examples },
+    { href: href("services", locale), label: dict.nav.services },
+    { href: href("pricing", locale), label: dict.nav.pricing },
+    { href: href("contact", locale), label: dict.nav.contact },
   ];
 
   return (
@@ -52,8 +52,8 @@ export function Navbar() {
         <nav aria-label={dict.nav.label} className="hidden flex-1 justify-center lg:flex">
           <ul className="flex items-center gap-1 rounded-full bg-white/[0.03] p-1 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)]">
             {links.map((l) => (
-              <li key={l.id}>
-                <Link href={`${home}#${l.id}`} className="rounded-full px-3.5 py-1.5 text-sm text-fg-muted transition-colors hover:bg-white/[0.06] hover:text-fg">
+              <li key={l.href}>
+                <Link href={l.href} className="rounded-full px-3.5 py-1.5 text-sm text-fg-muted transition-colors hover:bg-white/[0.06] hover:text-fg">
                   {l.label}
                 </Link>
               </li>
@@ -90,8 +90,8 @@ export function Navbar() {
         <nav aria-label={dict.nav.label} className="mx-auto max-w-[76rem] px-4 pt-3 pb-6 sm:px-6">
           <ul className="flex flex-col">
             {links.map((l) => (
-              <li key={l.id}>
-                <Link href={`${home}#${l.id}`} onClick={() => setMenuOpen(false)} className="block border-b border-white/[0.05] py-3.5 text-lg tracking-tight text-fg">
+              <li key={l.href}>
+                <Link href={l.href} onClick={() => setMenuOpen(false)} className="block border-b border-white/[0.05] py-3.5 text-lg tracking-tight text-fg">
                   {l.label}
                 </Link>
               </li>

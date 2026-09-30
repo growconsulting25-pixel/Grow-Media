@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useSignup } from "@/components/onboarding/SignupProvider";
 import { Button } from "@/components/ui/Button";
@@ -10,15 +11,16 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Sparkles } from "@/components/ui/Sparkles";
 import { sectionIds } from "@/config/navigation";
 import { addOns, launchOffer, plans, type Plan } from "@/config/pricing";
-import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/I18nProvider";
 import { interpolate } from "@/i18n/interpolate";
+import { href } from "@/i18n/routing";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
 import { FreeVideoButton } from "@/components/onboarding/FreeVideoButton";
 
-export function Pricing() {
+/** `flush`: sits right under a page hero, so less space on top. */
+export function Pricing({ flush = false }: { flush?: boolean }) {
   const { dict, locale } = useI18n();
   const t = dict.pricing;
   const ref = useRef<HTMLElement>(null);
@@ -40,7 +42,7 @@ export function Pricing() {
   }, []);
 
   return (
-    <section ref={ref} id={sectionIds.pricing} aria-labelledby="pricing-title" className="relative overflow-hidden py-24 sm:py-32">
+    <section ref={ref} id={sectionIds.pricing} aria-labelledby="pricing-title" className={cn("relative overflow-hidden", flush ? "pt-8 pb-24 sm:pt-10 sm:pb-32" : "py-24 sm:py-32")}>
       <Container className="relative">
         <SectionHeading eyebrow={t.eyebrow} lines={t.headline} description={t.description} titleId="pricing-title" />
 
@@ -83,9 +85,9 @@ export function Pricing() {
                 {a.price !== null ? (
                   <span className="font-semibold">{interpolate(t.addOns[a.id].price, { price: formatPrice(a.price, locale) })}</span>
                 ) : (
-                  <a href={`mailto:${siteConfig.contactEmail}`} className="text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
+                  <Link href={`${href("contact", locale)}?topic=ads`} className="text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
                     {t.addOns[a.id].price}
-                  </a>
+                  </Link>
                 )}
               </li>
             ))}

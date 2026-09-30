@@ -242,7 +242,7 @@ const appFr: Widen<typeof app> = {
         new: "Nouveau",
         empty: "Aucune activité pour l'instant.",
         bell: "Activité ({count} nouvelles)",
-        kinds: { new_client: "Nouveau client", new_project: "Nouveau projet", client_message: "Message client", revision_requested: "Retouche demandée", subscription_started: "Nouvel abonné", subscription_canceled: "Abonnement annulé", payment: "Paiement reçu" },
+        kinds: { new_client: "Nouveau client", new_project: "Nouveau projet", client_message: "Message client", revision_requested: "Retouche demandée", subscription_started: "Nouvel abonné", subscription_canceled: "Abonnement annulé", payment: "Paiement reçu", contact_request: "Formulaire de contact" },
       },
       messages: {
         title: "Messages",

@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { SignupProvider } from "@/components/onboarding/SignupProvider";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 import { isLocale, localeTags, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { I18nProvider } from "@/i18n/I18nProvider";
+import { organizationLd } from "@/lib/schema";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -48,6 +50,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         <I18nProvider locale={locale} dict={dict}>
           <SignupProvider>{children}</SignupProvider>
         </I18nProvider>
+        <JsonLd data={organizationLd(dict, locale)} />
       </body>
     </html>
   );

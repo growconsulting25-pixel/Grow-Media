@@ -115,7 +115,7 @@ export function renderEmail(kind: EmailKind, lang: Lang, vars: { name: string; t
 // ---------------------------------------------------------------------------
 export type StaffAlertKind =
   | "new_client" | "new_project" | "client_message" | "revision_requested"
-  | "subscription_started" | "subscription_canceled" | "payment";
+  | "subscription_started" | "subscription_canceled" | "payment" | "contact_request";
 
 const staffCopy: Record<StaffAlertKind, { label: string; tone: string; subject: string; heading: string; cta: string }> = {
   new_client: { label: "Nouveau client", tone: "#0096e0", subject: "Nouveau client : {name}", heading: "Un nouveau client s'est inscrit.", cta: "Voir le client" },
@@ -125,6 +125,7 @@ const staffCopy: Record<StaffAlertKind, { label: string; tone: string; subject: 
   subscription_started: { label: "Nouvel abonné", tone: "#059669", subject: "Nouvel abonné : {name}", heading: "Un client vient de s'abonner.", cta: "Voir le client" },
   subscription_canceled: { label: "Annulation", tone: "#e11d48", subject: "Abonnement annulé : {name}", heading: "Un client a annulé son abonnement.", cta: "Voir le client" },
   payment: { label: "Paiement reçu", tone: "#ea580c", subject: "Paiement reçu : {amount} — {name}", heading: "Un paiement a été reçu.", cta: "Voir les finances" },
+  contact_request: { label: "Formulaire de contact", tone: "#0891b2", subject: "Nouveau message du site : {name}", heading: "Quelqu'un vous a écrit depuis le site.", cta: "Répondre" },
 };
 
 export function renderStaffAlert(
@@ -134,7 +135,8 @@ export function renderStaffAlert(
   const c = staffCopy[kind];
   const v = { name: vars.name, title: vars.title, amount: vars.amount };
   const subject = fill(c.subject, v);
-  const rows: [string, string][] = [["Client", vars.email ? `${vars.name} · ${vars.email}` : vars.name], ...vars.rows];
+  const who = kind === "contact_request" ? "Visiteur" : "Client";
+  const rows: [string, string][] = [[who, vars.email ? `${vars.name} · ${vars.email}` : vars.name], ...vars.rows];
   const html = layout({
     lang: "fr", preheader: subject, eyebrow: `Équipe · ${c.label}`, tone: c.tone, heading: c.heading, bodyHtml: esc(subject), rows, cta: c.cta, url: vars.url,
     footerNote: "Alerte envoyée à l'équipe Grow Media. Retrouvez tout l'historique dans l'onglet Activité de l'admin.",

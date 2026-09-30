@@ -11,15 +11,32 @@ import app from "./en-app";
 
 const en = {
   meta: {
-    title: "Professional real estate listing videos — without the shoot",
+    title: "Real estate listing videos, no film shoot",
     description:
-      "Turn your listing photos into cinematic, branded videos for Instagram, Facebook, TikTok and YouTube Shorts. Delivered in about 24 hours. First video free.",
-    ogAlt: "A listing photo transformed into a vertical social media video",
+      "Professional real estate videos made from your listing photos, delivered in 24 hours and ready for social media. Your first video is free.",
+    ogAlt: "Listing photos turned into a vertical real estate video for social media",
+    pages: {
+      services: {
+        title: "Real estate video services for agents",
+        description:
+          "Listing videos, 3D virtual tours, AI UGC and video ads for real estate agents in Quebec and Canada, delivered in 24 hours. Answers to your questions.",
+      },
+      pricing: {
+        title: "Real estate video pricing",
+        description:
+          "Real estate video pricing: $49.95 per video or plans from $99/month for 4 videos. No film shoot, no hidden fees. Your first video is free.",
+      },
+      contact: {
+        title: "Contact us: real estate video",
+        description:
+          "A question about our real estate videos, a team plan or a video ad campaign? Write to Grow Media and we'll get back to you quickly.",
+      },
+    },
   },
 
   common: {
     skipToContent: "Skip to content",
-    freeVideoCta: "Create My First Video Free",
+    freeVideoCta: "Create My Free Video",
     tryFree: "Try It Free",
     watchExample: "Watch an Example",
     learnMore: "Learn more",
@@ -32,7 +49,7 @@ const en = {
     perMonth: "/ month",
     noCard: "No credit card required.",
     demoBadge: "Demo content",
-    trustLine: ["No credit card required", "24h delivery", "Ready to post"],
+    trustLine: ["No credit card required", "Delivered in 24h", "Ready to post"],
     new: "New",
   },
 
@@ -44,28 +61,29 @@ const en = {
     services: "Services",
     pricing: "Pricing",
     faq: "FAQ",
+    contact: "Contact",
     login: "Login",
-    cta: "First Video Free",
+    cta: "Free Video",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     language: "Language",
   },
 
   hero: {
-    offerPill: "Launch offer — your first video is free",
+    offerPill: "Launch offer: your first video is free",
     headline: [
-      { text: "Professional listing videos." },
+      { text: "Professional real estate videos." },
       { text: "Without the ", accent: "shoot." },
     ],
-    supporting: "Turn your listing photos into scroll-stopping videos.",
+    supporting: "Your listing photos, turned into a video that holds attention.",
     description:
-      "Send us your listing photos. We turn them into cinematic, branded videos ready for social media — delivered in approximately 24 hours.",
+      "Send us your property photos. We turn them into a cinematic, branded real estate video, ready to post within 24 hours.",
     visual: {
       label: "Your listing photos becoming a vertical social video",
       inputLabel: "Listing photos",
-      processing: "Producing",
+      processing: "In production",
       output: "Ready to post",
-      tags: ["Motion", "Agent branding", "Captions", "Music", "9:16"],
+      tags: ["Motion", "Your branding", "Captions", "Music", "9:16"],
       reel: {
         handle: "@yourbrokerage",
         price: "$489,900",
@@ -78,13 +96,9 @@ const en = {
   },
 
   transform: {
-    eyebrow: "Photo → Video",
-    headline: [
-      { text: "From static listing to" },
-      { text: "scroll-stopping ", accent: "content." },
-    ],
-    description:
-      "Same photos. A completely different result. Drag the handle to compare a standard listing with what we deliver.",
+    eyebrow: "Before / after",
+    headline: [{ text: "The same photos." }, { text: "A whole new ", accent: "impact." }],
+    description: "Drag the handle to compare a standard listing photo with the real estate video we deliver.",
     before: "Before",
     after: "After",
     beforeCaption: "Standard listing photo",
@@ -93,7 +107,7 @@ const en = {
     transformButton: "Transform",
     resetButton: "Reset",
     added: "What we add",
-    addedItems: ["Motion", "Transitions", "Music", "Captions", "Branding", "Social formatting"],
+    addedItems: ["Motion", "Transitions", "Music", "Captions", "Branding", "Social formats"],
     listing: {
       price: "$489,900",
       address: "1234 Example Street",
@@ -101,15 +115,15 @@ const en = {
       status: "For sale",
     },
     compare: {
-      title: "What it typically costs",
-      traditionalLabel: "Traditional video shoot",
+      title: "What a listing video usually costs",
+      traditionalLabel: "On-site videographer",
       traditionalValue: "Often $1,000+",
-      traditionalNote: "Videographer, scheduling, on-site shoot, editing.",
-      oursLabel: "{brand} listing video",
+      traditionalNote: "Scheduling, filming, travel and editing.",
+      oursLabel: "{brand} video",
       oursValue: "From {price}",
-      oursNote: "Your existing photos. About 24h turnaround.",
+      oursNote: "Made from your existing photos. Delivered in 24h.",
       footnote:
-        "Traditional production costs vary widely by market, provider and scope. Figures shown are an illustrative typical range, not a quote.",
+        "Traditional production costs vary by provider, region and scope. Figures are illustrative only, not a quote.",
     },
   },
 
@@ -118,48 +132,47 @@ const en = {
   },
   examples: {
     eyebrow: "Examples",
-    headline: [{ text: "See it in ", accent: "motion." }],
-    description:
-      "Real videos produced from listing assets. Press play — each one loads only when you ask for it.",
+    headline: [{ text: "Real estate videos ", accent: "in motion." }],
+    description: "Real videos made from listing photos. Each one loads only when you press play.",
     playLabel: "Play video: {title}",
     items: {
-      one: { title: "Cinematic listing reel", meta: "Listing video" },
+      one: { title: "Cinematic listing video", meta: "Listing video" },
       two: { title: "Property showcase", meta: "Listing video" },
-      three: { title: "Social-first teaser", meta: "Listing video" },
+      three: { title: "Social teaser", meta: "Listing video" },
     },
     modalTitle: "Example video",
   },
 
   how: {
     eyebrow: "How it works",
-    headline: [{ text: "Three steps. ", accent: "That's it." }],
-    description: "No filming day, no scheduling, no editing software. Just your listing.",
+    headline: [{ text: "Three steps. ", accent: "24 hours." }],
+    description: "No filming, no scheduling, no software. Just your listing.",
     steps: {
       upload: {
         number: "01",
         label: "Upload",
         title: "Send us your listing.",
         description:
-          "Property photos, your headshot, logo, listing details — and optional video footage if you have it.",
+          "Property photos, your headshot, your logo and the listing details. Video clips too, if you have them.",
         address: "1234 Example Street",
         uploaded: "{count} photos uploaded",
         dropHint: "Drag & drop photos, logo, footage",
-        items: ["Property photos", "Agent photo", "Logo", "Listing info", "Footage (optional)"],
+        items: ["Property photos", "Agent photo", "Logo", "Listing details", "Footage (optional)"],
       },
       customize: {
         number: "02",
         label: "Customize",
-        title: "Tell us the vibe. Or let us handle it.",
-        description: "Pick a style in one tap, add a note if you want. We take it from there.",
+        title: "Pick a style, or let us choose.",
+        description: "One tap for the style, a note if you like. We handle the rest.",
         styles: ["Luxury", "Cinematic", "Modern", "Energetic", "Minimal", "Surprise Me"],
         briefLabel: "Creative brief (optional)",
-        briefExample: "Make it elegant, modern and premium.",
+        briefExample: "Elegant, modern and premium.",
       },
       receive: {
         number: "03",
-        label: "Receive & publish",
-        title: "Ready the next day.",
-        description: "Download, request a revision, or share — formatted for every platform.",
+        label: "Publish",
+        title: "Get it the next day.",
+        description: "Download, request a revision or share, formatted for every platform.",
         checklist: ["Video ready", "Caption ready", "9:16 social format", "Branding applied"],
         actions: { download: "Download", revise: "Request revision", share: "Share" },
       },
@@ -167,40 +180,40 @@ const en = {
   },
 
   content: {
-    eyebrow: "Content engine",
-    headline: [{ text: "One listing." }, { text: "Endless ", accent: "content." }],
-    description: "Turn the same listing into content for every stage of your marketing.",
+    eyebrow: "Formats",
+    headline: [{ text: "One listing." }, { text: "Every ", accent: "format." }],
+    description: "The same property, adapted for every stage of your marketing.",
     sponsored: "Sponsored",
     tablistLabel: "Content formats",
     formats: {
       reel: {
         label: "Listing Reel",
         format: "9:16 · 20–30 s",
-        description: "The classic: a fast, cinematic vertical tour built for Reels and Shorts.",
+        description: "The essential: a fast, cinematic vertical tour for Reels and Shorts.",
         overlay: "Just listed",
       },
       cinematic: {
         label: "Cinematic Video",
         format: "16:9 · 45–60 s",
-        description: "A widescreen film for your website, YouTube and listing presentations.",
+        description: "A widescreen film for your website, YouTube and seller presentations.",
         overlay: "Welcome home",
       },
       ugc: {
         label: "AI Agent UGC",
         format: "9:16 · 15–30 s",
-        description: "You, presenting the property — built from your approved likeness and content.",
+        description: "You, presenting the property, built from your likeness and content you approve.",
         overlay: "“Let me show you around”",
       },
       facebookAd: {
         label: "Facebook Ad",
         format: "4:5 · 15 s",
-        description: "Paid-social creative with a clear hook and a call to action.",
+        description: "Ad creative with a clear hook and a call to action.",
         overlay: "Open house Saturday",
       },
       story: {
         label: "Instagram Story",
         format: "9:16 · 10 s",
-        description: "Short, tappable teasers that keep your listing top of mind.",
+        description: "Short teasers that keep your listing top of mind.",
         overlay: "Swipe for the kitchen",
       },
       teaser: {
@@ -210,60 +223,60 @@ const en = {
         overlay: "Coming soon",
       },
       walkthrough: {
-        label: "Virtual Walkthrough",
+        label: "Virtual Tour",
         format: "3D · interactive",
-        description: "An immersive space buyers can explore remotely, room by room.",
+        description: "An immersive space buyers explore remotely, room by room.",
         overlay: "Explore in 3D",
       },
       shortAd: {
         label: "Short-Form Ad",
         format: "9:16 · 6 s",
-        description: "Punchy bumper ads for TikTok, Reels and YouTube.",
+        description: "Punchy ads for TikTok, Reels and YouTube.",
         overlay: "3 bd · Big backyard",
       },
     },
   },
 
   benefits: {
-    eyebrow: "Why agents use it",
+    eyebrow: "Why Grow Media",
     headline: [
-      { text: "Built for agents who want more content —" },
-      { text: "without more ", accent: "work." },
+      { text: "More visibility for your listings." },
+      { text: "Less ", accent: "work." },
     ],
     items: {
       more: {
         title: "More content",
-        description: "Turn one listing into multiple marketing assets — reels, stories, ads and more.",
+        description: "One listing becomes reels, stories and ads.",
       },
       fast: {
-        title: "Fast delivery",
-        description: "Content delivered in approximately 24 hours. No shoot to schedule.",
+        title: "Delivered in 24h",
+        description: "No shoot to schedule, no waiting.",
         timeline: ["Upload", "Production", "Ready"],
       },
       ready: {
         title: "Ready to post",
-        description: "Captions, formatting and branding included.",
+        description: "Captions, formats and branding included.",
       },
       cost: {
-        title: "Lower production cost",
-        description: "Professional content without organizing a complete shoot.",
+        title: "A fraction of the cost",
+        description: "A professional result without the cost of a shoot.",
       },
       consistent: {
-        title: "Stay consistent",
-        description: "Publish regularly, even during your busiest weeks.",
+        title: "Post every week",
+        description: "Stay visible, even when your calendar is full.",
         days: ["M", "T", "W", "T", "F", "S", "S"],
       },
       brand: {
         title: "Your brand",
-        description: "Logo, colors, name and contact details integrated into every video.",
+        description: "Logo, colors, name and contact details on every video.",
       },
       social: {
-        title: "Social first",
-        description: "Designed for Reels, Shorts, TikTok and paid social.",
+        title: "Built for social",
+        description: "Reels, Shorts, TikTok and paid social.",
       },
       scale: {
-        title: "Scale",
-        description: "One property or an entire portfolio — same quality, same simplicity.",
+        title: "One listing or a hundred",
+        description: "Same quality, same simplicity, whatever the volume.",
         listings: "{count} listings",
       },
     },
@@ -271,45 +284,43 @@ const en = {
 
   services: {
     eyebrow: "Services",
-    headline: [{ text: "More than ", accent: "listing videos." }],
-    description: "One partner for the content your listings and your personal brand need.",
+    headline: [{ text: "All the video content ", accent: "your listings need." }],
+    description: "One partner for your listing videos, virtual tours and personal brand.",
     quote: "Custom quote",
     items: {
       listing: {
-        title: "AI Listing Video",
-        description: "Turn listing photos into cinematic social videos with music, captions and your branding.",
-        cta: "Create Video",
-        points: ["Vertical & widescreen", "Music & captions", "About 24h delivery"],
+        title: "Listing Video",
+        description: "Your photos become a cinematic real estate video with music, captions and your branding.",
+        cta: "Create a Video",
+        points: ["Vertical & widescreen", "Music & captions", "Delivered in 24h"],
       },
       walkthrough: {
-        title: "3D / Virtual Walkthrough",
-        description:
-          "An immersive digital property experience that lets buyers explore the space remotely.",
+        title: "3D Virtual Tour",
+        description: "An immersive tour buyers explore remotely, room by room.",
         cta: "Learn More",
-        points: ["Explore room by room", "Shareable link", "Add to any listing"],
+        points: ["Explore room by room", "Shareable link", "Optional on any listing"],
       },
       ugc: {
-        title: "AI UGC",
-        description:
-          "Social-style videos featuring you — built from your approved likeness and content.",
+        title: "AI UGC: you, on screen",
+        description: "Social-style videos featuring you, built from your likeness and content you approve.",
         cta: "Learn More",
         points: ["Agent introductions", "Property promotion", "Educational content"],
       },
       ads: {
-        title: "AI Video Ads",
-        description: "Video creatives designed for Meta, Instagram, Facebook and TikTok campaigns.",
+        title: "Video Ads",
+        description: "Video creatives for your Meta, Instagram, Facebook and TikTok campaigns.",
         cta: "Talk to Us",
-        points: ["Hook-first creative", "Multiple variations", "Planned with you"],
+        points: ["Hook in the first second", "Multiple variations", "Planned with you"],
       },
     },
   },
 
   pricing: {
-    eyebrow: "Pricing",
-    headline: [{ text: "Content that fits ", accent: "your business." }],
-    description: "Simple plans. Clear limits. No hidden fees.",
+    eyebrow: "Plans",
+    headline: [{ text: "Clear pricing, ", accent: "no surprises." }],
+    description: "Pay per video or choose a monthly plan. No hidden fees, cancel anytime.",
     offer: {
-      badge: "Limited launch offer",
+      badge: "Launch offer",
       title: "Your first video is free.",
       note: "No credit card required.",
     },
@@ -321,26 +332,26 @@ const en = {
       single: {
         name: "Single",
         tagline: "For a one-off listing.",
-        cta: "Create One Video",
-        features: ["1 professional listing video", "Captions", "Music", "Branding", "Social formats", "Approximately 24h delivery"],
+        cta: "Create a Video",
+        features: ["1 professional listing video", "Captions", "Music", "Branding", "Social formats", "Delivered in 24h"],
       },
       agent: {
         name: "Agent",
-        tagline: "For agents listing every month.",
+        tagline: "For agents who list every month.",
         cta: "Choose Agent",
         features: [
           "4 videos per month",
           "Professional listing videos",
           "Captions & music",
-          "Agent branding",
+          "Your branding",
           "Social formats",
-          "Client platform & project history",
-          "Content delivery",
+          "Client space & project history",
+          "Delivery to your account",
         ],
       },
       pro: {
         name: "Pro",
-        tagline: "For high-volume agents and teams.",
+        tagline: "For teams and high-volume agents.",
         cta: "Choose Pro",
         features: [
           "Everything in Agent",
@@ -353,16 +364,38 @@ const en = {
     },
     addOnsTitle: "Add-ons",
     addOns: {
-      walkthrough: { name: "3D Virtual Walkthrough", price: "+{price}" },
-      ads: { name: "Custom AI Ads", price: "Talk to us" },
+      walkthrough: { name: "3D Virtual Tour", price: "+{price}" },
+      ads: { name: "Custom video ads", price: "Custom quote" },
     },
-    limitsNote: "Unused videos don't roll over. Need more than 10 a month? Talk to us.",
+    limitsNote: "Unused videos don't roll over to the next month. Need more than 10 a month? Write to us.",
+    faq: [
+      {
+        q: "How much does a real estate video cost?",
+        a: "{singlePrice} for a single video. The Agent plan includes 4 videos a month for {agentPrice}, and the Pro plan up to 10 videos a month for {proPrice}. Your first video is free.",
+      },
+      {
+        q: "Are there travel or filming fees?",
+        a: "No. Everything is made from your listing photos: no travel, no filming, no hidden fees.",
+      },
+      {
+        q: "Do unused videos roll over?",
+        a: "No. The videos included in your plan renew every month and don't carry over to the next month.",
+      },
+      {
+        q: "Can I change plans or cancel?",
+        a: "Yes, anytime from your account. Your plan stays active until the end of the current billing period.",
+      },
+      {
+        q: "How much does the 3D virtual tour cost?",
+        a: "The 3D virtual tour is a {walkthroughPrice} add-on on any listing, on top of the video.",
+      },
+    ],
   },
 
   results: {
     eyebrow: "Results",
     headline: [{ text: "Created for real estate." }, { text: "Built for real ", accent: "results." }],
-    description: "Every project is tracked from upload to delivery — here's what that looks like.",
+    description: "Every project is tracked from upload to delivery.",
     photos: "{count} photos",
     video: "{count} sec video",
     delivered: "Delivered in {count}h",
@@ -372,19 +405,17 @@ const en = {
     empty: {
       title: "Be one of our first featured agents.",
       description:
-        "We're collecting stories from our launch clients. Create your first video free — and if you love it, we'd love to feature it here.",
+        "We're collecting stories from our launch clients. Create your first video free and, if you love it, we'd be glad to feature it here.",
     },
     demo: [
       {
-        quote:
-          "Placeholder quote — the agent's own words about their first delivered video will appear here.",
+        quote: "Placeholder quote: the agent's own words about their first delivered video will appear here.",
         name: "Demo agent",
         role: "Brokerage name",
         property: "Sample property",
       },
       {
-        quote:
-          "Placeholder quote — a short, specific sentence about speed, quality or results goes here.",
+        quote: "Placeholder quote: a short, specific sentence about speed, quality or results.",
         name: "Demo agent",
         role: "Brokerage name",
         property: "Sample condo",
@@ -394,79 +425,151 @@ const en = {
 
   faq: {
     eyebrow: "FAQ",
-    headline: [{ text: "Questions, ", accent: "answered." }],
-    stillQuestions: "Still have a question?",
+    headline: [{ text: "Real estate video ", accent: "questions." }],
+    stillQuestions: "Another question?",
     showMore: "Show {count} more questions",
     showLess: "Show fewer questions",
     contact: "Write to us",
     items: [
       {
-        q: "How does it work?",
-        a: "Create a project, upload your listing photos and pick a style. Our team produces your video using professional editing and AI-assisted motion, then delivers it to your account — usually within about 24 hours.",
+        q: "What is a Grow Media real estate video?",
+        a: "It's a professional video of your listing, made from your photos with no film shoot. We add motion, transitions, music, captions and your branding, then deliver it in 24 hours, ready for Instagram, Facebook, TikTok and YouTube.",
+      },
+      {
+        q: "How do you turn photos into a real estate video?",
+        a: "Create a project, upload your listing photos and pick a style. Our team produces the video with professional editing and AI-assisted motion, then delivers it to your account, usually within 24 hours.",
+      },
+      {
+        q: "How much does a real estate video cost?",
+        a: "{singlePrice} for a single video. The Agent plan includes 4 videos a month for {agentPrice}, and the Pro plan up to 10 videos for {proPrice}. Your first video is free, no credit card required.",
+      },
+      {
+        q: "Do I need a film shoot or a videographer?",
+        a: "No. Everything is made from your listing photos. If you have video clips, we can include them too.",
       },
       {
         q: "What do I need to send you?",
-        a: "Your listing photos (ideally 10–25, high resolution). Optionally: your headshot, logo, listing details and any video clips you already have. If you've set up your Brand Kit, your branding is applied automatically.",
+        a: "Your listing photos, ideally 10 to 25 in high resolution. Optionally: your headshot, logo, listing details and video clips. If your branding is saved, it's applied automatically.",
       },
       {
         q: "How quickly will I receive my video?",
-        a: "Most videos are delivered in approximately 24 hours after you submit your project. Delivery can take longer during peak periods or for complex requests — you'll always see the live status in your dashboard.",
+        a: "Most videos are delivered about 24 hours after you submit your project. It can take longer during peak periods or for complex requests; you follow the live status in your account.",
+      },
+      {
+        q: "Does a video help sell a property?",
+        a: "A video gives buyers a better sense of the property and usually draws more attention on social media than a photo alone. It also lets you post more often about each listing.",
       },
       {
         q: "Can I request changes?",
-        a: "Yes. Every video includes a revision round. Tell us what you'd like changed directly on the project and we'll handle it.",
+        a: "Yes. Every video includes one revision round. Describe your changes directly on the project and we'll handle them.",
       },
       {
         q: "Can you add my logo and branding?",
-        a: "Yes. Your logo, colors, name, photo and contact details can be added to every video. Save them once in your Brand Kit and they're reused automatically.",
+        a: "Yes. Your logo, colors, name, photo and contact details can appear on every video. Save them once; they're applied automatically after that.",
       },
       {
-        q: "Which social platforms are supported?",
-        a: "Videos are formatted for Instagram Reels and Stories, Facebook, TikTok, YouTube Shorts and paid social. Widescreen versions are available for YouTube and websites.",
+        q: "Which platforms can I post my videos on?",
+        a: "Videos are formatted for Instagram Reels and Stories, Facebook, TikTok, YouTube Shorts and paid social. Widescreen versions are available for YouTube and your website.",
+      },
+      {
+        q: "Do you serve all of Quebec?",
+        a: "Yes. Everything happens online: we work with agents across Quebec and Canada, in French and English.",
       },
       {
         q: "What happens after my free video?",
-        a: "Nothing, unless you want more. There's no card on file and no automatic charge. If you love it, you can buy single videos or choose a monthly plan.",
+        a: "Nothing, unless you want more. No card is saved and nothing is charged. You can then buy single videos or choose a monthly plan.",
       },
       {
         q: "Can I cancel my subscription?",
         a: "Yes, anytime from your account. Your plan stays active until the end of the current billing period.",
       },
       {
-        q: "What is included in the Agent plan?",
-        a: "4 professional listing videos per month with captions, music, agent branding and social formats, plus the client platform, project history and content delivery.",
-      },
-      {
-        q: "What is included in the Pro plan?",
-        a: "Everything in Agent, up to 10 videos per month, priority production, advanced content options and full platform access.",
-      },
-      {
         q: "Do you offer AI UGC?",
-        a: "Yes. We create social-style videos featuring you — agent introductions, property promotion and educational content — built only from likeness and material you've approved.",
+        a: "Yes. We create social-style videos featuring you (agent introductions, property promotion, educational content), built only from your likeness and content you approve.",
       },
       {
-        q: "Do you create advertisements?",
-        a: "Yes. We design video ad creatives for Meta, Instagram, Facebook and TikTok. Because every campaign is different, we start with a short conversation — talk to us for a quote.",
+        q: "Do you create video ads?",
+        a: "Yes. We design video ad creatives for Meta, Instagram, Facebook and TikTok. Since every campaign is different, we start with a short conversation: write to us for a quote.",
       },
       {
-        q: "How does the virtual walkthrough work?",
-        a: "From your photos and floor information, we create an immersive digital experience that buyers can explore remotely. It's available as a {walkthroughPrice} add-on to any listing.",
+        q: "How does the 3D virtual tour work?",
+        a: "From your photos and room information, we create an immersive tour buyers explore remotely. It's a {walkthroughPrice} add-on on any listing.",
       },
     ],
   },
 
   finalCta: {
     headline: [{ text: "Your next listing deserves" }, { text: "more than ", accent: "photos." }],
-    supporting: "Turn your listing into content people want to watch.",
+    supporting: "Send your photos today. Get your video tomorrow.",
+  },
+
+  pages: {
+    services: {
+      eyebrow: "Services",
+      headline: [{ text: "Video services for" }, { text: "real estate ", accent: "agents." }],
+      intro:
+        "Listing videos, 3D virtual tours, AI UGC and video ads: everything you need to showcase your properties on social media, made from your photos and delivered in 24 hours.",
+      breadcrumb: "Services",
+    },
+    pricing: {
+      eyebrow: "Pricing",
+      headline: [{ text: "Real estate video" }, { text: "", accent: "pricing." }],
+      intro:
+        "A real estate video costs {singlePrice} on its own, or under $25 per video with the Agent plan. No filming, no travel, no hidden fees.",
+      faqTitle: "Pricing questions",
+      breadcrumb: "Pricing",
+    },
+    contact: {
+      eyebrow: "Contact",
+      headline: [{ text: "Let's talk about your" }, { text: "", accent: "listings." }],
+      intro:
+        "A question before your free video, a plan for your team or an ad campaign? Write to us and we'll reply quickly, in English or French.",
+      breadcrumb: "Contact",
+      emailLabel: "Email",
+      form: {
+        name: "Full name",
+        email: "Email",
+        phone: "Phone (optional)",
+        agency: "Brokerage (optional)",
+        topic: "Topic",
+        topics: {
+          question: "General question",
+          team: "Team plan",
+          ads: "Video ads",
+          walkthrough: "3D virtual tour",
+          other: "Other",
+        },
+        message: "Message",
+        messagePlaceholder: "Tell us about your listings and what you're looking for.",
+        submit: "Send message",
+        sending: "Sending…",
+        sent: "Thank you! We received your message and will reply quickly.",
+        error: "We couldn't send your message right now. Try again, or email us directly.",
+        invalid: "Please check your name, email and message.",
+        privacy: "Your details are only used to reply to you.",
+      },
+      aside: {
+        title: "Ready to try?",
+        text: "The fastest way to get to know us: your first video, free.",
+      },
+    },
+    homeTeaser: {
+      eyebrow: "Learn more",
+      headline: [{ text: "Everything you need to know," }, { text: "in ", accent: "two clicks." }],
+      services: { title: "Services & FAQ", text: "Listing videos, 3D tours, UGC, ads, and answers to your questions.", cta: "See services" },
+      pricing: { title: "Pricing", text: "From {singlePrice} per video, plans from {agentPrice}. First video free.", cta: "See pricing" },
+      contact: { title: "Contact", text: "A question, a team project or a campaign? Write to us.", cta: "Write to us" },
+    },
+    breadcrumbHome: "Home",
   },
 
   footer: {
-    tagline: "Professional listing videos. Without the shoot.",
+    tagline: "Professional real estate videos, no film shoot. For agents across Quebec and Canada.",
     product: "Product",
     company: "Company",
     account: "Account",
     legal: "Legal",
-    about: "About",
+    about: "How it works",
     contact: "Contact",
     createAccount: "Create Account",
     privacy: "Privacy",

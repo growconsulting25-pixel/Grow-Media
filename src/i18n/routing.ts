@@ -6,6 +6,9 @@ import { locales, type Locale } from "./config";
  */
 export const routes = {
   home: { en: "", fr: "" },
+  services: { en: "/services", fr: "/services" },
+  pricing: { en: "/pricing", fr: "/tarifs" },
+  contact: { en: "/contact", fr: "/contact" },
   login: { en: "/login", fr: "/connexion" },
   signup: { en: "/signup", fr: "/inscription" },
   forgotPassword: { en: "/forgot-password", fr: "/mot-de-passe-oublie" },
@@ -30,7 +33,7 @@ export type RouteKey = keyof typeof routes;
  * Routes whose folder name (English) differs from the localized URL.
  * The proxy rewrites e.g. /fr/connexion → /fr/login internally.
  */
-export const rewrittenRoutes: RouteKey[] = ["login", "signup", "forgotPassword", "resetPassword"];
+export const rewrittenRoutes: RouteKey[] = ["pricing", "login", "signup", "forgotPassword", "resetPassword"];
 
 export function internalPath(pathname: string): string | null {
   const [, locale, ...rest] = pathname.split("/");

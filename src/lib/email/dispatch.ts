@@ -70,6 +70,7 @@ interface AlertRow {
 
 const TYPE_LABEL: Record<string, string> = { listing_video: "Vidéo d'inscription", walkthrough: "Visite virtuelle 3D", ugc: "UGC IA", video_ad: "Publicité vidéo" };
 const PLAN_LABEL: Record<string, string> = { single: "À l'unité", agent: "Courtier", pro: "Pro" };
+const TOPIC_LABEL: Record<string, string> = { question: "Question générale", team: "Forfait pour une équipe", ads: "Publicités vidéo", walkthrough: "Visite virtuelle 3D", other: "Autre" };
 const money = (cents: unknown) => new Intl.NumberFormat("fr-CA", { style: "currency", currency: "CAD" }).format(Number(cents ?? 0) / 100);
 
 /** Emails each pending staff alert (sign-ups, projects, messages, revisions, billing) to the team inbox. */
@@ -87,7 +88,10 @@ async function dispatchStaffAlerts(db: NonNullable<ReturnType<typeof getSupabase
   let sent = 0;
   for (const a of (data ?? []) as unknown as AlertRow[]) {
     const p = a.profiles;
-    const name = [p?.first_name, p?.last_name].filter(Boolean).join(" ") || p?.email || "Client";
+    const str = (k: string) => (typeof a.payload[k] === "string" ? (a.payload[k] as string) : "");
+    const contact = a.kind === "contact_request";
+    const name = contact ? str("name") || "Visiteur" : [p?.first_name, p?.last_name].filter(Boolean).join(" ") || p?.email || "Client";
+    const email = contact ? str("email") : p?.email ?? "";
     const title = a.projects?.address || a.projects?.title || "";
     const rows: [string, string][] = [];
     if (title) rows.push(["Projet", title]);
@@ -95,15 +99,22 @@ async function dispatchStaffAlerts(db: NonNullable<ReturnType<typeof getSupabase
     if (typeof a.payload.plan === "string") rows.push(["Forfait", PLAN_LABEL[a.payload.plan] ?? a.payload.plan]);
     if (a.payload.amount_cents) rows.push(["Montant", money(a.payload.amount_cents)]);
     if (typeof a.payload.ends_at === "string") rows.push(["Fin d'accès", new Date(a.payload.ends_at).toLocaleDateString("fr-CA")]);
-    if (typeof a.payload.excerpt === "string") rows.push(["Message", a.payload.excerpt]);
+    if (contact) {
+      if (str("phone")) rows.push(["Téléphone", str("phone")]);
+      if (str("agency")) rows.push(["Agence", str("agency")]);
+      rows.push(["Sujet", TOPIC_LABEL[str("topic")] ?? str("topic")]);
+      rows.push(["Langue", str("locale") === "en" ? "Anglais" : "Français"]);
+      rows.push(["Message", str("message") || str("excerpt")]);
+    } else if (typeof a.payload.excerpt === "string") rows.push(["Message", a.payload.excerpt]);
     const admin = `${siteConfig.url}/fr/admin`;
     const url =
-      a.kind === "payment" ? `${admin}/payments`
+      contact ? `mailto:${email}`
+      : a.kind === "payment" ? `${admin}/payments`
       : a.project_id ? `${admin}/projects/${a.project_id}${a.kind === "client_message" ? "#messages" : ""}`
       : a.user_id ? `${admin}/clients/${a.user_id}`
       : admin;
-    const email = renderStaffAlert(a.kind, { name, email: p?.email ?? "", title, amount: money(a.payload.amount_cents), url, rows });
-    const { ok } = await sendEmail({ to, ...email });
+    const message = renderStaffAlert(a.kind, { name, email, title, amount: money(a.payload.amount_cents), url, rows });
+    const { ok } = await sendEmail({ to, ...message, replyTo: contact && email ? email : undefined });
     if (ok) {
       await db.from("staff_alerts").update({ emailed_at: new Date().toISOString() }).eq("id", a.id);
       sent++;
