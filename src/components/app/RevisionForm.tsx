@@ -48,7 +48,7 @@ export function RevisionForm({ projectId }: { projectId: string }) {
   }
 
   return (
-    <form id="revision" onSubmit={submit} className="w-full space-y-4 rounded-2xl bg-white/[0.03] p-5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07)]">
+    <form id="revision" onSubmit={submit} className="w-full space-y-4 rounded-2xl bg-white/[0.03] p-5 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_7%,transparent)]">
       <div>
         <p className="font-medium">{t.title}</p>
         <p className="mt-0.5 text-sm text-fg-muted">{t.intro}</p>
@@ -56,12 +56,12 @@ export function RevisionForm({ projectId }: { projectId: string }) {
       <div>
         <label htmlFor="revision-message" className="mb-1.5 block text-sm font-medium">{t.whatLabel}</label>
         <textarea id="revision-message" required rows={4} maxLength={5000} value={message} onChange={(e) => setMessage(e.target.value)} placeholder={t.whatPlaceholder}
-          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
+          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
       </div>
       <div className="max-w-40">
         <label htmlFor="revision-stamp" className="mb-1.5 block text-sm font-medium">{t.timestampLabel}</label>
         <input id="revision-stamp" inputMode="numeric" value={stamp} onChange={(e) => setStamp(e.target.value)} placeholder={t.timestampHint}
-          className="h-10 w-full rounded-xl bg-white/[0.04] px-3.5 text-sm shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
+          className="h-10 w-full rounded-xl bg-white/[0.04] px-3.5 text-sm shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
       </div>
       {result === "error" && <p role="alert" className="text-sm text-red-300">{t.error}</p>}
       <div className="flex gap-2">

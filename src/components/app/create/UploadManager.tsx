@@ -186,7 +186,7 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
                   if (dragIndex !== null) void move(dragIndex, i);
                   setDragIndex(null);
                 }}
-                className={cn("group relative aspect-square cursor-grab overflow-hidden rounded-xl bg-ink-800 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] active:cursor-grabbing", dragIndex === i && "opacity-40", i === 0 && "ring-2 ring-brand-400/70")}
+                className={cn("group relative aspect-square cursor-grab overflow-hidden rounded-xl bg-ink-800 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_6%,transparent)] active:cursor-grabbing", dragIndex === i && "opacity-40", i === 0 && "ring-2 ring-brand-400/70")}
               >
                 {f.url ? (
                   // eslint-disable-next-line @next/next/no-img-element -- local object URL or signed URL
@@ -197,7 +197,7 @@ export function UploadManager({ supabase, project, files, onFilesChange, onBusyC
                     <span className="line-clamp-2 break-all">{f.file_name}</span>
                   </span>
                 )}
-                <span className="absolute top-1.5 left-1.5 rounded bg-black/60 px-1.5 font-mono text-[0.62rem] text-white">{i + 1}</span>
+                <span className="absolute top-1.5 left-1.5 rounded bg-black/60 px-1.5 font-mono text-[0.62rem] text-[#fff]">{i + 1}</span>
                 <div className="absolute inset-x-1.5 bottom-1.5 flex justify-between opacity-100 transition-opacity sm:opacity-0 sm:group-focus-within:opacity-100 sm:group-hover:opacity-100">
                   <span className="flex gap-1">
                     <IconButton label={interpolate(t.moveEarlier, { name: f.file_name })} icon="arrowRight" className="rotate-180" disabled={i === 0} onClick={() => move(i, i - 1)} />
@@ -246,7 +246,7 @@ function IconButton({ label, icon, onClick, disabled, className }: { label: stri
       title={label}
       onClick={onClick}
       disabled={disabled}
-      className="grid size-7 place-items-center rounded-full bg-black/65 text-white backdrop-blur transition-colors hover:bg-black/85 disabled:opacity-30"
+      className="grid size-7 place-items-center rounded-full bg-black/65 text-[#fff] backdrop-blur transition-colors hover:bg-black/85 disabled:opacity-30"
     >
       <Icon name={icon} className={cn("size-3.5", className)} />
     </button>

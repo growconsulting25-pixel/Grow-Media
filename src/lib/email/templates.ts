@@ -124,7 +124,7 @@ const staffCopy: Record<StaffAlertKind, { label: string; tone: string; subject: 
   revision_requested: { label: "Retouche demandée", tone: "#e11d48", subject: "Retouche demandée : {title}", heading: "Un client demande une retouche.", cta: "Voir la demande" },
   subscription_started: { label: "Nouvel abonné", tone: "#059669", subject: "Nouvel abonné : {name}", heading: "Un client vient de s'abonner.", cta: "Voir le client" },
   subscription_canceled: { label: "Annulation", tone: "#e11d48", subject: "Abonnement annulé : {name}", heading: "Un client a annulé son abonnement.", cta: "Voir le client" },
-  payment: { label: "Paiement reçu", tone: "#7c3aed", subject: "Paiement reçu : {amount} — {name}", heading: "Un paiement a été reçu.", cta: "Voir les finances" },
+  payment: { label: "Paiement reçu", tone: "#ea580c", subject: "Paiement reçu : {amount} — {name}", heading: "Un paiement a été reçu.", cta: "Voir les finances" },
 };
 
 export function renderStaffAlert(

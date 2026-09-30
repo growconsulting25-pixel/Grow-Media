@@ -13,9 +13,9 @@ const items: { key: Key; path: string; icon: IconName; accent: Accent }[] = [
   { key: "production", path: "/production", icon: "play", accent: "amber" },
   { key: "messages", path: "/messages", icon: "comment", accent: "blue" },
   { key: "clients", path: "/clients", icon: "user", accent: "emerald" },
-  { key: "payments", path: "/payments", icon: "coins", accent: "violet" },
+  { key: "payments", path: "/payments", icon: "coins", accent: "orange" },
   { key: "activity", path: "/activity", icon: "bell", accent: "rose" },
-  { key: "team", path: "/team", icon: "heart", accent: "slate" },
+  { key: "team", path: "/team", icon: "users", accent: "slate" },
   { key: "settings", path: "/settings", icon: "palette", accent: "slate" },
 ];
 

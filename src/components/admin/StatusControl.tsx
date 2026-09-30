@@ -22,7 +22,7 @@ export function StatusControl({ projectId, current, title, client }: { projectId
       <div>
         <label htmlFor="admin-status" className="mb-1.5 block text-sm font-medium">{t.changeStatus}</label>
         <select id="admin-status" value={value} onChange={(e) => { setValue(e.target.value as ProjectStatus); setMsg(null); }}
-          className="h-11 rounded-xl bg-ink-900 px-3 text-sm text-fg shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]">
+          className="h-11 rounded-xl bg-ink-900 px-3 text-sm text-fg shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_12%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]">
           {STAFF_STATUSES.map((s) => <option key={s} value={s}>{t.statusLabels[s]}</option>)}
         </select>
       </div>

@@ -108,7 +108,7 @@ export function MessageThread({ projectId, userId, initial, asStaff = false, own
       <form onSubmit={send} className="mt-5 space-y-2">
         <label htmlFor="message-body" className="sr-only">{t.placeholder}</label>
         <textarea id="message-body" rows={3} maxLength={5000} value={body} onChange={(e) => setBody(e.target.value)} placeholder={t.placeholder}
-          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
+          className="w-full rounded-xl bg-white/[0.04] px-3.5 py-3 text-sm text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]" />
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-xs text-fg-muted">
             <button type="button" onClick={() => fileRef.current?.click()} className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-3 py-1.5 hover:text-fg">

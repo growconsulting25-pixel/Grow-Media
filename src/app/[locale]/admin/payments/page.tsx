@@ -41,20 +41,20 @@ export default async function PaymentsPage({ params, searchParams }: PageProps<"
       <nav className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 lg:mx-0 lg:px-0">
         {RANGES.map((r) => (
           <Link key={r} href={`${base}/payments?range=${r}`} aria-current={r === range ? "page" : undefined}
-            className={cn("shrink-0 rounded-full px-4 py-2 text-sm", r === range ? "bg-violet-400/15 text-violet-200 shadow-[inset_0_0_0_1px_rgba(167,139,250,0.35)]" : "bg-white/[0.04] text-fg-muted hover:text-fg")}>
+            className={cn("shrink-0 rounded-full px-4 py-2 text-sm", r === range ? "bg-orange-400/15 text-orange-200 shadow-[inset_0_0_0_1px_rgba(251,146,60,0.35)]" : "bg-white/[0.04] text-fg-muted hover:text-fg")}>
             {t.ranges[r]}
           </Link>
         ))}
       </nav>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard href={`${base}/payments?range=${range}#list`} accent="violet" icon="coins" label={t.total} value={money(total)} sub={interpolate(t.count, { count: shown.length })} />
+        <StatCard href={`${base}/payments?range=${range}#list`} accent="orange" icon="coins" label={t.total} value={money(total)} sub={interpolate(t.count, { count: shown.length })} />
         <StatCard href={`${base}/payments?range=today`} accent="cyan" icon="calendar" label={c.dash.revenueToday} value={money(s.revenueToday)} />
         <StatCard href={`${base}/clients?segment=subscribers`} accent="emerald" icon="layers" label={c.dash.mrr} value={money(s.mrrCents)} sub={interpolate(c.dash.subscribersCount, { count: s.subscribers })} />
       </div>
 
-      <Panel title={c.dash.revenue30} accent="violet">
-        <ColumnChart label={c.dash.revenue30} accent="violet" format={money}
+      <Panel title={c.dash.revenue30} accent="orange">
+        <ColumnChart label={c.dash.revenue30} accent="orange" format={money}
           data={s.daily.map((d) => ({ key: d.date, value: d.value, tip: day.format(new Date(d.date)) }))} />
         <div className="mt-2 flex justify-between text-[0.7rem] text-fg-subtle">
           <span>{day.format(new Date(s.daily[0].date))}</span>

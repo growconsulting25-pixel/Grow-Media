@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/layout/Logo";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Icon, type IconName } from "@/components/ui/Icon";
 import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/I18nProvider";
@@ -31,7 +32,7 @@ const items = allItems.filter((i) => i.key !== "ideas" || siteConfig.contentIdea
 const mobileTabs: NavKey[] = ["dashboard", "projects", "create", "videos"];
 
 /** Sidebar on desktop; top bar + bottom tab bar (with a "More" sheet) on mobile. */
-export function AppNav({ name, email, unread, isAdmin = false }: { name: string; email: string; unread: number; isAdmin?: boolean }) {
+export function AppNav({ name, email, unread, isAdmin = false, theme = "dark" }: { name: string; email: string; unread: number; isAdmin?: boolean; theme?: "dark" | "light" }) {
   const { dict, locale } = useI18n();
   const t = dict.app.nav;
   const pathname = usePathname() ?? "";
@@ -100,6 +101,7 @@ export function AppNav({ name, email, unread, isAdmin = false }: { name: string;
             <p className="truncate text-xs text-fg-subtle">{email}</p>
           </div>
           <div className="flex items-center justify-between px-2">
+            <ThemeToggle initial={theme} />
             <LanguageSwitcher />
             <button type="button" onClick={signOut} className="text-xs text-fg-muted hover:text-fg">{dict.auth.signOut}</button>
           </div>
@@ -162,6 +164,7 @@ export function AppNav({ name, email, unread, isAdmin = false }: { name: string;
               </Link>
             )}
             <div className="mt-5 flex items-center justify-between border-t border-white/[0.06] pt-4">
+              <ThemeToggle initial={theme} withLabel />
               <LanguageSwitcher />
               <button type="button" onClick={signOut} className="text-sm text-fg-muted">{dict.auth.signOut}</button>
             </div>

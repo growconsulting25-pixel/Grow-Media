@@ -7,10 +7,10 @@ export const markViewBox = "10 10 180 180";
 export const markRings = ["M102.2 158.9A70 70 0 1 1 158.9 102.2", "M90 125A35 35 0 1 1 125 90"];
 export const markArrow = { transform: "translate(97 95) scale(0.9)", d: "M5 5 100 43 58 60 41 99Z" };
 
-/** Grow's mark. Rings are white on the dark site; pass ringColor for light backgrounds. */
-export function GrowMark({ className, ringColor = "#ffffff" }: { className?: string; ringColor?: string }) {
+/** Grow's mark. Rings follow the text color (white on dark, ink in the light theme); pass ringColor to force one. */
+export function GrowMark({ className, ringColor = "currentColor" }: { className?: string; ringColor?: string }) {
   return (
-    <svg viewBox={markViewBox} aria-hidden className={className}>
+    <svg viewBox={markViewBox} aria-hidden className={cn("text-white", className)}>
       <g fill="none" stroke={ringColor} strokeWidth="15" strokeLinecap="round">
         {markRings.map((d) => (
           <path key={d} d={d} />
