@@ -171,4 +171,14 @@ select public.mark_staff_alerts_seen();
 reset role;
 select pg_temp.assert((select alerts_seen_at is null from public.profiles where id = :'alice'), 'clients have no team alerts to mark');
 
+-- Contact form: server inserts, staff are alerted, nobody else reads
+insert into public.contact_messages (name, email, topic, message) values ('Visitor', 'v@example.com', 'team', 'Hello');
+select pg_temp.assert((select count(*) = 1 from public.staff_alerts where kind = 'contact_request' and payload->>'email' = 'v@example.com'), 'alert: contact request');
+select pg_temp.act_as(:'alice');
+select pg_temp.assert((select count(*) = 0 from public.contact_messages), 'clients cannot read contact messages');
+reset role;
+select pg_temp.act_as(:'bob');
+select pg_temp.assert((select count(*) = 1 from public.contact_messages), 'staff read contact messages');
+reset role;
+
 \echo ALL RLS TESTS PASSED

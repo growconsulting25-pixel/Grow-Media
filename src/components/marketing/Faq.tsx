@@ -1,36 +1,60 @@
+import Link from "next/link";
 import { Accordion } from "@/components/ui/Accordion";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { sectionIds } from "@/config/navigation";
-import { addOns } from "@/config/pricing";
-import { siteConfig } from "@/config/site";
 import type { Locale } from "@/i18n/config";
-import type { Dictionary } from "@/i18n/dictionaries";
+import type { Dictionary, HeadlineLine } from "@/i18n/dictionaries";
 import { interpolate } from "@/i18n/interpolate";
-import { formatPrice } from "@/lib/format";
+import { href } from "@/i18n/routing";
+import { priceVars } from "@/lib/marketing/prices";
 
+type Item = { q: string; a: string };
+
+const fill = (items: Item[], locale: Locale) => {
+  const vars = priceVars(locale);
+  return items.map((item) => ({ q: item.q, a: interpolate(item.a, vars) }));
+};
+
+/** General FAQ (Services page), with prices filled in. */
 export function faqItems(dict: Dictionary, locale: Locale) {
-  const walkthrough = addOns.find((a) => a.id === "walkthrough")?.price ?? 0;
-  return dict.faq.items.map((item) => ({ q: item.q, a: interpolate(item.a, { walkthroughPrice: formatPrice(walkthrough, locale) }) }));
+  return fill(dict.faq.items, locale);
 }
 
-export function Faq({ dict, locale }: { dict: Dictionary; locale: Locale }) {
+/** Pricing questions (Pricing page). */
+export function pricingFaqItems(dict: Dictionary, locale: Locale) {
+  return fill(dict.pricing.faq, locale);
+}
+
+export function Faq({
+  dict,
+  locale,
+  items = faqItems(dict, locale),
+  lines = dict.faq.headline,
+  initialCount = 8,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+  items?: Item[];
+  lines?: HeadlineLine[];
+  initialCount?: number;
+}) {
   const t = dict.faq;
   return (
-    <section id={sectionIds.faq} aria-labelledby="faq-title" className="relative py-24 sm:py-32">
+    <section id={sectionIds.faq} aria-labelledby="faq-title" className="relative scroll-mt-24 py-24 sm:py-32">
       <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <SectionHeading align="left" eyebrow={t.eyebrow} lines={t.headline} titleId="faq-title" />
+          <SectionHeading align="left" eyebrow={t.eyebrow} lines={lines} titleId="faq-title" />
           <Reveal delay={100} className="mt-8">
             <p className="text-sm text-fg-muted">{t.stillQuestions}</p>
-            <a href={`mailto:${siteConfig.contactEmail}`} className="mt-1 inline-flex text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
-              {t.contact} → {siteConfig.contactEmail}
-            </a>
+            <Link href={href("contact", locale)} className="mt-1 inline-flex text-sm font-medium text-brand-300 underline-offset-4 hover:underline">
+              {t.contact} →
+            </Link>
           </Reveal>
         </div>
         <Reveal delay={80}>
-          <Accordion items={faqItems(dict, locale)} initialCount={6} moreLabel={t.showMore} lessLabel={t.showLess} />
+          <Accordion items={items} initialCount={initialCount} moreLabel={t.showMore} lessLabel={t.showLess} />
         </Reveal>
       </Container>
     </section>

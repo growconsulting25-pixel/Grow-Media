@@ -7,7 +7,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { requireAdmin } from "@/lib/admin/server";
 import { cn } from "@/lib/cn";
 
-type Kind = "new_client" | "new_project" | "client_message" | "revision_requested" | "subscription_started" | "subscription_canceled" | "payment";
+type Kind = "new_client" | "new_project" | "client_message" | "revision_requested" | "subscription_started" | "subscription_canceled" | "payment" | "contact_request";
 const look: Record<Kind, { icon: IconName; accent: Accent }> = {
   new_client: { icon: "user", accent: "cyan" },
   new_project: { icon: "upload", accent: "amber" },
@@ -16,6 +16,7 @@ const look: Record<Kind, { icon: IconName; accent: Accent }> = {
   subscription_started: { icon: "layers", accent: "emerald" },
   subscription_canceled: { icon: "close", accent: "rose" },
   payment: { icon: "coins", accent: "orange" },
+  contact_request: { icon: "send", accent: "cyan" },
 };
 
 /** The team's notification feed. Opening it marks everything as seen for this admin. */
@@ -55,10 +56,15 @@ export default async function ActivityPage({ params }: PageProps<"/[locale]/admi
             const l = look[r.kind];
             const a = accents[l.accent];
             const isNew = r.created_at > seen;
-            const name = [r.profiles?.first_name, r.profiles?.last_name].filter(Boolean).join(" ") || r.profiles?.email || "—";
+            const contactEmail = typeof r.payload.email === "string" ? r.payload.email : "";
+            const name =
+              r.kind === "contact_request"
+                ? [r.payload.name, contactEmail].filter((v) => typeof v === "string" && v).join(" · ") || "—"
+                : [r.profiles?.first_name, r.profiles?.last_name].filter(Boolean).join(" ") || r.profiles?.email || "—";
             const project = r.projects?.address || r.projects?.title;
             const href =
-              r.kind === "payment" ? `${base}/payments`
+              r.kind === "contact_request" ? `mailto:${contactEmail}`
+              : r.kind === "payment" ? `${base}/payments`
               : r.project_id ? `${base}/projects/${r.project_id}${r.kind === "client_message" ? "#messages" : ""}`
               : r.user_id ? `${base}/clients/${r.user_id}` : base;
             const detail =

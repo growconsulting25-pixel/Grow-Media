@@ -12,6 +12,8 @@ export function Headline({ lines, as: As = "h2", className, id }: { lines: Headl
         <span key={i} className="block">
           {line.text}
           {line.accent && <GradientText>{line.accent}</GradientText>}
+          {/* Keeps words apart in the text crawlers read (lines are display:block). */}
+          {i < lines.length - 1 && " "}
         </span>
       ))}
     </As>

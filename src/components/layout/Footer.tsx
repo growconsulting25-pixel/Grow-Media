@@ -19,15 +19,16 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
       links: [
         { label: dict.nav.howItWorks, href: `${home}#${sectionIds.howItWorks}` },
         { label: dict.nav.examples, href: `${home}#${sectionIds.examples}` },
-        { label: dict.nav.services, href: `${home}#${sectionIds.services}` },
-        { label: dict.nav.pricing, href: `${home}#${sectionIds.pricing}` },
+        { label: dict.nav.services, href: href("services", locale) },
+        { label: dict.nav.pricing, href: href("pricing", locale) },
+        { label: dict.nav.faq, href: href("services", locale, sectionIds.faq) },
       ],
     },
     {
       title: t.company,
       links: [
         { label: t.about, href: `${home}#${sectionIds.howItWorks}` },
-        { label: t.contact, href: `mailto:${siteConfig.contactEmail}` },
+        { label: t.contact, href: href("contact", locale) },
       ],
     },
     {
@@ -54,6 +55,9 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
           <div className="max-w-xs">
             <Logo href={home} />
             <p className="mt-4 text-sm leading-relaxed text-fg-muted">{t.tagline}</p>
+            <a href={`mailto:${siteConfig.contactEmail}`} className="mt-3 inline-block text-sm text-fg-muted transition-colors hover:text-fg">
+              {siteConfig.contactEmail}
+            </a>
             <ul aria-label={t.social} className="mt-5 flex gap-2">
               {siteConfig.social.map((s) => (
                 <li key={s.id}>

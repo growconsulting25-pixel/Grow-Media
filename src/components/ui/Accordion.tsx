@@ -22,17 +22,17 @@ export function Accordion({ items, className, initialCount, moreLabel, lessLabel
   const [expanded, setExpanded] = useState(false);
   const baseId = useId();
   const collapsible = initialCount !== undefined && items.length > initialCount;
-  const visible = collapsible && !expanded ? items.slice(0, initialCount) : items;
 
   return (
     <div className={className}>
-      <div className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
-        {visible.map((item, i) => {
+      <div className="border-t border-white/[0.07]">
+        {/* Every answer stays in the HTML (crawlers and answer engines read it); extra ones are only hidden. */}
+        {items.map((item, i) => {
           const isOpen = open === i;
           const buttonId = `${baseId}-b${i}`;
           const panelId = `${baseId}-p${i}`;
           return (
-            <div key={i}>
+            <div key={i} className="border-b border-white/[0.07]" hidden={collapsible && !expanded && i >= initialCount}>
               <h3>
                 <button
                   id={buttonId}

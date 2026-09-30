@@ -238,7 +238,7 @@ const app = {
         new: "New",
         empty: "No activity yet.",
         bell: "Activity ({count} new)",
-        kinds: { new_client: "New client", new_project: "New project", client_message: "Client message", revision_requested: "Revision requested", subscription_started: "New subscriber", subscription_canceled: "Subscription cancelled", payment: "Payment received" },
+        kinds: { new_client: "New client", new_project: "New project", client_message: "Client message", revision_requested: "Revision requested", subscription_started: "New subscriber", subscription_canceled: "Subscription cancelled", payment: "Payment received", contact_request: "Contact form" },
       },
       messages: {
         title: "Messages",
