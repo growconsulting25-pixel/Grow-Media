@@ -30,7 +30,8 @@ export function Photo({ name, width = 800, sizes, ratio, priority, className, im
 
   return (
     <div
-      className={cn("relative overflow-hidden", className)}
+      // A caller positioning the photo (absolute/fixed) must not be overridden by `relative`.
+      className={cn(/\b(absolute|fixed)\b/.test(className ?? "") ? "" : "relative", "overflow-hidden", className)}
       style={{ background: image.tone }}
     >
       {!failed && (
