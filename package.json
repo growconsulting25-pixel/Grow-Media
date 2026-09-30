@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:db": "bash supabase/tests/run.sh",
-    "test:stripe": "tsx --conditions=react-server tests/stripe-webhook.test.ts"
+    "test:stripe": "tsx --conditions=react-server tests/stripe-webhook.test.ts",
+    "emails:auth": "NEXT_PUBLIC_SITE_URL=https://media.growconsulting.ca tsx --conditions=react-server scripts/generate-auth-emails.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

@@ -161,4 +161,14 @@ select pg_temp.act_as(:'alice');
 select pg_temp.assert((select count(*) = 0 from public.staff_alerts), 'clients cannot read staff alerts');
 reset role;
 
+-- Team bell: each admin marks alerts seen for themselves only
+select pg_temp.act_as(:'bob');
+select public.mark_staff_alerts_seen();
+select pg_temp.assert((select alerts_seen_at is not null from public.profiles where id = :'bob'), 'admin marks alerts seen');
+reset role;
+select pg_temp.act_as(:'alice');
+select public.mark_staff_alerts_seen();
+reset role;
+select pg_temp.assert((select alerts_seen_at is null from public.profiles where id = :'alice'), 'clients have no team alerts to mark');
+
 \echo ALL RLS TESTS PASSED

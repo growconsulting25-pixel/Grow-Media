@@ -61,6 +61,7 @@ export async function dispatchEmails(limit = 50) {
 interface AlertRow {
   id: string;
   kind: StaffAlertKind;
+  user_id: string | null;
   project_id: string | null;
   payload: Record<string, unknown>;
   profiles: { email: string; first_name: string; last_name: string } | null;
@@ -76,7 +77,7 @@ async function dispatchStaffAlerts(db: NonNullable<ReturnType<typeof getSupabase
   const to = process.env.ADMIN_NOTIFY_EMAIL || siteConfig.contactEmail;
   const { data, error } = await db
     .from("staff_alerts")
-    .select("id, kind, project_id, payload, profiles(email, first_name, last_name), projects(title, address, type)")
+    .select("id, kind, user_id, project_id, payload, profiles(email, first_name, last_name), projects(title, address, type)")
     .is("emailed_at", null)
     .gte("created_at", since)
     .order("created_at")
@@ -95,7 +96,12 @@ async function dispatchStaffAlerts(db: NonNullable<ReturnType<typeof getSupabase
     if (a.payload.amount_cents) rows.push(["Montant", money(a.payload.amount_cents)]);
     if (typeof a.payload.ends_at === "string") rows.push(["Fin d'accès", new Date(a.payload.ends_at).toLocaleDateString("fr-CA")]);
     if (typeof a.payload.excerpt === "string") rows.push(["Message", a.payload.excerpt]);
-    const url = a.project_id ? `${siteConfig.url}/fr/admin/projects/${a.project_id}` : `${siteConfig.url}/fr/admin`;
+    const admin = `${siteConfig.url}/fr/admin`;
+    const url =
+      a.kind === "payment" ? `${admin}/payments`
+      : a.project_id ? `${admin}/projects/${a.project_id}${a.kind === "client_message" ? "#messages" : ""}`
+      : a.user_id ? `${admin}/clients/${a.user_id}`
+      : admin;
     const email = renderStaffAlert(a.kind, { name, email: p?.email ?? "", title, amount: money(a.payload.amount_cents), url, rows });
     const { ok } = await sendEmail({ to, ...email });
     if (ok) {

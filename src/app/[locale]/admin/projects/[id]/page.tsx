@@ -135,7 +135,9 @@ export default async function AdminProjectPage({ params }: PageProps<"/[locale]/
             </section>
           )}
 
-          <MessageThread projectId={id} userId={user.id} initial={messages} asStaff ownerId={p.user_id} />
+          <div id="messages" className="scroll-mt-24">
+            <MessageThread projectId={id} userId={user.id} initial={messages} asStaff ownerId={p.user_id} />
+          </div>
         </div>
 
         <aside className="space-y-6">

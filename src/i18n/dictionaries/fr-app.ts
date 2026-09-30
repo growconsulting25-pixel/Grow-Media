@@ -210,7 +210,7 @@ const appFr: Widen<typeof app> = {
     notAllowed: "Cet espace est réservé à l'équipe de production.",
     error: "Une erreur est survenue. Réessayez.",
     console: {
-      nav: { dashboard: "Tableau de bord", production: "Production", clients: "Clients", payments: "Paiements", team: "Équipe", site: "Voir le site" },
+      nav: { dashboard: "Tableau de bord", production: "Production", messages: "Messages", clients: "Clients", payments: "Finances", activity: "Activité", team: "Équipe", settings: "Paramètres", site: "Voir le site" },
       dash: {
         title: "Tableau de bord",
         hello: "Bonjour {name}",
@@ -235,6 +235,32 @@ const appFr: Widen<typeof app> = {
         viewAll: "Tout voir",
         none: "Rien pour l'instant.",
         weekOf: "Semaine du {date}",
+      },
+      activity: {
+        title: "Activité",
+        subtitle: "Tout ce qui se passe sur la plateforme, en temps réel. Chaque alerte est aussi envoyée par courriel à l'équipe.",
+        new: "Nouveau",
+        empty: "Aucune activité pour l'instant.",
+        bell: "Activité ({count} nouvelles)",
+        kinds: { new_client: "Nouveau client", new_project: "Nouveau projet", client_message: "Message client", revision_requested: "Retouche demandée", subscription_started: "Nouvel abonné", subscription_canceled: "Abonnement annulé", payment: "Paiement reçu" },
+      },
+      messages: {
+        title: "Messages",
+        subtitle: "Toutes les conversations avec les clients, par projet. Répondez depuis la page du projet.",
+        needsReply: "À répondre",
+        replied: "Répondu",
+        team: "Équipe",
+        empty: "Aucun message pour l'instant.",
+        count: "{count} messages",
+      },
+      settings: {
+        title: "Paramètres",
+        profile: "Mon profil",
+        notifications: "Courriels de l'équipe",
+        notificationsHint: "Les alertes (nouveaux clients, projets, messages, retouches, abonnements, paiements) sont envoyées à {email}. Pour changer cette adresse, modifiez ADMIN_NOTIFY_EMAIL dans Netlify.",
+        team: "Équipe",
+        teamHint: "Ajoutez ou retirez des administrateurs.",
+        manageTeam: "Gérer l'équipe",
       },
       segments: { subscriber_agent: "Abonnés Courtier", subscriber_pro: "Abonnés Pro", single: "À l'unité", free: "Gratuit seulement" },
       production: {
@@ -272,7 +298,7 @@ const appFr: Widen<typeof app> = {
         noPayments: "Aucun paiement.",
       },
       payments: {
-        title: "Paiements",
+        title: "Finances",
         ranges: { today: "Aujourd'hui", "7d": "7 jours", month: "Ce mois-ci", "30d": "30 jours", all: "Tout" },
         total: "Total de la période",
         count: "{count} paiements",

@@ -206,7 +206,7 @@ const app = {
     notAllowed: "This area is for the production team.",
     error: "Something went wrong. Try again.",
     console: {
-      nav: { dashboard: "Dashboard", production: "Production", clients: "Clients", payments: "Payments", team: "Team", site: "View site" },
+      nav: { dashboard: "Dashboard", production: "Production", messages: "Messages", clients: "Clients", payments: "Finances", activity: "Activity", team: "Team", settings: "Settings", site: "View site" },
       dash: {
         title: "Dashboard",
         hello: "Hi {name}",
@@ -231,6 +231,32 @@ const app = {
         viewAll: "View all",
         none: "Nothing yet.",
         weekOf: "Week of {date}",
+      },
+      activity: {
+        title: "Activity",
+        subtitle: "Everything happening on the platform, as it happens. Each alert is also emailed to the team.",
+        new: "New",
+        empty: "No activity yet.",
+        bell: "Activity ({count} new)",
+        kinds: { new_client: "New client", new_project: "New project", client_message: "Client message", revision_requested: "Revision requested", subscription_started: "New subscriber", subscription_canceled: "Subscription cancelled", payment: "Payment received" },
+      },
+      messages: {
+        title: "Messages",
+        subtitle: "Every client conversation, by project. Reply from the project page.",
+        needsReply: "Needs reply",
+        replied: "Replied",
+        team: "Team",
+        empty: "No messages yet.",
+        count: "{count} messages",
+      },
+      settings: {
+        title: "Settings",
+        profile: "My profile",
+        notifications: "Team emails",
+        notificationsHint: "Alerts (new clients, projects, messages, revisions, subscriptions, payments) go to {email}. To change it, edit ADMIN_NOTIFY_EMAIL in Netlify.",
+        team: "Team",
+        teamHint: "Add or remove admins.",
+        manageTeam: "Manage team",
       },
       segments: { subscriber_agent: "Agent subscribers", subscriber_pro: "Pro subscribers", single: "Pay per video", free: "Free only" },
       production: {
@@ -268,7 +294,7 @@ const app = {
         noPayments: "No payments.",
       },
       payments: {
-        title: "Payments",
+        title: "Finances",
         ranges: { today: "Today", "7d": "7 days", month: "This month", "30d": "30 days", all: "All" },
         total: "Period total",
         count: "{count} payments",
