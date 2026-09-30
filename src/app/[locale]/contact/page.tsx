@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { FinalCta } from "@/components/marketing/FinalCta";
 import { PageHero } from "@/components/marketing/PageHero";
+import { PaperBand } from "@/components/marketing/PaperBand";
 import { FreeVideoButton } from "@/components/onboarding/FreeVideoButton";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Container } from "@/components/ui/Container";
@@ -39,8 +41,9 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
     <>
       <Navbar />
       <main id="main">
-        <PageHero dict={dict} locale={locale} eyebrow={t.eyebrow} lines={t.headline} intro={t.intro} crumb={t.breadcrumb} />
-        <section aria-label={t.eyebrow} className="pb-24 sm:pb-32">
+        <PageHero dict={dict} locale={locale} eyebrow={t.eyebrow} lines={t.headline} intro={t.intro} crumb={t.breadcrumb} image="agentPhone" />
+        <PaperBand className="mb-20 sm:mb-28">
+        <section aria-label={t.eyebrow} className="py-16 sm:py-24">
           <Container className="grid gap-5 lg:grid-cols-[1.5fr_1fr]">
             <Reveal className="surface rounded-[var(--radius-panel)] p-6 sm:p-9">
               <ContactForm initialTopic={typeof topic === "string" ? topic : undefined} />
@@ -64,6 +67,8 @@ export default async function ContactPage({ params, searchParams }: PageProps<"/
             </div>
           </Container>
         </section>
+        </PaperBand>
+        <FinalCta dict={dict} />
       </main>
       <Footer dict={dict} locale={locale} />
       <JsonLd data={jsonLd} />

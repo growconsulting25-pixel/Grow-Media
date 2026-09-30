@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Faq, pricingFaqItems } from "@/components/marketing/Faq";
 import { FinalCta } from "@/components/marketing/FinalCta";
 import { PageHero } from "@/components/marketing/PageHero";
+import { PaperBand } from "@/components/marketing/PaperBand";
 import { Pricing } from "@/components/marketing/Pricing";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { addOns, currency, plans } from "@/config/pricing";
@@ -76,9 +77,11 @@ export default async function PricingPage({ params }: PageProps<"/[locale]/prici
     <>
       <Navbar />
       <main id="main">
-        <PageHero dict={dict} locale={locale} eyebrow={t.eyebrow} lines={t.headline} intro={interpolate(t.intro, priceVars(locale))} crumb={t.breadcrumb} />
+        <PageHero dict={dict} locale={locale} eyebrow={t.eyebrow} lines={t.headline} intro={interpolate(t.intro, priceVars(locale))} crumb={t.breadcrumb} image="bungalow" />
         <Pricing flush />
-        <Faq dict={dict} locale={locale} items={faq} lines={[{ text: t.faqTitle }]} initialCount={faq.length} />
+        <PaperBand className="mb-20 sm:mb-28">
+          <Faq dict={dict} locale={locale} items={faq} lines={[{ text: t.faqTitle }]} initialCount={faq.length} />
+        </PaperBand>
         <FinalCta dict={dict} />
       </main>
       <Footer dict={dict} locale={locale} />
