@@ -336,7 +336,6 @@ const en = {
           "Social formats",
           "Client platform & project history",
           "Content delivery",
-          "Content ideas",
         ],
       },
       pro: {
@@ -435,7 +434,7 @@ const en = {
       },
       {
         q: "What is included in the Agent plan?",
-        a: "4 professional listing videos per month with captions, music, agent branding and social formats, plus the client platform, project history, content delivery and monthly content ideas.",
+        a: "4 professional listing videos per month with captions, music, agent branding and social formats, plus the client platform, project history and content delivery.",
       },
       {
         q: "What is included in the Pro plan?",

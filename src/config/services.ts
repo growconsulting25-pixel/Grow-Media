@@ -13,5 +13,5 @@ export const services: Service[] = [
   { id: "listing", startingPrice: 49.95, cta: "create", href: "#start" },
   { id: "walkthrough", startingPrice: 99, cta: "learn", href: "#faq" },
   { id: "ugc", startingPrice: null, cta: "learn", href: "#faq" },
-  { id: "ads", startingPrice: null, cta: "contact", href: "mailto:hello@growconsulting.ca" },
+  { id: "ads", startingPrice: null, cta: "contact", href: "mailto:media@growconsulting.ca" },
 ];

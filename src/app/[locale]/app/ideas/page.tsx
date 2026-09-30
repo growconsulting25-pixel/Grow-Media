@@ -1,4 +1,6 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { siteConfig } from "@/config/site";
+import { href } from "@/i18n/routing";
 import { IdeaCard } from "@/components/app/IdeaCard";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
@@ -8,6 +10,7 @@ import { getCurrentUser } from "@/lib/supabase/server";
 export default async function IdeasPage({ params }: PageProps<"/[locale]/app/ideas">) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  if (!siteConfig.contentIdeas) redirect(href("app", locale));
   const dict = await getDictionary(locale);
   const session = await getCurrentUser();
   if (!session) return null;

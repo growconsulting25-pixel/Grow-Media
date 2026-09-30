@@ -149,4 +149,16 @@ select pg_temp.act_as(:'alice');
 select pg_temp.assert((select (q->>'used')::int = 2 from public.get_submission_quote() q), 'walkthrough video counts toward the plan');
 reset role;
 
+-- Staff alerts: every business event lands in the staff inbox queue
+insert into public.orders (user_id, amount_cents, status, plan_id) values (:'alice', 9900, 'paid', 'agent');
+select pg_temp.assert((select count(*) >= 2 from public.staff_alerts where kind = 'new_client'), 'alert: new sign-ups');
+select pg_temp.assert((select count(*) >= 2 from public.staff_alerts where kind = 'new_project'), 'alert: submitted projects');
+select pg_temp.assert((select count(*) = 1 from public.staff_alerts where kind = 'revision_requested'), 'alert: revision requested');
+select pg_temp.assert((select count(*) = 1 from public.staff_alerts where kind = 'client_message'), 'alert: client message (staff messages excluded)');
+select pg_temp.assert((select count(*) = 1 from public.staff_alerts where kind = 'subscription_started'), 'alert: new subscriber');
+select pg_temp.assert((select count(*) = 1 from public.staff_alerts where kind = 'payment' and (payload->>'amount_cents')::int = 9900), 'alert: payment');
+select pg_temp.act_as(:'alice');
+select pg_temp.assert((select count(*) = 0 from public.staff_alerts), 'clients cannot read staff alerts');
+reset role;
+
 \echo ALL RLS TESTS PASSED

@@ -340,7 +340,6 @@ const fr: Dictionary = {
           "Formats sociaux",
           "Plateforme client et historique des projets",
           "Livraison du contenu",
-          "Idées de contenu",
         ],
       },
       pro: {
@@ -439,7 +438,7 @@ const fr: Dictionary = {
       },
       {
         q: "Qu'est-ce qui est inclus dans le forfait Courtier?",
-        a: "4 vidéos d'inscription professionnelles par mois avec sous-titres, musique, image de marque et formats sociaux, en plus de la plateforme client, de l'historique des projets, de la livraison du contenu et d'idées de contenu chaque mois.",
+        a: "4 vidéos d'inscription professionnelles par mois avec sous-titres, musique, image de marque et formats sociaux, en plus de la plateforme client, de l'historique des projets et de la livraison du contenu.",
       },
       {
         q: "Qu'est-ce qui est inclus dans le forfait Pro?",
