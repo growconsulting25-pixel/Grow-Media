@@ -3,12 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  /** Permanent redirects for likely URLs and old section anchors, so links never 404. */
+  /**
+   * Permanent redirects for likely URLs and old section anchors, so links never 404.
+   * Never redirect a folder path that the proxy rewrites to (e.g. /fr/pricing ← /fr/tarifs):
+   * on Netlify the rewritten request hits the redirect again and loops.
+   */
   async redirects() {
     return [
       { source: "/fr/prix", destination: "/fr/tarifs", permanent: true },
       { source: "/fr/forfaits", destination: "/fr/tarifs", permanent: true },
-      { source: "/fr/pricing", destination: "/fr/tarifs", permanent: true },
       { source: "/en/tarifs", destination: "/en/pricing", permanent: true },
       { source: "/en/prices", destination: "/en/pricing", permanent: true },
       { source: "/fr/faq", destination: "/fr/services#faq", permanent: true },
