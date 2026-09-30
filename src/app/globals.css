@@ -251,3 +251,12 @@
     transform: none;
   }
 }
+
+/* Native dropdowns follow the dark theme (options were light-on-light). */
+select {
+  color-scheme: dark;
+}
+select option {
+  background-color: var(--color-ink-900);
+  color: var(--color-fg);
+}

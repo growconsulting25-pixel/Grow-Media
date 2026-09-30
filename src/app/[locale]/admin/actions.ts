@@ -2,20 +2,32 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/admin/server";
+import { NOTIFYING_STATUSES } from "@/lib/admin/statuses";
 import { dispatchEmails } from "@/lib/email/dispatch";
+import { getSupabaseService } from "@/lib/supabase/admin";
 import { projectStatuses, type ProjectStatus } from "@/lib/projects/types";
 
 const UUID = /^[0-9a-f-]{36}$/i;
 
-/** Changes a project's status. The DB trigger logs the timeline and notifies the client. */
-export async function updateProjectStatus(projectId: string, status: ProjectStatus) {
-  if (!UUID.test(projectId) || !projectStatuses.includes(status) || status === "draft") return { ok: false };
+/**
+ * Changes a project's status. The DB trigger logs the timeline and adds an
+ * in-app notification; the client is emailed only when `notify` is true.
+ */
+export async function updateProjectStatus(projectId: string, status: ProjectStatus, notify = true) {
+  if (!UUID.test(projectId) || !projectStatuses.includes(status) || status === "draft") return { ok: false, notified: false };
   const { supabase } = await requireAdmin();
   const { error } = await supabase.from("projects").update({ status }).eq("id", projectId);
-  if (error) return { ok: false };
-  await dispatchEmails().catch(() => undefined);
+  if (error) return { ok: false, notified: false };
+
+  const emails = notify && NOTIFYING_STATUSES.includes(status);
+  if (!emails) {
+    // Keep the in-app notification, skip the email.
+    await getSupabaseService()?.from("notifications").update({ emailed_at: new Date().toISOString() }).eq("project_id", projectId).is("emailed_at", null);
+  } else {
+    await dispatchEmails().catch(() => undefined);
+  }
   revalidatePath("/[locale]/admin", "layout");
-  return { ok: true };
+  return { ok: true, notified: emails };
 }
 
 export async function updateRevisionStatus(revisionId: string, status: "open" | "in_progress" | "done") {

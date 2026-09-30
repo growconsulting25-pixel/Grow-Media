@@ -100,7 +100,19 @@ async function run() {
   // 7. Unrelated events are ignored
   f = fakeDb();
   assert.equal(await handleStripeEvent(f.db, null, { type: "invoice.created", data: { object: {} } } as unknown as Stripe.Event), "ignored");
-  console.log("ok - unrelated events ignored\nALL STRIPE WEBHOOK TESTS PASSED");
+  console.log("ok - unrelated events ignored");
+
+  // 8. Monthly renewal → recorded as an order (first charge and one-off invoices are not)
+  const renewal = { id: "in_1", object: "invoice", billing_reason: "subscription_cycle", amount_paid: 9900, currency: "cad", customer: "cus_1",
+    parent: { subscription_details: { metadata: { user_id: "user_1", plan_id: "agent" } } } } as unknown as Stripe.Invoice;
+  f = fakeDb();
+  assert.equal(await handleStripeEvent(f.db, null, { type: "invoice.paid", data: { object: renewal } } as Stripe.Event), "renewal_recorded");
+  const ren = f.calls.find((c) => c.table === "orders")!;
+  assert.deepEqual([(ren.payload as { amount_cents: number }).amount_cents, (ren.payload as { plan_id: string }).plan_id], [9900, "agent"]);
+  f = fakeDb();
+  assert.equal(await handleStripeEvent(f.db, null, { type: "invoice.paid", data: { object: { ...renewal, billing_reason: "subscription_create" } } } as Stripe.Event), "ignored");
+  assert.equal(f.calls.length, 0);
+  console.log("ok - renewals recorded as orders; first invoice not double-counted\nALL STRIPE WEBHOOK TESTS PASSED");
 }
 
 run().catch((e) => {

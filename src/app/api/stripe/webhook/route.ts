@@ -8,7 +8,7 @@ import { getSupabaseService } from "@/lib/supabase/admin";
  * Stripe webhook. Subscription and payment state is only ever trusted from
  * here (signature-verified), never from the browser redirect.
  * Events: checkout.session.completed, checkout.session.async_payment_succeeded,
- * customer.subscription.created | updated | deleted
+ * customer.subscription.created | updated | deleted, invoice.paid (renewals)
  */
 export async function POST(request: NextRequest) {
   const stripe = getStripe();

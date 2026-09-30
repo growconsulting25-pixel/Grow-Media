@@ -96,11 +96,43 @@ export async function handleCheckoutCompleted(db: SupabaseClient, stripe: Stripe
   return "recorded";
 }
 
+/**
+ * Records a subscription renewal (monthly charge) as an order, so revenue
+ * reports include recurring income. The first charge is already recorded by
+ * checkout, and one-off invoices by the saved-card flow, so only cycles count.
+ */
+export async function handleInvoicePaid(db: SupabaseClient, invoice: Stripe.Invoice) {
+  if (invoice.billing_reason !== "subscription_cycle" || !invoice.amount_paid) return "ignored";
+  const meta = invoice.parent?.subscription_details?.metadata ?? {};
+  let userId: string | null = meta.user_id ?? null;
+  const customerId = idOf(invoice.customer as string | { id: string } | null);
+  if (!userId && customerId) {
+    const { data } = await db.from("profiles").select("id").eq("stripe_customer_id", customerId).maybeSingle();
+    userId = (data?.id as string | undefined) ?? null;
+  }
+  if (!userId) throw new Error(`invoice ${invoice.id}: no matching user`);
+  const { error } = await db.from("orders").upsert(
+    {
+      user_id: userId,
+      plan_id: meta.plan_id ?? null,
+      amount_cents: invoice.amount_paid,
+      currency: (invoice.currency ?? "cad").toUpperCase(),
+      status: "paid",
+      stripe_checkout_session_id: invoice.id,
+    },
+    { onConflict: "stripe_checkout_session_id", ignoreDuplicates: true },
+  );
+  if (error) throw error;
+  return "renewal_recorded";
+}
+
 export async function handleStripeEvent(db: SupabaseClient, stripe: Stripe | null, event: Stripe.Event) {
   switch (event.type) {
     case "checkout.session.completed":
     case "checkout.session.async_payment_succeeded":
       return handleCheckoutCompleted(db, stripe, event.data.object as Stripe.Checkout.Session);
+    case "invoice.paid":
+      return handleInvoicePaid(db, event.data.object as Stripe.Invoice);
     case "customer.subscription.created":
     case "customer.subscription.updated":
     case "customer.subscription.deleted":

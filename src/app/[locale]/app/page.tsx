@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { StatCard } from "@/components/admin/console/Cards";
 import { IdeaCard } from "@/components/app/IdeaCard";
 import { siteConfig } from "@/config/site";
 import { ProjectCard, projectLabel } from "@/components/app/ProjectCard";
@@ -10,7 +11,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { interpolate } from "@/i18n/interpolate";
 import { href, projectHref } from "@/i18n/routing";
-import { getAccountSummary, getProfile, listIdeas, listProjects } from "@/lib/projects/server";
+import { getAccountSummary, getProfile, listIdeas, listProjects, unreadNotificationCount } from "@/lib/projects/server";
 import { getCurrentUser } from "@/lib/supabase/server";
 
 function greetingKey(): "morning" | "afternoon" | "evening" {
@@ -25,11 +26,12 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
   const t = dict.app;
   const session = await getCurrentUser();
   if (!session) return null;
-  const [profile, projects, summary, ideas] = await Promise.all([
+  const [profile, projects, summary, ideas, unread] = await Promise.all([
     getProfile(session.supabase, session.user.id),
     listProjects(session.supabase, 24),
     getAccountSummary(session.supabase),
     siteConfig.contentIdeas ? listIdeas(session.supabase, locale, 3) : Promise.resolve([]),
+    unreadNotificationCount(session.supabase),
   ]);
 
   const drafts = projects.filter((p) => p.project.status === "draft");
@@ -49,15 +51,24 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
         </Link>
       </section>
 
+      <section className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
+        <StatCard href={href("appVideos", locale)} accent="emerald" icon="play" label={t.dashboard.stats.ready} value={String(ready.length)} />
+        <StatCard href={href("appProjects", locale)} accent="amber" icon="clock" label={t.dashboard.stats.current} value={String(current.length)} />
+        <StatCard href={href("appMessages", locale)} accent="violet" icon="bell" label={t.dashboard.stats.messages} value={String(unread)} />
+        <StatCard href={href("appSubscription", locale)} accent="cyan" icon="coins" label={t.dashboard.stats.plan}
+          value={summary.plan_id === "agent" || summary.plan_id === "pro" ? dict.pricing.plans[summary.plan_id].name : t.dashboard.stats.payPerVideo}
+          sub={summary.free_credits > 0 ? t.dashboard.stats.free : undefined} />
+      </section>
+
       <section className="grid gap-4 lg:grid-cols-2">
         {summary.free_credits > 0 && (
-          <div className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-brand-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.3)]">
+          <Link href={href("appCreate", locale)} className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-brand-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.3)] transition-colors hover:bg-brand-500/[0.12]">
             <span className="btn-primary grid size-11 shrink-0 place-items-center rounded-xl"><Icon name="sparkle" className="size-5" fill="currentColor" /></span>
             <div>
               <p className="font-medium">{t.dashboard.freeCredit}</p>
               <p className="text-sm text-fg-muted">{t.dashboard.freeCreditNote}</p>
             </div>
-          </div>
+          </Link>
         )}
         <UsageCard summary={summary} dict={dict} locale={locale} />
       </section>

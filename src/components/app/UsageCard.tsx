@@ -17,15 +17,15 @@ export function UsageCard({ summary, dict, locale }: { summary: AccountSummary; 
 
   if (!summary.plan_id || summary.plan_id === "single") {
     return (
-      <div className="surface flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius-card)] p-5">
+      <Link href={href("appSubscription", locale)} className="surface flex flex-wrap items-center justify-between gap-4 rounded-[var(--radius-card)] p-5 transition-colors hover:bg-white/[0.04]">
         <div>
           <p className="text-sm text-fg-subtle">{t.noPlan}</p>
           <p className="mt-1 font-medium">
             {summary.free_credits > 0 ? interpolate(t.freeLeft, { count: summary.free_credits }) : interpolate(t.payAsYouGo, { price: formatPrice(single.price, locale) })}
           </p>
         </div>
-        <Link href={href("appSubscription", locale)} className="text-sm text-brand-300 hover:underline">{t.manage} →</Link>
-      </div>
+        <span className="text-sm text-brand-300">{t.manage} →</span>
+      </Link>
     );
   }
 
@@ -34,10 +34,10 @@ export function UsageCard({ summary, dict, locale }: { summary: AccountSummary; 
   const remaining = Math.max(0, included - used);
   const planName = dict.pricing.plans[summary.plan_id].name;
   return (
-    <div className="surface rounded-[var(--radius-card)] p-5">
+    <Link href={href("appSubscription", locale)} className="surface block rounded-[var(--radius-card)] p-5 transition-colors hover:bg-white/[0.04]">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="font-medium">{interpolate(t.plan, { plan: planName })}</p>
-        <Link href={href("appSubscription", locale)} className="text-sm text-brand-300 hover:underline">{t.manage} →</Link>
+        <span className="text-sm text-brand-300">{t.manage} →</span>
       </div>
       <p className="mt-3 text-sm text-fg-muted tabular-nums">{interpolate(t.used, { used, included })}</p>
       <ProgressIndicator className="mt-2" value={included ? (used / included) * 100 : 0} label={interpolate(t.used, { used, included })} />
@@ -45,6 +45,6 @@ export function UsageCard({ summary, dict, locale }: { summary: AccountSummary; 
         {summary.period_end && <span>{interpolate(summary.cancel_at_period_end ? t.cancels : t.renews, { date: fmt.format(new Date(summary.period_end)) })}</span>}
         {remaining === 1 && <span className="flex items-center gap-1 text-brand-300"><Icon name="clock" className="size-3.5" /> {interpolate(t.lowRemaining, { count: remaining })}</span>}
       </div>
-    </div>
+    </Link>
   );
 }

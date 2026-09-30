@@ -52,7 +52,7 @@ export default async function AdminProjectPage({ params }: PageProps<"/[locale]/
   return (
     <div className="space-y-8">
       <div>
-        <Link href={`/${locale}/admin`} className="text-sm text-fg-muted hover:text-fg">← {t.back}</Link>
+        <Link href={`/${locale}/admin/production`} className="text-sm text-fg-muted hover:text-fg">← {t.back}</Link>
         <div className="mt-3 flex flex-wrap items-center gap-3">
           <h1 className="display text-3xl">{p.address || p.title || id.slice(0, 8)}</h1>
           <ProjectStatusBadge status={p.status} dict={dict} />
@@ -66,7 +66,7 @@ export default async function AdminProjectPage({ params }: PageProps<"/[locale]/
       <div className="grid gap-6 lg:grid-cols-[1fr_22rem]">
         <div className="space-y-6">
           <section className="surface rounded-[var(--radius-panel)] p-6">
-            <StatusControl projectId={id} current={p.status} />
+            <StatusControl key={p.status} projectId={id} current={p.status} title={p.address || p.title || id.slice(0, 8)} client={name || profile?.email || ""} />
           </section>
 
           <section className="surface rounded-[var(--radius-panel)] p-6">
