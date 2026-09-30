@@ -15,7 +15,7 @@ const look: Record<Kind, { icon: IconName; accent: Accent }> = {
   revision_requested: { icon: "revise", accent: "rose" },
   subscription_started: { icon: "layers", accent: "emerald" },
   subscription_canceled: { icon: "close", accent: "rose" },
-  payment: { icon: "coins", accent: "violet" },
+  payment: { icon: "coins", accent: "orange" },
 };
 
 /** The team's notification feed. Opening it marks everything as seen for this admin. */
@@ -73,7 +73,7 @@ export default async function ActivityPage({ params }: PageProps<"/[locale]/admi
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-center gap-2">
                       <span className="font-medium">{t.kinds[r.kind]}</span>
-                      {isNew && <span className="rounded-full bg-rose-500 px-2 py-0.5 text-[0.65rem] font-bold text-white uppercase">{t.new}</span>}
+                      {isNew && <span className="rounded-full bg-rose-500 px-2 py-0.5 text-[0.65rem] font-bold text-[#fff] uppercase">{t.new}</span>}
                     </span>
                     <span className="mt-0.5 block truncate text-sm text-fg-muted">{name}{project ? ` · ${project}` : ""}</span>
                     {detail && <span className="mt-1 block truncate text-sm text-fg-subtle">{detail}</span>}

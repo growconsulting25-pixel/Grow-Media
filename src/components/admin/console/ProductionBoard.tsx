@@ -15,7 +15,7 @@ import { accents, type Accent } from "./accents";
 import { MoveConfirm, type PendingMove } from "./MoveConfirm";
 
 const columnAccent: Record<ProjectStatus, Accent> = {
-  draft: "cyan", submitted: "cyan", in_production: "amber", review: "violet",
+  draft: "cyan", submitted: "cyan", in_production: "amber", review: "orange",
   revision_requested: "rose", ready: "emerald", completed: "emerald", cancelled: "rose",
 };
 
@@ -111,7 +111,7 @@ function BoardCard({ p, onMove }: { p: ProjectRow; onMove: (to: ProjectStatus) =
     <article
       draggable
       onDragStart={(e) => { e.dataTransfer.setData("text/plain", p.id); e.dataTransfer.effectAllowed = "move"; }}
-      className="group relative cursor-grab rounded-xl bg-ink-850 p-3.5 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.07)] transition-colors hover:bg-ink-800 active:cursor-grabbing"
+      className="group relative cursor-grab rounded-xl bg-ink-850 p-3.5 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_7%,transparent)] transition-colors hover:bg-ink-800 active:cursor-grabbing"
     >
       <Link href={`/${locale}/admin/projects/${p.id}`} className="absolute inset-0 rounded-xl" aria-label={p.title} draggable={false} />
       <p className="pr-8 text-sm font-medium leading-snug">{p.title}</p>
@@ -209,7 +209,7 @@ function ListView({ rows, status, base, onMove }: { rows: ProjectRow[]; status: 
                         aria-label={t.changeStatus}
                         value={r.status}
                         onChange={(e) => onMove(r, e.target.value as ProjectStatus)}
-                        className={cn("h-9 rounded-lg bg-ink-900 px-2.5 text-sm text-fg shadow-[inset_0_0_0_1px_rgba(255,255,255,0.12)] outline-none", a.text)}
+                        className={cn("h-9 rounded-lg bg-ink-900 px-2.5 text-sm text-fg shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_12%,transparent)] outline-none", a.text)}
                       >
                         {STAFF_STATUSES.map((s) => <option key={s} value={s}>{t.statusLabels[s]}</option>)}
                       </select>

@@ -10,7 +10,7 @@ import { supabaseAnonKey } from "@/lib/supabase/env";
 import { getSupabaseBrowser } from "@/lib/supabase/client";
 
 const input =
-  "w-full rounded-xl bg-white/[0.04] px-3.5 text-sm text-fg shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
+  "w-full rounded-xl bg-white/[0.04] px-3.5 text-sm text-fg shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
 
 /** Staff upload of the final video into the client's private deliverables folder. */
 export function DeliverableUploader({ projectId, clientId }: { projectId: string; clientId: string }) {

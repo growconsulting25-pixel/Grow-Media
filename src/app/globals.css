@@ -260,3 +260,67 @@ select option {
   background-color: var(--color-ink-900);
   color: var(--color-fg);
 }
+
+/* ==========================================================================
+   Light theme (client app + admin console). The dark palette is the default;
+   [data-theme="light"] swaps the tokens, so every component follows.
+   `--color-white` flips to ink: subtle "white/5%" tints become ink tints.
+   Accent -200/-300 steps darken so colored text keeps AA contrast on white.
+   ========================================================================== */
+[data-theme="light"] {
+  color-scheme: light;
+  --color-ink-950: #e9eef3;
+  --color-ink-900: #f3f6f9;
+  --color-ink-850: #ffffff;
+  --color-ink-800: #f7f9fb;
+  --color-ink-700: #e3e9ef;
+  --color-ink-600: #d3dce5;
+  --color-fg: #0b1622;
+  --color-fg-muted: #455a6e;
+  --color-fg-subtle: #64788c;
+  --color-white: #0b1622;
+  --color-success: #15803d;
+  --color-brand-100: #0b2239;
+  --color-brand-200: #00507a;
+  --color-brand-300: #0070a8;
+  --color-brand-400: #0080c0;
+  --color-emerald-200: #065f46;
+  --color-emerald-300: #047857;
+  --color-amber-200: #78350f;
+  --color-amber-300: #a16207;
+  --color-orange-200: #7c2d12;
+  --color-orange-300: #c2410c;
+  --color-rose-200: #881337;
+  --color-rose-300: #be123c;
+  --color-blue-200: #1e3a8a;
+  --color-blue-300: #1d4ed8;
+  --color-slate-100: #0f172a;
+  --color-slate-300: #334155;
+  --color-red-300: #b91c1c;
+  background: var(--color-ink-900);
+  color: var(--color-fg);
+}
+[data-theme="light"] .surface {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(11, 22, 34, 0.08), 0 1px 2px rgba(11, 22, 34, 0.04);
+}
+[data-theme="light"] .surface-raised {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(11, 22, 34, 0.08), 0 30px 60px -30px rgba(11, 22, 34, 0.3);
+}
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, 0.82);
+}
+[data-theme="light"] .btn-primary {
+  box-shadow: 0 8px 20px -12px rgba(0, 119, 179, 0.6);
+}
+[data-theme="light"] .btn-secondary {
+  box-shadow: inset 0 0 0 1px rgba(0, 119, 179, 0.5);
+}
+[data-theme="light"] select {
+  color-scheme: light;
+}
+[data-theme="light"] select option {
+  background-color: #ffffff;
+  color: #0b1622;
+}

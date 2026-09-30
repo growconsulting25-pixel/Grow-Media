@@ -43,7 +43,7 @@ export default async function ClientPage({ params }: PageProps<"/[locale]/admin/
 
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard href="#projects" accent="amber" icon="play" label={t.projects} value={String(client.projects)} />
-        <StatCard href="#payments" accent="violet" icon="coins" label={t.spent} value={money(client.spentCents)} />
+        <StatCard href="#payments" accent="orange" icon="coins" label={t.spent} value={money(client.spentCents)} />
         <StatCard href={`/${locale}/admin/clients?segment=${client.segment}`} accent={segmentAccent[client.segment]} icon="calendar" label={t.since} value={date.format(new Date(client.createdAt))} sub={c.segments[client.segment]} />
       </div>
 
@@ -65,7 +65,7 @@ export default async function ClientPage({ params }: PageProps<"/[locale]/admin/
             </ul>
           ) : <p className="text-sm text-fg-muted">{t.noProjects}</p>}
         </Panel>
-        <Panel id="payments" title={t.payments} accent="violet">
+        <Panel id="payments" title={t.payments} accent="orange">
           {orders.length ? (
             <ul className="-mx-2 divide-y divide-white/[0.05]">
               {orders.map((o) => {

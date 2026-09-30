@@ -34,7 +34,7 @@ export default async function AdminDashboardPage({ params }: PageProps<"/[locale
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard href={`${base}/payments?range=today`} accent="cyan" icon="coins" label={t.revenueToday} value={money(s.revenueToday)} />
-        <StatCard href={`${base}/payments?range=month`} accent="violet" icon="calendar" label={t.revenueMonth} value={money(s.revenueMonth)} sub={interpolate(t.vsLastMonth, { value: money(s.revenueLastMonth) })} />
+        <StatCard href={`${base}/payments?range=month`} accent="orange" icon="calendar" label={t.revenueMonth} value={money(s.revenueMonth)} sub={interpolate(t.vsLastMonth, { value: money(s.revenueLastMonth) })} />
         <StatCard href={`${base}/clients?segment=subscribers`} accent="emerald" icon="layers" label={t.mrr} value={money(s.mrrCents)} sub={interpolate(t.subscribersCount, { count: s.subscribers })} />
         <StatCard href={`${base}/clients`} accent="amber" icon="user" label={t.clients} value={String(s.clientsTotal)} sub={interpolate(t.newThisMonth, { count: s.clientsThisMonth })} />
       </div>
@@ -42,7 +42,7 @@ export default async function AdminDashboardPage({ params }: PageProps<"/[locale
       <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard href={`${base}/production?status=submitted`} accent="rose" icon="upload" label={t.toProduce} value={String(s.production.submitted)} />
         <StatCard href={`${base}/production?status=in_production`} accent="amber" icon="clock" label={t.inProduction} value={String(s.production.in_production)} />
-        <StatCard href={`${base}/production?status=revision_requested`} accent="violet" icon="revise" label={t.openRevisions} value={String(s.openRevisions)} />
+        <StatCard href={`${base}/production?status=revision_requested`} accent="orange" icon="revise" label={t.openRevisions} value={String(s.openRevisions)} />
         <StatCard href={`${base}/production?status=ready`} accent="emerald" icon="check" label={t.deliveredMonth} value={String(s.deliveredMonth)} />
       </div>
 
@@ -81,10 +81,10 @@ export default async function AdminDashboardPage({ params }: PageProps<"/[locale
             }))}
           />
         </Panel>
-        <Panel title={t.signups} href={`${base}/clients`} action={t.viewAll} accent="violet">
+        <Panel title={t.signups} href={`${base}/clients`} action={t.viewAll} accent="orange">
           <ColumnChart
             label={t.signups}
-            accent="violet"
+            accent="orange"
             height={140}
             format={(n) => String(n)}
             data={s.weekly.map((w) => ({ key: w.date, value: w.value, tip: interpolate(t.weekOf, { date: day.format(new Date(w.date)) }), href: `${base}/clients` }))}
@@ -93,7 +93,7 @@ export default async function AdminDashboardPage({ params }: PageProps<"/[locale
       </div>
 
       <div className="grid gap-4 xl:grid-cols-2">
-        <Panel title={t.recentPayments} href={`${base}/payments`} action={t.viewAll} accent="violet">
+        <Panel title={t.recentPayments} href={`${base}/payments`} action={t.viewAll} accent="orange">
           {s.recentOrders.length ? (
             <ul className="-mx-2 divide-y divide-white/[0.05]">
               {s.recentOrders.map((o) => (

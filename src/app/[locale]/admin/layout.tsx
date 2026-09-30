@@ -11,6 +11,8 @@ import { href } from "@/i18n/routing";
 import { interpolate } from "@/i18n/interpolate";
 import { consoleBadges } from "@/lib/admin/inbox";
 import { requireAdmin } from "@/lib/admin/server";
+import { getTheme } from "@/lib/theme";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { Icon } from "@/components/ui/Icon";
 
 export const metadata: Metadata = { robots: { index: false, follow: false } };
@@ -21,9 +23,9 @@ export default async function AdminLayout({ children, params }: LayoutProps<"/[l
   if (!isLocale(locale)) notFound();
   const dict = await getDictionary(locale);
   const { user, supabase } = await requireAdmin();
-  const badges = await consoleBadges(supabase, user.id);
+  const [badges, theme] = await Promise.all([consoleBadges(supabase, user.id), getTheme()]);
   return (
-    <div className="min-h-dvh">
+    <div data-theme={theme} className="min-h-dvh">
       <header className="glass sticky top-0 z-40 border-b border-white/[0.06]">
         <div className="mx-auto flex h-14 max-w-[88rem] items-center gap-4 px-4 sm:px-8">
           <Logo href={`/${locale}/admin`} />
@@ -34,9 +36,10 @@ export default async function AdminLayout({ children, params }: LayoutProps<"/[l
               className="relative grid size-9 place-items-center rounded-full bg-white/[0.05] text-fg-muted transition-colors hover:bg-white/10 hover:text-fg">
               <Icon name="bell" className="size-4.5" />
               {badges.newAlerts > 0 && (
-                <span className="absolute -top-1 -right-1 grid min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[0.65rem] font-bold text-white tabular-nums">{badges.newAlerts > 99 ? "99+" : badges.newAlerts}</span>
+                <span className="absolute -top-1 -right-1 grid min-w-5 place-items-center rounded-full bg-rose-500 px-1 text-[0.65rem] font-bold text-[#fff] tabular-nums">{badges.newAlerts > 99 ? "99+" : badges.newAlerts}</span>
               )}
             </Link>
+            <ThemeToggle initial={theme} />
             <LanguageSwitcher />
             <Link href={href("home", locale)} className="hidden text-sm text-fg-muted hover:text-fg sm:inline">{dict.app.admin.console.nav.site}</Link>
             <SignOutButton />

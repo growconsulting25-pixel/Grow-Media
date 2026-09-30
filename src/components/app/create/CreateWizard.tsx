@@ -453,7 +453,7 @@ function ReviewSummary({ form: f, fileCount, quote: q, onEdit, billingEnabled }:
   }
 
 const inputClass =
-  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none transition-shadow focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
+  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none transition-shadow focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
 
 function Step({ title, hint, headingRef, children }: { title: string; hint?: string; headingRef: React.RefObject<HTMLHeadingElement | null>; children: React.ReactNode }) {
   return (

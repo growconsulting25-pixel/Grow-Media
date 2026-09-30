@@ -12,7 +12,7 @@ const SOCIALS = ["instagram", "facebook", "tiktok", "youtube", "linkedin"] as co
 const SOCIAL_LABELS: Record<(typeof SOCIALS)[number], string> = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok", youtube: "YouTube", linkedin: "LinkedIn" };
 
 const input =
-  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_rgba(255,255,255,0.09)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
+  "h-11 w-full rounded-xl bg-white/[0.04] px-3.5 text-[0.95rem] text-fg placeholder:text-fg-subtle shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_9%,transparent)] outline-none focus:shadow-[inset_0_0_0_1.5px_var(--color-brand-400)]";
 
 type AssetKey = "logo_path" | "profile_photo_path";
 
@@ -129,7 +129,7 @@ export function BrandKitForm({ userId, kit, logoUrl, photoUrl }: { userId: strin
       {/* Live preview of how branding appears on a video */}
       <aside aria-label={t.preview} className="lg:sticky lg:top-10 lg:self-start">
         <p className="mb-2 text-sm text-fg-muted">{t.preview}</p>
-        <div className="relative aspect-[9/16] overflow-hidden rounded-[1.75rem] bg-ink-700 shadow-[0_0_0_1px_rgba(255,255,255,0.08)]">
+        <div className="relative aspect-[9/16] overflow-hidden rounded-[1.75rem] bg-ink-700 shadow-[0_0_0_1px_color-mix(in_oklab,var(--color-white)_8%,transparent)]">
           <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/85" />
           {assets.logo_path.url && (
             // eslint-disable-next-line @next/next/no-img-element -- signed/local URL
@@ -144,12 +144,12 @@ export function BrandKitForm({ userId, kit, logoUrl, photoUrl }: { userId: strin
                 // eslint-disable-next-line @next/next/no-img-element -- signed/local URL
                 <img src={assets.profile_photo_path.url} alt="" className="size-9 rounded-full object-cover" />
               ) : (
-                <span className="grid size-9 place-items-center rounded-full" style={{ background: values.primary_color }}><Icon name="user" className="size-4 text-white" /></span>
+                <span className="grid size-9 place-items-center rounded-full" style={{ background: values.primary_color }}><Icon name="user" className="size-4 text-[#fff]" /></span>
               )}
-              <div className="min-w-0 text-xs leading-tight text-white">
+              <div className="min-w-0 text-xs leading-tight text-[#fff]">
                 <p className="truncate font-semibold">{values.agent_name || t.agentName}</p>
-                <p className="truncate text-white/70">{values.agency || t.agency}</p>
-                {values.phone && <p className="truncate text-white/70">{values.phone}</p>}
+                <p className="truncate text-[#fff]/70">{values.agency || t.agency}</p>
+                {values.phone && <p className="truncate text-[#fff]/70">{values.phone}</p>}
               </div>
             </div>
           </div>

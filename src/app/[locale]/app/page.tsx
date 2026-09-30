@@ -54,7 +54,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
       <section className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
         <StatCard href={href("appVideos", locale)} accent="emerald" icon="play" label={t.dashboard.stats.ready} value={String(ready.length)} />
         <StatCard href={href("appProjects", locale)} accent="amber" icon="clock" label={t.dashboard.stats.current} value={String(current.length)} />
-        <StatCard href={href("appMessages", locale)} accent="violet" icon="bell" label={t.dashboard.stats.messages} value={String(unread)} />
+        <StatCard href={href("appMessages", locale)} accent="orange" icon="bell" label={t.dashboard.stats.messages} value={String(unread)} />
         <StatCard href={href("appSubscription", locale)} accent="cyan" icon="coins" label={t.dashboard.stats.plan}
           value={summary.plan_id === "agent" || summary.plan_id === "pro" ? dict.pricing.plans[summary.plan_id].name : t.dashboard.stats.payPerVideo}
           sub={summary.free_credits > 0 ? t.dashboard.stats.free : undefined} />
