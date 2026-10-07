@@ -89,6 +89,10 @@ export function HeroWalkthrough({
         introRef.current.style.pointerEvents = o > 0.5 ? "auto" : "none";
       }
       if (veilRef.current) veilRef.current.style.opacity = String(0.12 + 0.63 * smooth(1 - p / 0.16));
+      // The film is square; a wide screen shows a horizontal band of it. Keep the
+      // whole façade in view outside, then lower the band to eye level once indoors
+      // (floor, furniture, windows) so it reads like walking, not looking at ceilings.
+      video.style.objectPosition = `50% ${(45 + 30 * smooth((p - 0.14) / 0.14)).toFixed(1)}%`;
       if (barRef.current) barRef.current.style.transform = `scaleX(${p.toFixed(4)})`;
 
       chapterRefs.current.forEach((el, i) => {
