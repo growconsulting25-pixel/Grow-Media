@@ -64,7 +64,7 @@ export function ContentEngine() {
           "group relative flex shrink-0 items-center gap-3 rounded-2xl px-3.5 py-3 text-left transition-all duration-300 lg:w-60",
           side === "right" && "lg:flex-row-reverse lg:text-right",
           selected
-            ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5)]"
+            ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(245,166,35,0.5)]"
             : "bg-white/[0.025] text-fg-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] hover:bg-white/[0.05] hover:text-fg",
         )}
       >
@@ -178,7 +178,7 @@ function Stage({ id }: { id: FormatId }) {
             <svg viewBox="0 0 60 44" className="h-11 w-15 text-white/80" fill="none" stroke="currentColor" strokeWidth="1.2">
               <rect x="1" y="1" width="58" height="42" rx="2" />
               <path d="M24 1v18H1M24 19h12v24M36 27h23" />
-              <circle cx="14" cy="30" r="2.5" fill="#66ccff" stroke="none" />
+              <circle cx="14" cy="30" r="2.5" fill="#F8C25E" stroke="none" />
             </svg>
           </div>
           <p className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-ink-900">

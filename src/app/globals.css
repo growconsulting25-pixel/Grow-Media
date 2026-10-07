@@ -4,42 +4,43 @@
    Design tokens
    ========================================================================== */
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-darker), var(--font-body), ui-sans-serif, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* Dark surfaces — navy-black, biased toward the brand blue */
-  --color-ink-950: #050a10;
-  --color-ink-900: #08101a;
-  --color-ink-850: #0c1622;
-  --color-ink-800: #111d2b;
-  --color-ink-700: #182838;
-  --color-ink-600: #223447;
+  /* Dark surfaces — deep forest teal (Vesper palette) */
+  --color-ink-950: #0e1517;
+  --color-ink-900: #16292d;
+  --color-ink-850: #1b3135;
+  --color-ink-800: #1f3a3f;
+  --color-ink-700: #2a484d;
+  --color-ink-600: #36565b;
 
-  /* Foreground on dark — cool slate greys */
-  --color-fg: #f2f6fa;
-  --color-fg-muted: #9aabbd;
-  --color-fg-subtle: #62758a;
+  /* Foreground on dark — warm beige, with sage greys for secondary text */
+  --color-fg: #f4f1ea;
+  --color-fg-muted: #b3c1bd;
+  --color-fg-subtle: #8fa3a8;
 
-  /* Brand — Grow cyan (#00ABFF). Used solid, never as a gradient. */
-  --color-brand-100: #e6f6ff;
-  --color-brand-200: #b3e6ff;
-  --color-brand-300: #66ccff;
-  --color-brand-400: #33bcff;
-  --color-brand-500: #00abff;
-  --color-brand-600: #0096e0;
-  --color-brand-700: #0077b3;
-  /* Secondary — deep navy, for quiet fills and depth */
-  --color-navy-700: #0f2d48;
-  --color-navy-800: #0b2239;
-  /* Text/icons placed on a solid brand fill */
-  --color-on-brand: #ffffff;
+  /* Accent — warm amber. Used solid, never as a gradient. */
+  --color-brand-100: #fdf1dc;
+  --color-brand-200: #fbdca3;
+  --color-brand-300: #f8c25e;
+  --color-brand-400: #f6b13f;
+  --color-brand-500: #f5a623;
+  --color-brand-600: #e09512;
+  --color-brand-700: #c9861b;
+  /* Secondary — deep green, for quiet fills and depth */
+  --color-navy-700: #234247;
+  --color-navy-800: #1b2a2d;
+  /* Text/icons placed on a solid amber fill */
+  --color-on-brand: #16292d;
 
-  /* Light sections — cool paper greys */
-  --color-paper: #f4f6f8;
-  --color-paper-2: #e9eef3;
-  --color-paper-3: #dce4ec;
-  --color-ink-on-paper: #0b1622;
-  --color-muted-on-paper: #4f6275;
+  /* Light sections — warm beige paper */
+  --color-paper: #f4f1ea;
+  --color-paper-2: #ede7dc;
+  --color-paper-3: #dcd6c8;
+  --color-ink-on-paper: #16292d;
+  --color-muted-on-paper: #64757a;
 
   --color-success: #4ade80;
 
@@ -132,44 +133,45 @@
     color: var(--color-brand-500);
   }
   .on-paper .text-accent {
-    color: var(--color-brand-700);
+    color: #a86a0c;
   }
 
   .display {
-    font-weight: 600;
-    letter-spacing: -0.038em;
-    line-height: 1.02;
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.012em;
+    line-height: 0.98;
     text-wrap: balance;
   }
 
   /* Primary pill button — solid Grow blue with white text (the deeper
-     brand-600 keeps white text legible; #00ABFF stays the accent color). */
+     brand-600 keeps white text legible; #F5A623 stays the accent color). */
   .btn-primary {
-    background: var(--color-brand-600);
+    background: var(--color-brand-500);
     font-weight: 600;
     color: var(--color-on-brand);
-    box-shadow: 0 8px 24px -12px rgba(0, 171, 255, 0.55);
+    box-shadow: 0 8px 24px -12px rgba(245, 166, 35, 0.55);
     transition: transform 0.25s var(--ease-out-expo), background-color 0.2s ease, box-shadow 0.25s ease;
   }
   .btn-primary:hover {
-    background: var(--color-brand-700);
-    box-shadow: 0 10px 30px -12px rgba(0, 171, 255, 0.7);
+    background: var(--color-brand-400);
+    box-shadow: 0 10px 30px -12px rgba(245, 166, 35, 0.7);
   }
   .btn-primary:active { transform: translateY(1px) scale(0.99); }
 
   .btn-secondary {
     background: transparent;
-    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.45);
+    box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 0.45);
     color: var(--color-fg);
     transition: background-color 0.25s ease, box-shadow 0.25s ease;
   }
   .btn-secondary:hover {
-    background: rgba(0, 171, 255, 0.08);
-    box-shadow: inset 0 0 0 1px rgba(0, 171, 255, 0.8);
+    background: rgba(245, 166, 35, 0.08);
+    box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 0.8);
   }
   .on-paper .btn-secondary {
     color: var(--color-ink-on-paper);
-    box-shadow: inset 0 0 0 1px rgba(0, 119, 179, 0.4);
+    box-shadow: inset 0 0 0 1px rgba(201, 134, 27, 0.4);
   }
 
   /* Surfaces — flat fills with a hairline edge */
@@ -182,7 +184,7 @@
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 60px -30px rgba(0, 0, 0, 0.8);
   }
   .glass {
-    background: rgba(8, 16, 26, 0.72);
+    background: rgba(22, 41, 45, 0.72);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
   }
@@ -205,7 +207,7 @@
     transition: box-shadow 0.35s ease, transform 0.35s var(--ease-out-expo);
   }
   .hover-glow:hover {
-    box-shadow: inset 0 0 0 1px rgba(0,171,255,0.4), 0 20px 50px -25px rgba(0,171,255,0.55);
+    box-shadow: inset 0 0 0 1px rgba(245,166,35,0.4), 0 20px 50px -25px rgba(245,166,35,0.55);
   }
 
   /* Faint architectural grid used behind some sections */
@@ -269,21 +271,21 @@ select option {
    ========================================================================== */
 [data-theme="light"] {
   color-scheme: light;
-  --color-ink-950: #e9eef3;
-  --color-ink-900: #f3f6f9;
-  --color-ink-850: #ffffff;
-  --color-ink-800: #f7f9fb;
-  --color-ink-700: #e3e9ef;
-  --color-ink-600: #d3dce5;
-  --color-fg: #0b1622;
-  --color-fg-muted: #455a6e;
-  --color-fg-subtle: #64788c;
-  --color-white: #0b1622;
+  --color-ink-950: #ede7dc;
+  --color-ink-900: #f4f1ea;
+  --color-ink-850: #fbf9f4;
+  --color-ink-800: #f7f4ee;
+  --color-ink-700: #e4ddd0;
+  --color-ink-600: #d4ccbc;
+  --color-fg: #16292d;
+  --color-fg-muted: #4c5f63;
+  --color-fg-subtle: #64757a;
+  --color-white: #16292d;
   --color-success: #15803d;
-  --color-brand-100: #0b2239;
-  --color-brand-200: #00507a;
-  --color-brand-300: #0070a8;
-  --color-brand-400: #0080c0;
+  --color-brand-100: #3d2604;
+  --color-brand-200: #6e4507;
+  --color-brand-300: #8a560a;
+  --color-brand-400: #a86a0c;
   --color-emerald-200: #065f46;
   --color-emerald-300: #047857;
   --color-amber-200: #78350f;
@@ -301,26 +303,30 @@ select option {
   color: var(--color-fg);
 }
 [data-theme="light"] .surface {
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(11, 22, 34, 0.08), 0 1px 2px rgba(11, 22, 34, 0.04);
+  background: #fbf9f4;
+  box-shadow: inset 0 0 0 1px rgba(22, 41, 45, 0.08), 0 1px 2px rgba(22, 41, 45, 0.04);
 }
 [data-theme="light"] .surface-raised {
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1px rgba(11, 22, 34, 0.08), 0 30px 60px -30px rgba(11, 22, 34, 0.3);
+  background: #fbf9f4;
+  box-shadow: inset 0 0 0 1px rgba(22, 41, 45, 0.08), 0 30px 60px -30px rgba(22, 41, 45, 0.3);
 }
 [data-theme="light"] .glass {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(251, 249, 244, 0.85);
 }
 [data-theme="light"] .btn-primary {
-  box-shadow: 0 8px 20px -12px rgba(0, 119, 179, 0.6);
+  box-shadow: 0 8px 20px -12px rgba(201, 134, 27, 0.6);
 }
 [data-theme="light"] .btn-secondary {
-  box-shadow: inset 0 0 0 1px rgba(0, 119, 179, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(201, 134, 27, 0.5);
 }
 [data-theme="light"] select {
   color-scheme: light;
 }
 [data-theme="light"] select option {
-  background-color: #ffffff;
-  color: #0b1622;
+  background-color: #fbf9f4;
+  color: #16292d;
+}
+/* Amber accents stay readable on beige (light theme and paper bands). */
+[data-theme="light"] .text-accent {
+  color: #a86a0c;
 }

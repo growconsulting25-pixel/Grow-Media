@@ -26,7 +26,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           justifyContent: "space-between",
           padding: 72,
           color: "#f4f3f8",
-          background: "#08101a",
+          background: "#16292D",
         }}
       >
         <div style={{ fontSize: 30, fontWeight: 600, display: "flex" }}>{siteConfig.name}</div>
@@ -34,7 +34,7 @@ export default async function OpenGraphImage({ params }: { params: Promise<{ loc
           <span>{line1.text}</span>
           <span style={{ display: "flex" }}>
             {line2.text}
-            <span style={{ color: "#00abff", marginLeft: 16 }}>{line2.accent}</span>
+            <span style={{ color: "#F5A623", marginLeft: 16 }}>{line2.accent}</span>
           </span>
         </div>
         <div style={{ fontSize: 26, color: "#a3a1b3", display: "flex" }}>{dict.common.trustLine.join("  ·  ")}</div>

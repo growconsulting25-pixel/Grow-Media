@@ -111,7 +111,7 @@ function PricingCard({ plan, delay }: { plan: Plan; delay: number }) {
       className={cn(
         "relative flex flex-col rounded-[var(--radius-panel)] p-7 sm:p-8",
         featured
-          ? "edge-glow bg-navy-800 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5),0_30px_60px_-30px_rgba(0,0,0,0.8)] lg:-my-3 lg:py-11"
+          ? "edge-glow bg-navy-800 shadow-[inset_0_0_0_1px_rgba(245,166,35,0.5),0_30px_60px_-30px_rgba(0,0,0,0.8)] lg:-my-3 lg:py-11"
           : "surface",
       )}
     >

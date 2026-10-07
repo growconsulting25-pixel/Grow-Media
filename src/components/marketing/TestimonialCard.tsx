@@ -27,7 +27,7 @@ export function TestimonialCard({ dict, locale, quote, name, role, propertyLabel
   const nf = new Intl.NumberFormat(localeTags[locale], { notation: "compact" });
 
   return (
-    <article className="relative flex flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_0_0_1px_rgba(11,22,34,0.06),0_24px_48px_-32px_rgba(11,34,57,0.3)] md:flex-row">
+    <article className="relative flex flex-col overflow-hidden rounded-[1.5rem] bg-white shadow-[0_0_0_1px_rgba(22,41,45,0.06),0_24px_48px_-32px_rgba(11,34,57,0.3)] md:flex-row">
       {demo && (
         <span className="absolute top-3 right-3 z-10 rounded-full bg-amber-100 px-2.5 py-1 text-[0.68rem] font-semibold text-amber-800 ring-1 ring-amber-300">
           {dict.common.demoBadge}

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { GeistSans } from "geist/font/sans";
+import { Darker_Grotesque, Hanken_Grotesk } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
 import { SignupProvider } from "@/components/onboarding/SignupProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,6 +10,9 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { I18nProvider } from "@/i18n/I18nProvider";
 import { organizationLd } from "@/lib/schema";
 import "../globals.css";
+
+const body = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const display = Darker_Grotesque({ subsets: ["latin"], weight: ["500", "600", "700", "800"], variable: "--font-darker", display: "swap" });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -30,7 +33,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
 }
 
 export const viewport: Viewport = {
-  themeColor: "#08101a",
+  themeColor: "#16292D",
   colorScheme: "dark",
 };
 
@@ -40,7 +43,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const dict = await getDictionary(locale);
 
   return (
-    <html lang={localeTags[locale]} className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+    <html lang={localeTags[locale]} className={`${body.variable} ${display.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body>
         {/* Enables reveal animations only when JS runs, so content is never hidden without it. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

@@ -25,7 +25,7 @@ export function BrandKitForm({ userId, kit, logoUrl, photoUrl }: { userId: strin
     phone: kit?.phone ?? "",
     email: kit?.email ?? "",
     website: kit?.website ?? "",
-    primary_color: kit?.primary_color ?? "#00abff",
+    primary_color: kit?.primary_color ?? "#F5A623",
     secondary_color: kit?.secondary_color ?? "#f4f3f8",
   });
   const [social, setSocial] = useState<Record<string, string>>(kit?.social ?? {});

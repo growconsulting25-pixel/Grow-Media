@@ -37,14 +37,15 @@ const smooth = (n: number) => {
 export function HeroWalkthrough({
   children,
   chapters,
-  finalCta,
+  ctas = {},
   label,
   hint,
   demo,
 }: {
   children: ReactNode;
   chapters: Chapter[];
-  finalCta?: ReactNode;
+  /** Calls to action shown with a chapter, by chapter index. */
+  ctas?: Record<number, ReactNode>;
   label: string;
   hint: string;
   demo: string;
@@ -225,7 +226,7 @@ export function HeroWalkthrough({
 
         {/* Legibility: an even veil that lifts after the intro, plus a fixed bottom-left fade for captions. */}
         <div ref={veilRef} aria-hidden className="absolute inset-0 bg-ink-900" style={{ opacity: 0.75 }} />
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(8,16,26,0.85)_0%,rgba(8,16,26,0.25)_40%,transparent_65%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(22,41,45,0.85)_0%,rgba(22,41,45,0.25)_40%,transparent_65%)]" />
         <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-ink-900/70 to-transparent" />
 
         <div ref={introRef} className="absolute inset-0 flex flex-col items-center justify-center pt-20 will-change-transform">
@@ -249,7 +250,7 @@ export function HeroWalkthrough({
               <p className="text-xs font-semibold tracking-wide text-brand-300 uppercase">{c.eyebrow}</p>
               <p className="display mt-2 text-3xl sm:text-5xl">{c.title}</p>
               <p className="mt-3 max-w-md text-base text-fg-muted sm:text-lg">{c.body}</p>
-              {i === chapters.length - 1 && finalCta && <div className="mt-6">{finalCta}</div>}
+              {ctas[i] && <div className="mt-6">{ctas[i]}</div>}
             </div>
           ))}
         </Container>

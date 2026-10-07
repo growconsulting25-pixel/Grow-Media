@@ -32,7 +32,7 @@ export function Navbar() {
   }, [menuOpen]);
 
   const links = [
-    { href: `${home}#${sectionIds.howItWorks}`, label: dict.nav.howItWorks },
+    { href: href("services", locale, sectionIds.howItWorks), label: dict.nav.howItWorks },
     { href: `${home}#${sectionIds.examples}`, label: dict.nav.examples },
     { href: href("services", locale), label: dict.nav.services },
     { href: href("pricing", locale), label: dict.nav.pricing },

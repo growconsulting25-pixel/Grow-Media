@@ -15,17 +15,21 @@ interface Props {
   autoplay?: boolean;
   className?: string;
   location?: string;
+  /** Overrides the box shape (e.g. a tall card); the poster is cropped to fit. */
+  aspectClass?: string;
+  /** Shown over the poster until the video plays (e.g. a card caption). */
+  overlay?: React.ReactNode;
 }
 
 /**
  * Lightweight YouTube facade: shows the poster only and swaps in the
  * privacy-enhanced iframe on demand. No third-party JS until the user plays.
  */
-export function VideoPlayer({ video, title, autoplay, className, location = "inline" }: Props) {
+export function VideoPlayer({ video, title, autoplay, className, location = "inline", aspectClass, overlay }: Props) {
   const { dict } = useI18n();
   const [active, setActive] = useState(!!autoplay);
   const [poster, setPoster] = useState<string | null>(`https://i.ytimg.com/vi/${video.youtubeId}/maxresdefault.jpg`);
-  const aspect = video.aspect === "9:16" ? "aspect-[9/16]" : "aspect-video";
+  const aspect = aspectClass ?? (video.aspect === "9:16" ? "aspect-[9/16]" : "aspect-video");
 
   const play = () => {
     setActive(true);
@@ -66,6 +70,7 @@ export function VideoPlayer({ video, title, autoplay, className, location = "inl
           >
             <Icon name="play" className="size-6 translate-x-0.5" fill="currentColor" />
           </span>
+          {overlay}
         </button>
       )}
     </div>

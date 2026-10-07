@@ -1,8 +1,12 @@
+import Link from "next/link";
 import { FreeVideoButton } from "@/components/onboarding/FreeVideoButton";
+import { buttonClasses } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Headline } from "@/components/ui/Headline";
 import { Icon } from "@/components/ui/Icon";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { href } from "@/i18n/routing";
 import { HeroWalkthrough } from "./HeroWalkthrough";
 import { WatchExampleButton } from "./WatchExampleButton";
 import { HeroVisual } from "./visuals/HeroVisual";
@@ -11,7 +15,7 @@ import { HeroVisual } from "./visuals/HeroVisual";
  * Hero: a pinned, scroll-driven 3D walkthrough (façade → interior → terrace)
  * with the headline and CTAs on top, then the "photos → video" demo below.
  */
-export function Hero({ dict }: { dict: Dictionary }) {
+export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const t = dict.hero;
   const w = dict.walkthrough;
   return (
@@ -21,7 +25,15 @@ export function Hero({ dict }: { dict: Dictionary }) {
         hint={w.hint}
         demo={w.demo}
         chapters={w.chapters}
-        finalCta={<FreeVideoButton source="hero_walkthrough" size="lg" className="pointer-events-auto" />}
+        ctas={{
+          2: (
+            <Link href={href("services", locale)} className={buttonClasses({ variant: "secondary", size: "md", className: "pointer-events-auto bg-ink-900/40 backdrop-blur-sm" })}>
+              {w.midCta}
+              <Icon name="arrowRight" className="size-4" />
+            </Link>
+          ),
+          [w.chapters.length - 1]: <FreeVideoButton source="hero_walkthrough" size="lg" className="pointer-events-auto" />,
+        }}
       >
         <Container className="flex flex-col items-center text-center">
           <p className="inline-flex items-center gap-2 rounded-full bg-ink-900/50 py-1.5 pr-3.5 pl-1.5 text-[0.8rem] text-fg-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] backdrop-blur-sm">

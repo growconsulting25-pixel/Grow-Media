@@ -73,7 +73,7 @@ export function Benefits({ dict }: { dict: Dictionary }) {
           <Tile k="brand" icon="palette" dict={dict} delay={60}>
             <div className="mt-auto flex items-center gap-2 pt-5" aria-hidden>
               <Photo name="agentPhone" width={96} ratio={1} sizes="36px" decorative className="size-9 rounded-full ring-2 ring-white" />
-              {["#0b1622", "#00abff", "#dce4ec"].map((c) => (
+              {["#16292D", "#F5A623", "#dce4ec"].map((c) => (
                 <span key={c} className="size-7 rounded-full ring-2 ring-white" style={{ background: c }} />
               ))}
               <span className="ml-auto rounded-md bg-ink-on-paper px-2 py-1 text-[0.62rem] font-bold tracking-wide text-white">LOGO</span>
@@ -110,7 +110,7 @@ function Tile({ k, icon, dict, className, children, delay, horizontal }: { k: Ke
     <Reveal
       delay={delay}
       className={cn(
-        "flex min-w-0 rounded-[1.5rem] bg-white p-6 shadow-[0_1px_0_rgba(11,22,34,0.04),0_0_0_1px_rgba(11,22,34,0.06),0_24px_48px_-32px_rgba(11,34,57,0.25)] transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(0,171,255,0.25),0_30px_60px_-30px_rgba(0,171,255,0.35)]",
+        "flex min-w-0 rounded-[1.5rem] bg-white p-6 shadow-[0_1px_0_rgba(22,41,45,0.04),0_0_0_1px_rgba(22,41,45,0.06),0_24px_48px_-32px_rgba(11,34,57,0.25)] transition-shadow duration-500 hover:shadow-[0_0_0_1px_rgba(245,166,35,0.25),0_30px_60px_-30px_rgba(245,166,35,0.35)]",
         horizontal ? "flex-col gap-6 lg:flex-row lg:items-center" : "flex-col",
         className,
       )}
@@ -138,7 +138,7 @@ function MoreContentVisual({ labels }: { labels: string[] }) {
     <div className="relative mt-auto pt-8">
       <div className="flex items-start justify-center gap-2.5">
         {tiles.map((tile, i) => (
-          <figure key={tile.name} className={cn("relative overflow-hidden rounded-xl shadow-[0_20px_40px_-20px_rgba(11,22,34,0.5)]", tile.cls)}>
+          <figure key={tile.name} className={cn("relative overflow-hidden rounded-xl shadow-[0_20px_40px_-20px_rgba(22,41,45,0.5)]", tile.cls)}>
             <Photo name={tile.name} width={240} sizes="(min-width: 1024px) 140px, 25vw" decorative className="size-full" />
             <figcaption className="absolute inset-x-1.5 bottom-1.5 truncate rounded-md bg-black/55 px-1.5 py-0.5 text-[0.6rem] font-medium text-white backdrop-blur">
               {labels[i]}

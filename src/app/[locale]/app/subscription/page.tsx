@@ -73,7 +73,7 @@ export default async function SubscriptionPage({ params, searchParams }: PagePro
             const copy = dict.pricing.plans[p.id];
             const current = summary.plan_id === p.id;
             return (
-              <li key={p.id} className={cn("flex flex-col rounded-[var(--radius-panel)] p-6", p.highlighted ? "edge-glow bg-brand-500/[0.08] shadow-[inset_0_0_0_1px_rgba(0,171,255,0.4)]" : "surface")}>
+              <li key={p.id} className={cn("flex flex-col rounded-[var(--radius-panel)] p-6", p.highlighted ? "edge-glow bg-brand-500/[0.08] shadow-[inset_0_0_0_1px_rgba(245,166,35,0.4)]" : "surface")}>
                 <div className="flex items-center justify-between">
                   <p className="font-semibold">{copy.name}</p>
                   {current && <span className="rounded-full bg-success/12 px-2.5 py-0.5 text-xs text-success">{t.currentBadge}</span>}

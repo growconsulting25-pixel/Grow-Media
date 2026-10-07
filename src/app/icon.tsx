@@ -14,7 +14,7 @@ export default function Icon() {
             <path key={d} d={d} />
           ))}
         </g>
-        <path transform={markArrow.transform} d={markArrow.d} fill="#00abff" stroke="#00abff" strokeWidth="9" strokeLinejoin="round" />
+        <path transform={markArrow.transform} d={markArrow.d} fill="#F5A623" stroke="#F5A623" strokeWidth="9" strokeLinejoin="round" />
       </svg>
     ),
     size,
