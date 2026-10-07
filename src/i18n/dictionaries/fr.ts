@@ -91,6 +91,17 @@ const fr: Dictionary = {
     },
   },
 
+  walkthrough: {
+    label: "Visite virtuelle 3D : faites défiler pour entrer dans la maison",
+    hint: "Défilez pour visiter",
+    demo: "Visite 3D de démonstration, créée à partir d'une seule photo",
+    chapters: [
+      { eyebrow: "L'entrée", title: "Entrez comme si vous y étiez.", body: "Une visite virtuelle 3D qui ouvre la porte aux acheteurs, à distance." },
+      { eyebrow: "Salon et cuisine", title: "Chaque pièce, en mouvement.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
+      { eyebrow: "La terrasse", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
+    ],
+  },
+
   transform: {
     eyebrow: "Avant / après",
     headline: [{ text: "Les mêmes photos." }, { text: "Un tout autre ", accent: "impact." }],
