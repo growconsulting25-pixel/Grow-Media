@@ -95,6 +95,17 @@ const en = {
     },
   },
 
+  walkthrough: {
+    label: "3D virtual tour: scroll to step inside the house",
+    hint: "Scroll to tour",
+    demo: "Demo 3D tour, created from a single photo",
+    chapters: [
+      { eyebrow: "The entrance", title: "Walk in as if you were there.", body: "A 3D virtual tour that opens the door to buyers, remotely." },
+      { eyebrow: "Living room and kitchen", title: "Every room, in motion.", body: "Smooth shots, no film shoot, for your social media and your website." },
+      { eyebrow: "The terrace", title: "Ready to post in 24h.", body: "Send your photos today. Get your video tomorrow." },
+    ],
+  },
+
   transform: {
     eyebrow: "Before / after",
     headline: [{ text: "The same photos." }, { text: "A whole new ", accent: "impact." }],
