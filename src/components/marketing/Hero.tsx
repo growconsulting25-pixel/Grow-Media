@@ -26,7 +26,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         demo={w.demo}
         chapters={w.chapters}
         ctas={{
-          2: (
+          3: (
             <Link href={href("services", locale)} className={buttonClasses({ variant: "secondary", size: "md", className: "pointer-events-auto bg-ink-900/40 backdrop-blur-sm" })}>
               {w.midCta}
               <Icon name="arrowRight" className="size-4" />

@@ -97,9 +97,10 @@ const fr: Dictionary = {
     demo: "Visite 3D de démonstration, créée à partir d'une seule photo",
     chapters: [
       { eyebrow: "L'entrée", title: "Entrez comme si vous y étiez.", body: "Une visite virtuelle 3D qui ouvre la porte aux acheteurs, à distance." },
+      { eyebrow: "La cuisine", title: "Un coup d'œil à gauche.", body: "L'îlot, les armoires, la lumière : chaque détail qui fait vendre." },
       { eyebrow: "L'étage", title: "On monte à l'étage.", body: "Chaque niveau de la propriété, dans un seul plan continu." },
       { eyebrow: "La chambre principale", title: "La lumière, la vue, les volumes.", body: "Comme une visite en personne, depuis le téléphone de l'acheteur." },
-      { eyebrow: "Salon et cuisine", title: "Chaque pièce, en mouvement.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
+      { eyebrow: "Le salon", title: "Retour au rez-de-chaussée.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
       { eyebrow: "La cour", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
     ],
     midCta: "Découvrir la visite 3D",
