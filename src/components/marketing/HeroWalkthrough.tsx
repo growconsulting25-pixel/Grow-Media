@@ -207,7 +207,7 @@ export function HeroWalkthrough({
   }, [chapters.length, legSeconds]);
 
   return (
-    <section ref={trackRef} aria-labelledby="hero-title" className="relative motion-safe:h-[600vh] sm:motion-safe:h-[720vh]">
+    <section ref={trackRef} aria-labelledby="hero-title" className="relative motion-safe:h-[520vh] sm:motion-safe:h-[620vh]">
       <p className="sr-only">{label}</p>
       <div className="sticky top-0 h-svh overflow-hidden motion-reduce:relative motion-reduce:min-h-svh">
         {/* Poster = first frame of the film; stays until the video paints. */}

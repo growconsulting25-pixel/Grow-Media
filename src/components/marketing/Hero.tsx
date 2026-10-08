@@ -27,7 +27,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         hint={w.hint}
         demo={w.demo}
         chapters={w.chapters}
-        legSeconds={[8, 8, 8, 10, 10, 10, 10]}
+        legSeconds={[8, 8, 8, 8, 8, 8]}
         ctas={{
           3: (
             <Link href={href("services", locale)} className={buttonClasses({ variant: "secondary", size: "md", className: "pointer-events-auto bg-ink-900/40 backdrop-blur-sm" })}>
