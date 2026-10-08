@@ -75,6 +75,14 @@ const fr: Dictionary = {
     description:
       "Envoyez-nous les photos de votre propriété. Nous en faisons une vidéo immobilière cinématographique, à votre image, prête à publier en 24 heures.",
     visual: {
+      eyebrow: "Comment ça marche",
+      headline: [{ text: "Vos photos. Notre montage." }, { text: "Votre vidéo en ", accent: "24 h." }],
+      description: "Vous avez déjà tout ce qu'il faut : les photos de votre inscription. On s'occupe du reste.",
+      steps: [
+        { title: "Vous envoyez vos photos", text: "Celles de l'inscription, telles quelles. Aucun tournage." },
+        { title: "Nous montons la vidéo", text: "Mouvement, musique, sous-titres et votre image de marque." },
+        { title: "Vous publiez", text: "Une vidéo verticale prête pour Instagram, Facebook et TikTok." },
+      ],
       label: "Les photos de votre inscription deviennent une vidéo verticale pour les réseaux sociaux",
       inputLabel: "Photos de l'inscription",
       processing: "En production",
@@ -97,11 +105,10 @@ const fr: Dictionary = {
     demo: "Visite 3D de démonstration, créée à partir d'une seule photo",
     chapters: [
       { eyebrow: "L'entrée", title: "Entrez comme si vous y étiez.", body: "Une visite virtuelle 3D qui ouvre la porte aux acheteurs, à distance." },
-      { eyebrow: "La cuisine", title: "Un coup d'œil à gauche.", body: "L'îlot, les armoires, la lumière : chaque détail qui fait vendre." },
-      { eyebrow: "L'étage", title: "On monte à l'étage.", body: "Chaque niveau de la propriété, dans un seul plan continu." },
-      { eyebrow: "La chambre principale", title: "La lumière, la vue, les volumes.", body: "Comme une visite en personne, depuis le téléphone de l'acheteur." },
-      { eyebrow: "Le salon", title: "Retour au rez-de-chaussée.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
-      { eyebrow: "La cour", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
+      { eyebrow: "La cuisine", title: "Un coup d'œil à la cuisine.", body: "L'îlot, les armoires, la lumière : chaque détail qui fait vendre." },
+      { eyebrow: "Le salon", title: "Chaque pièce, en mouvement.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
+      { eyebrow: "La chambre", title: "La lumière, les volumes, le calme.", body: "Comme une visite en personne, depuis le téléphone de l'acheteur." },
+      { eyebrow: "Le jardin", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
     ],
     midCta: "Découvrir la visite 3D",
   },

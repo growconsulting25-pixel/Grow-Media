@@ -132,6 +132,19 @@ export function HeroVisual() {
           </div>
         </div>
       </div>
+
+      {/* The three steps, under the part of the picture they describe. */}
+      <ol className="mt-14 grid gap-6 md:mt-10 md:grid-cols-[1fr_auto_1fr] md:gap-2">
+        {v.steps.map((step, i) => (
+          <li key={step.title} className={cn("flex gap-3.5 md:flex-col md:items-center md:text-center", i === 1 && "md:w-40 lg:w-52")}>
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-500 text-sm font-bold text-on-brand">{i + 1}</span>
+            <span>
+              <span className="block text-base font-semibold tracking-tight text-fg">{step.title}</span>
+              <span className="mt-1 block text-sm leading-relaxed text-fg-muted">{step.text}</span>
+            </span>
+          </li>
+        ))}
+      </ol>
       <style>{`@keyframes beam { from { left: -4rem } to { left: 100% } }`}</style>
     </div>
   );

@@ -7,7 +7,9 @@ import { Icon } from "@/components/ui/Icon";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { href } from "@/i18n/routing";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { HeroWalkthrough } from "./HeroWalkthrough";
+import { PaperBand } from "./PaperBand";
 import { WatchExampleButton } from "./WatchExampleButton";
 import { HeroVisual } from "./visuals/HeroVisual";
 
@@ -25,6 +27,7 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         hint={w.hint}
         demo={w.demo}
         chapters={w.chapters}
+        legSeconds={[8, 8, 8, 8, 8, 8]}
         ctas={{
           3: (
             <Link href={href("services", locale)} className={buttonClasses({ variant: "secondary", size: "md", className: "pointer-events-auto bg-ink-900/40 backdrop-blur-sm" })}>
@@ -66,11 +69,16 @@ export function Hero({ dict, locale }: { dict: Dictionary; locale: Locale }) {
         </Container>
       </HeroWalkthrough>
 
-      <section aria-label={t.visual.label} className="relative border-b border-white/[0.06] py-16 sm:py-20">
-        <Container>
-          <HeroVisual />
-        </Container>
-      </section>
+      <PaperBand className="mt-3 sm:mt-4">
+        <section aria-labelledby="visual-title" className="relative py-20 sm:py-28">
+          <Container>
+            <SectionHeading eyebrow={t.visual.eyebrow} lines={t.visual.headline} description={t.visual.description} titleId="visual-title" />
+            <div className="mt-14 sm:mt-16">
+              <HeroVisual />
+            </div>
+          </Container>
+        </section>
+      </PaperBand>
     </>
   );
 }

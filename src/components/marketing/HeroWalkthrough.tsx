@@ -38,6 +38,7 @@ export function HeroWalkthrough({
   children,
   chapters,
   ctas = {},
+  legSeconds,
   label,
   hint,
   demo,
@@ -46,6 +47,8 @@ export function HeroWalkthrough({
   chapters: Chapter[];
   /** Calls to action shown with a chapter, by chapter index. */
   ctas?: Record<number, ReactNode>;
+  /** Length of each shot in the film (façade first), so captions follow the rooms. */
+  legSeconds?: number[];
   label: string;
   hint: string;
   demo: string;
@@ -66,7 +69,10 @@ export function HeroWalkthrough({
     const coarse = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
     const mobile = coarse || window.matchMedia("(max-width: 860px)").matches;
     const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
-    const legs = chapters.length + 1; // the façade leg, then one per chapter
+    // Shot boundaries as fractions of the film: the façade shot, then one per chapter.
+    const lengths = legSeconds ?? Array.from({ length: chapters.length + 1 }, () => 1);
+    const total = lengths.reduce((a, b) => a + b, 0);
+    const bounds = lengths.reduce<number[]>((acc, len) => [...acc, acc[acc.length - 1] + len / total], [0]);
 
     let target = 0;
     let cur = 0;
@@ -98,8 +104,8 @@ export function HeroWalkthrough({
 
       chapterRefs.current.forEach((el, i) => {
         if (!el) return;
-        const start = (i + 1) / legs;
-        const end = (i + 2) / legs;
+        const start = bounds[i + 1];
+        const end = bounds[i + 2];
         const local = (p - start) / (end - start);
         const last = i === chapters.length - 1;
         const o = last ? smooth(local / 0.35) : local < 0 || local > 1 ? 0 : smooth(1 - Math.abs(local - 0.5) / 0.5) * 1.4;
@@ -198,10 +204,10 @@ export function HeroWalkthrough({
       window.removeEventListener("load", kick);
       if (objectUrl) URL.revokeObjectURL(objectUrl);
     };
-  }, [chapters.length]);
+  }, [chapters.length, legSeconds]);
 
   return (
-    <section ref={trackRef} aria-labelledby="hero-title" className="relative motion-safe:h-[600vh] sm:motion-safe:h-[720vh]">
+    <section ref={trackRef} aria-labelledby="hero-title" className="relative motion-safe:h-[520vh] sm:motion-safe:h-[620vh]">
       <p className="sr-only">{label}</p>
       <div className="sticky top-0 h-svh overflow-hidden motion-reduce:relative motion-reduce:min-h-svh">
         {/* Poster = first frame of the film; stays until the video paints. */}
