@@ -79,6 +79,14 @@ const en = {
     description:
       "Send us your property photos. We turn them into a cinematic, branded real estate video, ready to post within 24 hours.",
     visual: {
+      eyebrow: "How it works",
+      headline: [{ text: "Your photos. Our edit." }, { text: "Your video in ", accent: "24h." }],
+      description: "You already have everything we need: your listing photos. We take care of the rest.",
+      steps: [
+        { title: "You send your photos", text: "Your listing photos, as they are. No film shoot." },
+        { title: "We edit the video", text: "Motion, music, captions and your branding." },
+        { title: "You post", text: "A vertical video ready for Instagram, Facebook and TikTok." },
+      ],
       label: "Your listing photos becoming a vertical social video",
       inputLabel: "Listing photos",
       processing: "In production",

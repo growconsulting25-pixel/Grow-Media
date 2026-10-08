@@ -75,6 +75,14 @@ const fr: Dictionary = {
     description:
       "Envoyez-nous les photos de votre propriété. Nous en faisons une vidéo immobilière cinématographique, à votre image, prête à publier en 24 heures.",
     visual: {
+      eyebrow: "Comment ça marche",
+      headline: [{ text: "Vos photos. Notre montage." }, { text: "Votre vidéo en ", accent: "24 h." }],
+      description: "Vous avez déjà tout ce qu'il faut : les photos de votre inscription. On s'occupe du reste.",
+      steps: [
+        { title: "Vous envoyez vos photos", text: "Celles de l'inscription, telles quelles. Aucun tournage." },
+        { title: "Nous montons la vidéo", text: "Mouvement, musique, sous-titres et votre image de marque." },
+        { title: "Vous publiez", text: "Une vidéo verticale prête pour Instagram, Facebook et TikTok." },
+      ],
       label: "Les photos de votre inscription deviennent une vidéo verticale pour les réseaux sociaux",
       inputLabel: "Photos de l'inscription",
       processing: "En production",
