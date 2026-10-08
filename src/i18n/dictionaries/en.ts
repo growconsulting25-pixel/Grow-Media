@@ -101,9 +101,13 @@ const en = {
     demo: "Demo 3D tour, created from a single photo",
     chapters: [
       { eyebrow: "The entrance", title: "Walk in as if you were there.", body: "A 3D virtual tour that opens the door to buyers, remotely." },
-      { eyebrow: "Living room and kitchen", title: "Every room, in motion.", body: "Smooth shots, no film shoot, for your social media and your website." },
-      { eyebrow: "The terrace", title: "Ready to post in 24h.", body: "Send your photos today. Get your video tomorrow." },
+      { eyebrow: "The kitchen", title: "A glance to the left.", body: "The island, the cabinetry, the light: every detail that sells." },
+      { eyebrow: "Upstairs", title: "Up to the second floor.", body: "Every level of the property, in one continuous shot." },
+      { eyebrow: "The primary suite", title: "The light, the view, the space.", body: "Like an in-person visit, from the buyer's phone." },
+      { eyebrow: "The living room", title: "Back downstairs.", body: "Smooth shots, no film shoot, for your social media and your website." },
+      { eyebrow: "The yard", title: "Ready to post in 24h.", body: "Send your photos today. Get your video tomorrow." },
     ],
+    midCta: "Explore the 3D tour",
   },
 
   transform: {
@@ -147,9 +151,9 @@ const en = {
     description: "Real videos made from listing photos. Each one loads only when you press play.",
     playLabel: "Play video: {title}",
     items: {
-      one: { title: "Cinematic listing video", meta: "Listing video" },
-      two: { title: "Property showcase", meta: "Listing video" },
-      three: { title: "Social teaser", meta: "Listing video" },
+      one: { title: "Cinematic listing video", meta: "Listing video", description: "The façade, then every room, in slow camera moves. The format for standout listings." },
+      two: { title: "Property showcase", meta: "Listing video", description: "The materials, the light and the details that sell, in time with the music." },
+      three: { title: "Social teaser", meta: "Listing video", description: "Short and punchy, made to stop the scroll on Instagram, Facebook and TikTok." },
     },
     modalTitle: "Example video",
   },

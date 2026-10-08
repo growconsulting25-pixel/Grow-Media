@@ -53,7 +53,7 @@ export function Results({ dict, locale }: { dict: Dictionary; locale: Locale }) 
           )}
 
           {!hasReal && !showDemo && (
-            <Reveal className="mx-auto grid max-w-5xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_0_0_1px_rgba(11,22,34,0.06),0_24px_48px_-32px_rgba(11,34,57,0.3)] md:grid-cols-[0.9fr_1.1fr]">
+            <Reveal className="mx-auto grid max-w-5xl overflow-hidden rounded-[1.75rem] bg-white shadow-[0_0_0_1px_rgba(22,41,45,0.06),0_24px_48px_-32px_rgba(11,34,57,0.3)] md:grid-cols-[0.9fr_1.1fr]">
               <Photo name="keysHandover" width={640} sizes="(min-width: 768px) 40vw, 92vw" className="aspect-[4/3] md:aspect-auto md:min-h-full" />
               <div className="flex flex-col items-center px-6 py-12 text-center sm:px-10">
               <ol className="flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-muted-on-paper" aria-label={dict.how.eyebrow}>

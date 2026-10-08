@@ -10,13 +10,13 @@ export const markArrow = { transform: "translate(97 95) scale(0.9)", d: "M5 5 10
 /** Grow's mark. Rings follow the text color (white on dark, ink in the light theme); pass ringColor to force one. */
 export function GrowMark({ className, ringColor = "currentColor" }: { className?: string; ringColor?: string }) {
   return (
-    <svg viewBox={markViewBox} aria-hidden className={cn("text-white", className)}>
+    <svg viewBox={markViewBox} aria-hidden className={cn("text-fg", className)}>
       <g fill="none" stroke={ringColor} strokeWidth="15" strokeLinecap="round">
         {markRings.map((d) => (
           <path key={d} d={d} />
         ))}
       </g>
-      <path transform={markArrow.transform} d={markArrow.d} fill="#00abff" stroke="#00abff" strokeWidth="9" strokeLinejoin="round" />
+      <path transform={markArrow.transform} d={markArrow.d} fill="#F5A623" stroke="#F5A623" strokeWidth="9" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -26,7 +26,7 @@ export function Logo({ href, className }: { href: string; className?: string }) 
   return (
     <Link href={href} className={cn("group inline-flex shrink-0 items-center gap-2 whitespace-nowrap", className)} aria-label={siteConfig.name}>
       <GrowMark className="size-8 transition-transform duration-300 group-hover:-translate-y-0.5" />
-      <span className="text-[1.15rem] leading-none font-semibold tracking-tight text-white">Media</span>
+      <span className="text-[1.15rem] leading-none font-semibold tracking-tight text-fg">Media</span>
     </Link>
   );
 }

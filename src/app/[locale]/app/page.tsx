@@ -62,7 +62,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/app
 
       <section className="grid gap-4 lg:grid-cols-2">
         {summary.free_credits > 0 && (
-          <Link href={href("appCreate", locale)} className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-brand-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.3)] transition-colors hover:bg-brand-500/[0.12]">
+          <Link href={href("appCreate", locale)} className="edge-glow flex items-center gap-4 rounded-[var(--radius-card)] bg-brand-500/[0.08] p-5 shadow-[inset_0_0_0_1px_rgba(245,166,35,0.3)] transition-colors hover:bg-brand-500/[0.12]">
             <span className="btn-primary grid size-11 shrink-0 place-items-center rounded-xl"><Icon name="sparkle" className="size-5" fill="currentColor" /></span>
             <div>
               <p className="font-medium">{t.dashboard.freeCredit}</p>

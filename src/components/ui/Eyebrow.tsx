@@ -8,7 +8,7 @@ export function Eyebrow({ children, tone = "dark", className }: { children: Reac
         "inline-flex items-center gap-2.5 rounded-full px-4 py-1.5 text-[0.8rem] font-medium tracking-tight",
         tone === "dark"
           ? "bg-white/[0.05] text-fg-muted shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--color-white)_8%,transparent)]"
-          : "bg-white text-muted-on-paper shadow-[inset_0_0_0_1px_rgba(11,22,34,0.08)]",
+          : "bg-white text-muted-on-paper shadow-[inset_0_0_0_1px_rgba(22,41,45,0.08)]",
         className,
       )}
     >

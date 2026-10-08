@@ -58,43 +58,43 @@ interface LayoutInput {
 }
 
 /** The shared premium layout. Values in `rows` are escaped here; `bodyHtml` must already be safe. */
-export function layout({ lang, preheader, eyebrow, tone = "#0096e0", heading, bodyHtml, rows = [], cta, url, footerNote }: LayoutInput) {
+export function layout({ lang, preheader, eyebrow, tone = "#b8770f", heading, bodyHtml, rows = [], cta, url, footerNote }: LayoutInput) {
   const site = siteConfig.url;
   const f = footerCopy[lang];
   const details = rows.length
-    ? `<tr><td style="padding:24px 0 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f7fa;border-radius:14px">${rows
-        .map(([k, v], i) => `<tr><td style="padding:${i ? "0" : "14px"} 18px 12px;font:500 12px/1.4 ${FONT};color:#62758a;white-space:nowrap;vertical-align:top;width:1%">${esc(k)}</td><td style="padding:${i ? "0" : "14px"} 18px 12px 0;font:14px/1.5 ${FONT};color:#0b1622">${esc(v)}</td></tr>`)
+    ? `<tr><td style="padding:24px 0 0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#faf8f3;border-radius:14px">${rows
+        .map(([k, v], i) => `<tr><td style="padding:${i ? "0" : "14px"} 18px 12px;font:500 12px/1.4 ${FONT};color:#64757a;white-space:nowrap;vertical-align:top;width:1%">${esc(k)}</td><td style="padding:${i ? "0" : "14px"} 18px 12px 0;font:14px/1.5 ${FONT};color:#16292d">${esc(v)}</td></tr>`)
         .join("")}</table></td></tr>`
     : "";
   return `<!doctype html>
 <html lang="${lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"><meta name="supported-color-schemes" content="light"><title>${esc(heading)}</title></head>
-<body style="margin:0;padding:0;background:#eef2f6;-webkit-text-size-adjust:100%">
+<body style="margin:0;padding:0;background:#f4f1ea;-webkit-text-size-adjust:100%">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">${esc(preheader)}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef2f6"><tr><td align="center" style="padding:36px 12px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea"><tr><td align="center" style="padding:36px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px">
-  <tr><td style="background:#08101a;border-radius:20px 20px 0 0;padding:26px 36px">
+  <tr><td style="background:#16292d;border-radius:20px 20px 0 0;padding:26px 36px">
     <a href="${esc(site)}" style="text-decoration:none"><img src="${esc(site)}/email/logo-white.png" width="106" height="34" alt="Grow Media" style="display:block;border:0;width:106px;height:34px"></a>
   </td></tr>
-  <tr><td style="height:3px;line-height:3px;font-size:0;background:#00abff">&nbsp;</td></tr>
+  <tr><td style="height:3px;line-height:3px;font-size:0;background:#f5a623">&nbsp;</td></tr>
   <tr><td style="background:#ffffff;padding:36px 36px 32px">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
       <tr><td style="font:600 12px/1 ${FONT};letter-spacing:.08em;text-transform:uppercase;color:${tone}">${esc(eyebrow)}</td></tr>
-      <tr><td style="padding-top:14px;font:700 26px/1.25 ${FONT};letter-spacing:-.02em;color:#0b1622">${esc(heading)}</td></tr>
-      <tr><td style="padding-top:14px;font:16px/1.65 ${FONT};color:#4f6275">${bodyHtml}</td></tr>
+      <tr><td style="padding-top:14px;font:700 26px/1.25 ${FONT};letter-spacing:-.02em;color:#16292d">${esc(heading)}</td></tr>
+      <tr><td style="padding-top:14px;font:16px/1.65 ${FONT};color:#4c5f63">${bodyHtml}</td></tr>
       ${details}
       <tr><td style="padding-top:28px">
-        <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:#0096e0;border-radius:999px">
+        <table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:#b8770f;border-radius:999px">
           <a href="${esc(url)}" style="display:inline-block;padding:14px 28px;font:600 15px/1 ${FONT};color:#ffffff;text-decoration:none;border-radius:999px">${esc(cta)} &rarr;</a>
         </td></tr></table>
       </td></tr>
-      <tr><td style="padding-top:18px;font:12px/1.5 ${FONT};color:#8a9aab;word-break:break-all">${lang === "en" ? "Or open" : "Ou ouvrez"} <a href="${esc(url)}" style="color:#0077b3">${esc(url)}</a></td></tr>
+      <tr><td style="padding-top:18px;font:12px/1.5 ${FONT};color:#8fa3a8;word-break:break-all">${lang === "en" ? "Or open" : "Ou ouvrez"} <a href="${esc(url)}" style="color:#8a560a">${esc(url)}</a></td></tr>
     </table>
   </td></tr>
-  <tr><td style="background:#ffffff;border-top:1px solid #e6ebf0;border-radius:0 0 20px 20px;padding:20px 36px 24px;font:12px/1.6 ${FONT};color:#8a9aab">
-    <strong style="color:#0b1622">Grow Media</strong> · ${esc(f.tagline)}<br>
-    <a href="${esc(site)}" style="color:#0077b3;text-decoration:none">${esc(site.replace(/^https?:\/\//, ""))}</a> · <a href="mailto:${siteConfig.contactEmail}" style="color:#0077b3;text-decoration:none">${siteConfig.contactEmail}</a>
+  <tr><td style="background:#ffffff;border-top:1px solid #e4ddd0;border-radius:0 0 20px 20px;padding:20px 36px 24px;font:12px/1.6 ${FONT};color:#8fa3a8">
+    <strong style="color:#16292d">Grow Media</strong> · ${esc(f.tagline)}<br>
+    <a href="${esc(site)}" style="color:#8a560a;text-decoration:none">${esc(site.replace(/^https?:\/\//, ""))}</a> · <a href="mailto:${siteConfig.contactEmail}" style="color:#8a560a;text-decoration:none">${siteConfig.contactEmail}</a>
   </td></tr>
-  <tr><td align="center" style="padding:18px 12px 0;font:11px/1.5 ${FONT};color:#8a9aab">${esc(footerNote ?? f.note)}</td></tr>
+  <tr><td align="center" style="padding:18px 12px 0;font:11px/1.5 ${FONT};color:#8fa3a8">${esc(footerNote ?? f.note)}</td></tr>
 </table>
 </td></tr></table>
 </body></html>`;
@@ -118,7 +118,7 @@ export type StaffAlertKind =
   | "subscription_started" | "subscription_canceled" | "payment" | "contact_request";
 
 const staffCopy: Record<StaffAlertKind, { label: string; tone: string; subject: string; heading: string; cta: string }> = {
-  new_client: { label: "Nouveau client", tone: "#0096e0", subject: "Nouveau client : {name}", heading: "Un nouveau client s'est inscrit.", cta: "Voir le client" },
+  new_client: { label: "Nouveau client", tone: "#b8770f", subject: "Nouveau client : {name}", heading: "Un nouveau client s'est inscrit.", cta: "Voir le client" },
   new_project: { label: "Nouveau projet", tone: "#d97706", subject: "Nouveau projet à produire : {title}", heading: "Un projet vient d'être envoyé.", cta: "Ouvrir le projet" },
   client_message: { label: "Message client", tone: "#2563eb", subject: "Message de {name} : {title}", heading: "Un client vous a écrit.", cta: "Répondre" },
   revision_requested: { label: "Retouche demandée", tone: "#e11d48", subject: "Retouche demandée : {title}", heading: "Un client demande une retouche.", cta: "Voir la demande" },

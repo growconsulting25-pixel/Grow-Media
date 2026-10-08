@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { ContentEngine } from "@/components/marketing/ContentEngine";
 import { Faq, faqItems } from "@/components/marketing/Faq";
 import { FinalCta } from "@/components/marketing/FinalCta";
+import { HowItWorks } from "@/components/marketing/HowItWorks";
 import { PageHero } from "@/components/marketing/PageHero";
 import { PaperBand } from "@/components/marketing/PaperBand";
 import { Services } from "@/components/marketing/Services";
@@ -59,6 +60,7 @@ export default async function ServicesPage({ params }: PageProps<"/[locale]/serv
       <main id="main">
         <PageHero dict={dict} locale={locale} eyebrow={t.eyebrow} lines={t.headline} intro={t.intro} crumb={t.breadcrumb} image="keysHandover" />
         <Services dict={dict} locale={locale} flush />
+        <HowItWorks dict={dict} />
         <ContentEngine />
         <PaperBand className="mb-20 sm:mb-28">
           <Faq dict={dict} locale={locale} items={faq} />

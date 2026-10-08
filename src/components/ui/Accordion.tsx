@@ -40,7 +40,7 @@ export function Accordion({ items, className, initialCount, moreLabel, lessLabel
                   aria-expanded={isOpen}
                   aria-controls={panelId}
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="group flex w-full items-center justify-between gap-6 py-5 text-left text-[1.02rem] font-medium tracking-tight text-fg transition-colors hover:text-white sm:py-6 sm:text-lg"
+                  className="group flex w-full items-center justify-between gap-6 py-5 text-left text-[1.02rem] font-medium tracking-tight text-fg transition-colors hover:text-brand-300 sm:py-6 sm:text-lg"
                 >
                   {item.q}
                   <span
@@ -76,7 +76,7 @@ export function Accordion({ items, className, initialCount, moreLabel, lessLabel
             if (expanded && open !== null && open >= initialCount) setOpen(null);
             setExpanded(!expanded);
           }}
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-brand-500 hover:text-white"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm font-medium text-fg transition-colors hover:border-brand-500 hover:text-brand-300"
         >
           {expanded ? lessLabel : moreLabel?.replace("{count}", String(items.length - initialCount))}
           <span aria-hidden className={cn("transition-transform", expanded && "rotate-180")}>↓</span>

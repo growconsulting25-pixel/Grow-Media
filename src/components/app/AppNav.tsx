@@ -79,7 +79,7 @@ export function AppNav({ name, email, unread, isAdmin = false, theme = "dark" }:
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
-                      active ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(0,171,255,0.35)]" : "text-fg-muted hover:bg-white/[0.04] hover:text-fg",
+                      active ? "bg-brand-500/12 text-fg shadow-[inset_0_0_0_1px_rgba(245,166,35,0.35)]" : "text-fg-muted hover:bg-white/[0.04] hover:text-fg",
                     )}
                   >
                     <Icon name={item.icon} className={cn("size-4", active && "text-brand-300")} />

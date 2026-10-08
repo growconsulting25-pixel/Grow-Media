@@ -17,7 +17,7 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
     {
       title: t.product,
       links: [
-        { label: dict.nav.howItWorks, href: `${home}#${sectionIds.howItWorks}` },
+        { label: dict.nav.howItWorks, href: href("services", locale, sectionIds.howItWorks) },
         { label: dict.nav.examples, href: `${home}#${sectionIds.examples}` },
         { label: dict.nav.services, href: href("services", locale) },
         { label: dict.nav.pricing, href: href("pricing", locale) },
@@ -27,7 +27,7 @@ export function Footer({ dict, locale }: { dict: Dictionary; locale: Locale }) {
     {
       title: t.company,
       links: [
-        { label: t.about, href: `${home}#${sectionIds.howItWorks}` },
+        { label: t.about, href: href("services", locale, sectionIds.howItWorks) },
         { label: t.contact, href: href("contact", locale) },
       ],
     },

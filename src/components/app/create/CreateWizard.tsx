@@ -227,7 +227,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     onClick={() => set("type", type)}
                     className={cn(
                       "group flex flex-col overflow-hidden rounded-2xl text-left transition-all",
-                      active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(0,171,255,0.6)]" : "surface hover:bg-white/[0.05]",
+                      active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(245,166,35,0.6)]" : "surface hover:bg-white/[0.05]",
                     )}
                   >
                     <span className="relative block aspect-[16/9] w-full overflow-hidden">
@@ -313,7 +313,7 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                     role="radio"
                     aria-checked={active}
                     onClick={() => set("branding", { ...form.branding, useBrandKit: useKit })}
-                    className={cn("rounded-2xl p-5 text-left transition-all", active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(0,171,255,0.6)]" : "surface")}
+                    className={cn("rounded-2xl p-5 text-left transition-all", active ? "bg-brand-500/12 shadow-[inset_0_0_0_1.5px_rgba(245,166,35,0.6)]" : "surface")}
                   >
                     <span className="block font-medium">{useKit ? t.useBrandKit : t.customize}</span>
                     {useKit && <span className="mt-1 block text-sm text-fg-muted">{t.useBrandKitHint}</span>}
@@ -334,8 +334,8 @@ export function CreateWizard({ initialProject, initialFiles, initialStep, initia
                 </Field>
                 <Field id="primaryColor" label={t.primaryColor}>
                   <div className="flex items-center gap-3">
-                    <input id="primaryColor" type="color" value={form.branding.primaryColor ?? "#00abff"} onChange={(e) => set("branding", { ...form.branding, primaryColor: e.target.value })} className="h-11 w-16 cursor-pointer rounded-lg bg-transparent" />
-                    <span className="font-mono text-sm text-fg-muted">{form.branding.primaryColor ?? "#00abff"}</span>
+                    <input id="primaryColor" type="color" value={form.branding.primaryColor ?? "#F5A623"} onChange={(e) => set("branding", { ...form.branding, primaryColor: e.target.value })} className="h-11 w-16 cursor-pointer rounded-lg bg-transparent" />
+                    <span className="font-mono text-sm text-fg-muted">{form.branding.primaryColor ?? "#F5A623"}</span>
                   </div>
                 </Field>
               </div>

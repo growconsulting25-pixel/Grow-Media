@@ -6,8 +6,6 @@ import { Benefits } from "@/components/marketing/Benefits";
 import { Examples } from "@/components/marketing/Examples";
 import { FinalCta } from "@/components/marketing/FinalCta";
 import { Hero } from "@/components/marketing/Hero";
-import { HomeTeaser } from "@/components/marketing/HomeTeaser";
-import { HowItWorks } from "@/components/marketing/HowItWorks";
 import { Transformation } from "@/components/marketing/Transformation";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { currency, plans } from "@/config/pricing";
@@ -57,13 +55,11 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
     <>
       <Navbar />
       <main id="main">
-        <Hero dict={dict} />
+        <Hero dict={dict} locale={locale} />
         <Transformation />
         <BrandMarquee dict={dict} />
         <Examples dict={dict} />
-        <HowItWorks dict={dict} />
         <Benefits dict={dict} />
-        <HomeTeaser dict={dict} locale={locale} />
         <FinalCta dict={dict} />
       </main>
       <Footer dict={dict} locale={locale} />

@@ -36,7 +36,7 @@ export function PageHero({
   return (
     <section aria-labelledby="page-title" className="relative isolate overflow-hidden">
       <Photo name={image} width={1920} sizes="100vw" priority decorative className="absolute inset-0 -z-20" imgClassName="size-full object-cover" />
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(8,16,26,0.94)_0%,rgba(8,16,26,0.78)_50%,rgba(8,16,26,0.4)_100%)]" />
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(22,41,45,0.94)_0%,rgba(22,41,45,0.78)_50%,rgba(22,41,45,0.4)_100%)]" />
       <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-ink-900 to-transparent" />
       <Container className="flex min-h-[30rem] flex-col justify-end pt-32 pb-16 sm:min-h-[34rem] sm:pt-36 sm:pb-20">
         <nav aria-label="Breadcrumb" className="mb-6 text-sm text-fg-subtle">

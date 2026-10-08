@@ -11,12 +11,12 @@ import { formatPrice } from "@/lib/format";
 export function Upsell({ dict, locale }: { dict: Dictionary; locale: Locale }) {
   const t = dict.app.upsell;
   return (
-    <section aria-labelledby="upsell-title" className="edge-glow relative overflow-hidden rounded-[var(--radius-panel)] bg-navy-800 p-6 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.35)] sm:p-8">
+    <section aria-labelledby="upsell-title" className="edge-glow relative overflow-hidden rounded-[var(--radius-panel)] bg-navy-800 p-6 shadow-[inset_0_0_0_1px_rgba(245,166,35,0.35)] sm:p-8">
       <h2 id="upsell-title" className="display text-2xl sm:text-3xl">{t.title}</h2>
       <p className="mt-1 text-fg-muted">{t.subtitle}</p>
       <ul className="mt-6 grid gap-3 sm:grid-cols-3">
         {plans.map((p) => (
-          <li key={p.id} className={cn("rounded-2xl p-4", p.highlighted ? "bg-brand-500/15 shadow-[inset_0_0_0_1px_rgba(0,171,255,0.5)]" : "bg-white/[0.04]")}>
+          <li key={p.id} className={cn("rounded-2xl p-4", p.highlighted ? "bg-brand-500/15 shadow-[inset_0_0_0_1px_rgba(245,166,35,0.5)]" : "bg-white/[0.04]")}>
             <p className="text-sm text-fg-muted">{t[p.id]}</p>
             <p className="mt-1 text-2xl font-semibold tracking-tight">
               {formatPrice(p.price, locale)} <span className="text-sm font-normal text-fg-muted">{p.interval === "month" ? t.perMonth : t.perVideo}</span>

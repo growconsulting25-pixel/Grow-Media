@@ -62,13 +62,13 @@ export function HeroVisual() {
             <span className="absolute h-px w-16 animate-[beam_2.6s_linear_infinite] bg-white/80" />
           </div>
           <div className="relative flex flex-col items-center gap-3">
-            <div className="relative grid size-20 place-items-center rounded-full bg-ink-800 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_0_60px_-10px_rgba(0,171,255,0.7)]">
+            <div className="relative grid size-20 place-items-center rounded-full bg-ink-800 shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_0_60px_-10px_rgba(245,166,35,0.7)]">
               <svg viewBox="0 0 80 80" className="absolute inset-0 size-full animate-[spin_6s_linear_infinite]">
                 <circle cx="40" cy="40" r="37" fill="none" stroke="url(#arc)" strokeWidth="1.5" strokeDasharray="60 180" strokeLinecap="round" />
                 <defs>
                   <linearGradient id="arc" x1="0" x2="1">
-                    <stop offset="0" stopColor="#66ccff" stopOpacity="0" />
-                    <stop offset="1" stopColor="#66ccff" />
+                    <stop offset="0" stopColor="#F8C25E" stopOpacity="0" />
+                    <stop offset="1" stopColor="#F8C25E" />
                   </linearGradient>
                 </defs>
               </svg>

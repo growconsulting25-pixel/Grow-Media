@@ -97,9 +97,13 @@ const fr: Dictionary = {
     demo: "Visite 3D de démonstration, créée à partir d'une seule photo",
     chapters: [
       { eyebrow: "L'entrée", title: "Entrez comme si vous y étiez.", body: "Une visite virtuelle 3D qui ouvre la porte aux acheteurs, à distance." },
-      { eyebrow: "Salon et cuisine", title: "Chaque pièce, en mouvement.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
-      { eyebrow: "La terrasse", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
+      { eyebrow: "La cuisine", title: "Un coup d'œil à gauche.", body: "L'îlot, les armoires, la lumière : chaque détail qui fait vendre." },
+      { eyebrow: "L'étage", title: "On monte à l'étage.", body: "Chaque niveau de la propriété, dans un seul plan continu." },
+      { eyebrow: "La chambre principale", title: "La lumière, la vue, les volumes.", body: "Comme une visite en personne, depuis le téléphone de l'acheteur." },
+      { eyebrow: "Le salon", title: "Retour au rez-de-chaussée.", body: "Des plans fluides, sans tournage, pour vos réseaux et votre site." },
+      { eyebrow: "La cour", title: "Prête à publier en 24 h.", body: "Envoyez vos photos aujourd'hui. Recevez votre vidéo demain." },
     ],
+    midCta: "Découvrir la visite 3D",
   },
 
   transform: {
@@ -143,9 +147,9 @@ const fr: Dictionary = {
     description: "De vraies vidéos réalisées à partir de photos d'inscription. Chaque vidéo se charge seulement quand vous appuyez sur lecture.",
     playLabel: "Lire la vidéo : {title}",
     items: {
-      one: { title: "Vidéo cinématographique", meta: "Vidéo d'inscription" },
-      two: { title: "Mise en valeur de la propriété", meta: "Vidéo d'inscription" },
-      three: { title: "Aperçu pour les réseaux", meta: "Vidéo d'inscription" },
+      one: { title: "Vidéo cinématographique", meta: "Vidéo d'inscription", description: "La façade, puis chaque pièce, en lents mouvements de caméra. Le format des belles inscriptions." },
+      two: { title: "Mise en valeur de la propriété", meta: "Vidéo d'inscription", description: "Les matériaux, la lumière et les détails qui font vendre, au rythme de la musique." },
+      three: { title: "Aperçu pour les réseaux", meta: "Vidéo d'inscription", description: "Court et rythmé, pensé pour arrêter le défilement sur Instagram, Facebook et TikTok." },
     },
     modalTitle: "Vidéo exemple",
   },
